@@ -171,6 +171,8 @@ public class RRAuto5SampleLV extends LinearOpMode{
 
             if(opModeIsActive()) {
                 mechOps.liftReset();
+                if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
+                if (opModeIsActive()) mechOps.setExtensionPosition();
             }
 
             Actions.runBlocking(
