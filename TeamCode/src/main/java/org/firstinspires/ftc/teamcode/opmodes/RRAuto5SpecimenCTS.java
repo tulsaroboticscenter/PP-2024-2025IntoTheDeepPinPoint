@@ -75,7 +75,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
 
     @Override
     public void runOpMode() throws InterruptedException {
-        specimenScoringPosition = new Pose2d(-27.5, 2, Math.toRadians(0));
+        specimenScoringPosition = new Pose2d(-28.5, 2, Math.toRadians(0));
         specimenScoringPosition2 = new Pose2d(-28, 0, Math.toRadians(5));
         specimenScoringPosition3 = new Pose2d(-28, -3, Math.toRadians(5));
         specimenScoringPosition4 = new Pose2d(-27.5, -10, Math.toRadians(5));
@@ -85,14 +85,14 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
         specimenScoringPrep = new Pose2d(-20, 0, Math.toRadians(0));
         //specimenScoringPush = new Pose2d(-28, -8, Math.toRadians(0));
         grabSpecimenPosition = new Pose2d(-2.75, 27, Math.toRadians(-180));
-        coloredSample1PositionGrab = new Pose2d(-23, 36, Math.toRadians(120));
-        coloredSample1PositionDrop = new Pose2d(-17, 34, Math.toRadians(40));
-        coloredSample2PositionGrab = new Pose2d(-22.5, 28, Math.toRadians(118));
-        coloredSample2PositionDrop = new Pose2d(-21, 25, Math.toRadians(50));
-        coloredSample3PositionGrab = new Pose2d(-22.5, 19.5, Math.toRadians(110));
-        coloredSample3PositionDrop = new Pose2d(-14, 20, Math.toRadians(60));
+        coloredSample1PositionGrab = new Pose2d(-30, 34, Math.toRadians(120));
+        coloredSample1PositionDrop = new Pose2d(-17, 28, Math.toRadians(40));
+        coloredSample2PositionGrab = new Pose2d(-27, 25, Math.toRadians(118));
+        coloredSample2PositionDrop = new Pose2d(-20, 24, Math.toRadians(50));
+        coloredSample3PositionGrab = new Pose2d(-27, 15.5, Math.toRadians(110));
+        coloredSample3PositionDrop = new Pose2d(-14, 18, Math.toRadians(60));
         midwayPose1 = new Pose2d(-19, 30, Math.toRadians(103)); //prep for grabbing first sample
-        parkPose = new Pose2d(-20, -20, Math.toRadians(-180));
+        parkPose = new Pose2d(-20, -20, Math.toRadians(-160));
 
         robot.init(hardwareMap, false);
         PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
@@ -143,15 +143,11 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
         //Release the sample into the basket
         // Lower the arm
         if (opModeIsActive()) mechOps.specimenScorePosition();
-        safeWaitSeconds(.25);
+        safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.scoreClawOpen();
         if (opModeIsActive()) mechOps.autoSpecimenLiftReset();
-        if (opModeIsActive()) mechOps.extClawOpen();
-        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
-        if (opModeIsActive()) mechOps.setExtensionPosition();
-        if (opModeIsActive()) mechOps.extForeBarDeploy();
-        if (opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
-        if (opModeIsActive()) robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
+        if (opModeIsActive()) mechOps.extClawClose();
+
     }
 
     public void retreiveColoredSamples(PinpointDrive drive) {
@@ -159,31 +155,35 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .strafeToLinearHeading(coloredSample1PositionGrab.position, coloredSample1PositionGrab.heading)
+
                         .build());
 
         // Push Color Sample1 into the Observation area
         // Drive to color sample1 Position
 
+//        safeWaitSeconds(0.1);
+//        if (opModeIsActive()) mechOps.extClawClose();
         safeWaitSeconds(0.1);
-        if (opModeIsActive()) mechOps.extClawClose();
-        safeWaitSeconds(0.1);
+        if(opModeIsActive()) mechOps.extForeBarSweep();
+        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
+        if (opModeIsActive()) mechOps.setExtensionPosition();
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(coloredSample1PositionGrab.position, coloredSample1PositionGrab.heading)
                         .strafeToLinearHeading(coloredSample1PositionDrop.position, coloredSample1PositionDrop.heading)
                         .build());
 
         // Raise Arm to high basket scoring position
-        if (opModeIsActive()) mechOps.extClawOpen();
+        if (opModeIsActive()) mechOps.extForePart();
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(coloredSample2PositionGrab.position, coloredSample2PositionGrab.heading)
                         .build());
 
-        safeWaitSeconds(0.1);
-        if (opModeIsActive()) mechOps.extClawClose();
+        //safeWaitSeconds(0.1);
+        if (opModeIsActive()) mechOps.extForeBarSweep();
         safeWaitSeconds(.1);
 
         Actions.runBlocking(
@@ -191,7 +191,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
                         .strafeToLinearHeading(coloredSample2PositionDrop.position, coloredSample2PositionDrop.heading)
                         .build());
 
-        if (opModeIsActive()) mechOps.extClawOpen();
+        if (opModeIsActive()) mechOps.extForePart();
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -200,7 +200,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
 
 
         // safeWaitSeconds(0.1);
-        if (opModeIsActive()) mechOps.extClawClose();
+        if (opModeIsActive()) mechOps.extForeBarSweep();
         safeWaitSeconds(.1);
 
 
@@ -304,7 +304,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
 //
 
         if (opModeIsActive()) mechOps.specimenScorePosition();
-        safeWaitSeconds(.25);
+        safeWaitSeconds(.3);
         if (opModeIsActive()) mechOps.scoreClawOpen();
         //safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.autoSpecimenLiftReset();

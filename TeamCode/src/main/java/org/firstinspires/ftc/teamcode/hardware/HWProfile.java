@@ -80,6 +80,7 @@ public class HWProfile {
 
     public final double INTAKE_CLAW_PITCH_GRAB = 1;
     public final double INTAKE_CLAW_PITCH_HOLD = 0.5;
+    public final double INTAKE_CLAW_PITCH_AUTON = .9;
     public final double INTAKE_CLAW_PITCH_TRANSFER = 0.05;
 
 
@@ -94,10 +95,12 @@ public class HWProfile {
     public final double SCORE_CLAW_CLOSED = .15;
 
 
-    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.23;//started at 0
+    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.26;//started at 0
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_PART = .4;//started at 0
+    final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .15;
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY_AUTON = .85;
     final public double INTAKE_RIGHT_FOREBAR_RETRACT = .72; // started at 1
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .77;//started at 1
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .74;//started at 1
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_PART = .6; //started at 1
     final public double INTAKE_LEFT_FOREBAR_RETRACT = .28; // started at 0
 

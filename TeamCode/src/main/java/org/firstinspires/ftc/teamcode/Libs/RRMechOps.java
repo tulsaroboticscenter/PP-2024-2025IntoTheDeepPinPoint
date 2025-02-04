@@ -156,7 +156,20 @@ public class RRMechOps {
         robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
 
     }
+    public void extForeBarSweep(){
+        robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY_AUTON);
+        robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON);
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_AUTON);
+        robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
+        robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
+    }
 
+    public void foreBarUp(){
+        robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY_PART);
+        robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY_PART);
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
+        robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
+    }
     public void extPitchGrab(){
         robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
     }

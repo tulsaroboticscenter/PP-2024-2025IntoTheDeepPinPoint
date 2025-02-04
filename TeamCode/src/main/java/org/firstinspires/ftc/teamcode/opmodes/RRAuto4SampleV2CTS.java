@@ -67,15 +67,15 @@ public class RRAuto4SampleV2CTS extends LinearOpMode{
     public Pose2d parkPrepPose = new Pose2d(0, 0, 0);
     public Pose2d parkPose = new Pose2d(0, 0, 0);
 
-    public PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
+
 
     @Override
     public void runOpMode() throws InterruptedException {
 
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
         yellowSample1Position = new Pose2d(10, 16, Math.toRadians(-5));
-        yellowSample2Position = new Pose2d(9.5, 25, Math.toRadians(-5));
-        yellowSample3Position = new Pose2d(37, 8.1, Math.toRadians(90));
+        yellowSample2Position = new Pose2d(10.5, 25, Math.toRadians(-5));
+        yellowSample3Position = new Pose2d(38, 8.1, Math.toRadians(90));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
         midwayPose3 = new Pose2d(33,1, Math.toRadians(90));
@@ -85,7 +85,7 @@ public class RRAuto4SampleV2CTS extends LinearOpMode{
 
         //Initialize hardware
         robot.init(hardwareMap, false);
-        drive = new PinpointDrive(hardwareMap, initPose);
+        PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
 
         //Key Pay inputs to selecting Starting Position of robot
         mechOps.scoreClawClosed();

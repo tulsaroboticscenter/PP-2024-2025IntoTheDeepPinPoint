@@ -118,9 +118,9 @@ public class RRAuto5SampleLV extends LinearOpMode{
         drive = new PinpointDrive(hardwareMap, initPose);
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
         yellowSample1Position = new Pose2d(9, 18, Math.toRadians(-10));
-        yellowSample2Position = new Pose2d(7, 30, Math.toRadians(-5));
+        yellowSample2Position = new Pose2d(9, 23, Math.toRadians(-5));
         yellowSample3Position = new Pose2d(37.5, 8.1, Math.toRadians(90));
-        yellowSample4PositionHP = new Pose2d(5,-45, Math.toRadians(-90));
+        yellowSample4PositionHP = new Pose2d(5,-50, Math.toRadians(-90));
         midwayPose1 = new Pose2d(16,20, Math.toRadians(-45));
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
         midwayPose3 = new Pose2d(33,1, Math.toRadians(90));
@@ -154,11 +154,7 @@ public class RRAuto5SampleLV extends LinearOpMode{
 
             if(opModeIsActive()) {
                 mechOps.scoreClawOpen();
-                mechOps.extClawOpen();
-                mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
-                mechOps.setExtensionPosition();
-                robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
-                robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
+
             }
 
 
@@ -169,13 +165,24 @@ public class RRAuto5SampleLV extends LinearOpMode{
 
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            .strafeToLinearHeading(yellowSample4PositionHP.position, yellowSample4PositionHP.heading)
+                            .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
                             .build());
 
 
             if(opModeIsActive()) {
                 mechOps.liftReset();
+            }
+
+            Actions.runBlocking(
+                    drive.actionBuilder(drive.pose)
+                            .strafeToLinearHeading(yellowSample4PositionHP.position,yellowSample4PositionHP.heading)
+                            .build());
+
+            if(opModeIsActive()) {
+                mechOps.extClawOpen();
                 mechOps.extClawRotateZero();
+                if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
+                if (opModeIsActive()) mechOps.setExtensionPosition();
                 mechOps.autoExtension();
                 safeWaitSeconds(.5);
                 robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
@@ -321,7 +328,7 @@ public class RRAuto5SampleLV extends LinearOpMode{
             // Release sample1 into the basket
             if(opModeIsActive()) {
                 mechOps.scoreClawOpen();
-                    mechOps.extClawRotateNinety();
+                    robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
                     mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
                     mechOps.setExtensionPosition();
                     mechOps.autoExtension();
@@ -331,7 +338,7 @@ public class RRAuto5SampleLV extends LinearOpMode{
             // Drive to prep position
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            .strafeToLinearHeading(midwayPose3.position, midwayPose3.heading)
+                            //.strafeToLinearHeading(midwayPose3.position, midwayPose3.heading)
                             .strafeToLinearHeading(yellowSample3Position.position,yellowSample3Position.heading)
                             .build());
 
