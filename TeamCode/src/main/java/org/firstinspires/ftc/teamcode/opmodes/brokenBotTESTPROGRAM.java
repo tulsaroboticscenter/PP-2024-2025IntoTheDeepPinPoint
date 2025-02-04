@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -11,6 +12,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+
 
 import java.util.Locale;
 
@@ -46,6 +49,12 @@ public class brokenBotTESTPROGRAM extends LinearOpMode {
     private final static HWProfile robot = new HWProfile();
     private final LinearOpMode opMode = this;
     private final RRMechOps mechOps = new RRMechOps(robot,opMode);
+
+    public static double NEW_P = 10;
+    public static double NEW_I = .5;
+    public static double NEW_D = 0;
+    public static double NEW_F = 0.5;
+
 
     double cycletime = 0;
     double looptime = 0;
@@ -153,6 +162,9 @@ public class brokenBotTESTPROGRAM extends LinearOpMode {
             double x = gamepad1.left_stick_x;
             double rx = gamepad1.right_stick_x;
 
+
+
+
             // This button choice was made so that it is hard to hit on accident,
             // it can be freely changed based on preference.
             // The equivalent button is start on Xbox-style controllers.
@@ -191,6 +203,14 @@ public class brokenBotTESTPROGRAM extends LinearOpMode {
             robot.motorLiftBack.setTargetPosition((int)liftPosition);
             robot.motorLiftFront.setPower(1);
             robot.motorLiftBack.setPower(1);
+
+
+            PIDFCoefficients pidfOrig = robot.extendMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+            PIDFCoefficients pidfNew = new PIDFCoefficients(NEW_P, NEW_I, NEW_D, NEW_F);
+            robot.extendMotor.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfNew);
+            PIDFCoefficients pidfModified = robot.extendMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
 //            robot.extendMotor.setTargetPosition((int)extensionPosition);
 //            robot.extendMotor.setPower(1);
 

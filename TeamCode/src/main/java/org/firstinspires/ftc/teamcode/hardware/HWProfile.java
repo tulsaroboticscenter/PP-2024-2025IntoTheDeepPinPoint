@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_TO_POSITION;
+
 import com.acmerobotics.roadrunner.ftc.GoBildaPinpointDriverRR;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
@@ -9,6 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class HWProfile {
@@ -73,6 +76,7 @@ public class HWProfile {
 
     /* Variables to store the positions that the wrist should be set to when folding in, or folding out. */
     public final double INTAKE_WRIST_ROTATED_ZERO = 0;
+    public final double INTAKE_WRIST_ROTATED_45 = 0.16;
     public final double INTAKE_WRIST_ROTATED_NINETY = 0.33;
     public final double INTAKE_WRIST_ROTATED_180  = 1;
     public final double INTAKE_WRIST_FOLDED_PARTIAL = .25;
@@ -121,6 +125,9 @@ public class HWProfile {
     public final double EXTENSION_OUT_MAX = 660;
     public final int    EXTENSION_DOWN_MAX = 1600;
     public final double EXTENSION_RESET = 10;
+
+
+
 
 
 
@@ -206,14 +213,14 @@ public class HWProfile {
         motorLiftFront.setTargetPosition(0);
         motorLiftFront.setPower(0);
         motorLiftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLiftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorLiftFront.setMode(RUN_TO_POSITION);
 
         motorLiftBack = ahwMap.get(DcMotorEx.class, "motorLiftR");
         motorLiftBack.setDirection(DcMotorSimple.Direction.FORWARD);
         motorLiftBack.setTargetPosition(0);
         motorLiftBack.setPower(0);
         motorLiftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLiftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorLiftBack.setMode(RUN_TO_POSITION);
 
             /*
             motorLiftFront  = new MotorEx(ahwMap, "motorLiftF", Motor.GoBILDA.RPM_435);
@@ -227,12 +234,15 @@ public class HWProfile {
             motorLiftBack.resetEncoder();
             */
 
+
         extendMotor = ahwMap.get(DcMotorEx.class, "motorExtend");
         extendMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         extendMotor.setTargetPosition(0);
         extendMotor.setPower(0);
         extendMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        extendMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        extendMotor.setMode(RUN_TO_POSITION);
+
+
 
 
             /*lift = new MotorGroup(motorLiftFront, motorLiftBack);
