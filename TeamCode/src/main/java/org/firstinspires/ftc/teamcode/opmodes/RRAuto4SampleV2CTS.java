@@ -73,7 +73,7 @@ public class RRAuto4SampleV2CTS extends LinearOpMode{
     public void runOpMode() throws InterruptedException {
 
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
-        yellowSample1Position = new Pose2d(10, 16, Math.toRadians(-5));
+        yellowSample1Position = new Pose2d(11, 16, Math.toRadians(-5));
         yellowSample2Position = new Pose2d(10.5, 25, Math.toRadians(-5));
         yellowSample3Position = new Pose2d(38, 8.1, Math.toRadians(90));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));

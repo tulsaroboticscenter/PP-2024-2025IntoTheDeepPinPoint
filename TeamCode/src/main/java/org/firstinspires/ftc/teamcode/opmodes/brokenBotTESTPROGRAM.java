@@ -50,10 +50,10 @@ public class brokenBotTESTPROGRAM extends LinearOpMode {
     private final LinearOpMode opMode = this;
     private final RRMechOps mechOps = new RRMechOps(robot,opMode);
 
-    public static double NEW_P = 10;
-    public static double NEW_I = .5;
-    public static double NEW_D = 0;
-    public static double NEW_F = 0.5;
+    public static double NEW_P = 20;
+    public static double NEW_I = 5;
+    public static double NEW_D = .5;
+    public static double NEW_F = 0;
 
 
     double cycletime = 0;

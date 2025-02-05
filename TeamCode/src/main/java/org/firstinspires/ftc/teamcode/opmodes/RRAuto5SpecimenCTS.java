@@ -43,7 +43,7 @@ import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 
 
-@Autonomous(name = "Auto - 5 Specimen-CTS", group = "Competition", preselectTeleOp = "GoBildaRi3D2425")
+@Autonomous(name = "Auto - 5 Specimen 5+0", group = "Competition", preselectTeleOp = "GoBildaRi3D2425")
 public class RRAuto5SpecimenCTS extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
@@ -75,24 +75,24 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
 
     @Override
     public void runOpMode() throws InterruptedException {
-        specimenScoringPosition = new Pose2d(-28.5, 2, Math.toRadians(0));
-        specimenScoringPosition2 = new Pose2d(-28, 0, Math.toRadians(5));
-        specimenScoringPosition3 = new Pose2d(-28, -3, Math.toRadians(5));
-        specimenScoringPosition4 = new Pose2d(-27.5, -10, Math.toRadians(5));
-        specimenScoringPosition5 = new Pose2d(-28, -15, Math.toRadians(5));
+        specimenScoringPosition = new Pose2d(-28.5, 3, Math.toRadians(0));
+        specimenScoringPosition2 = new Pose2d(-28, 2, Math.toRadians(5));
+        specimenScoringPosition3 = new Pose2d(-28, -1, Math.toRadians(5));
+        specimenScoringPosition4 = new Pose2d(-27.5, -3, Math.toRadians(5));
+        specimenScoringPosition5 = new Pose2d(-28, -5, Math.toRadians(5));
         specimenGrabPrep = new Pose2d(-9, 27.69, Math.toRadians(-180)); // specimen grabbing prep
         specimenGrabPrepCycle = new Pose2d(-9, 27.25, Math.toRadians(-180));
-        specimenScoringPrep = new Pose2d(-20, 0, Math.toRadians(0));
+        specimenScoringPrep = new Pose2d(-20, 2, Math.toRadians(0));
         //specimenScoringPush = new Pose2d(-28, -8, Math.toRadians(0));
         grabSpecimenPosition = new Pose2d(-2.75, 27, Math.toRadians(-180));
         coloredSample1PositionGrab = new Pose2d(-30, 34, Math.toRadians(120));
         coloredSample1PositionDrop = new Pose2d(-17, 28, Math.toRadians(40));
         coloredSample2PositionGrab = new Pose2d(-27, 25, Math.toRadians(118));
-        coloredSample2PositionDrop = new Pose2d(-20, 24, Math.toRadians(50));
+        coloredSample2PositionDrop = new Pose2d(-18, 26, Math.toRadians(50));
         coloredSample3PositionGrab = new Pose2d(-27, 15.5, Math.toRadians(110));
-        coloredSample3PositionDrop = new Pose2d(-14, 18, Math.toRadians(60));
+        coloredSample3PositionDrop = new Pose2d(-12, 19, Math.toRadians(50));
         midwayPose1 = new Pose2d(-19, 30, Math.toRadians(103)); //prep for grabbing first sample
-        parkPose = new Pose2d(-20, -20, Math.toRadians(-160));
+        parkPose = new Pose2d(-20, -5, Math.toRadians(-160));
 
         robot.init(hardwareMap, false);
         PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
@@ -214,8 +214,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
         if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
         if (opModeIsActive()) mechOps.extClawOpen();
         if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT);
-        if (opModeIsActive())
-            robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
+        if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
         if (opModeIsActive()) robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
         if (opModeIsActive()) mechOps.setExtensionPosition();
@@ -304,7 +303,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
 //
 
         if (opModeIsActive()) mechOps.specimenScorePosition();
-        safeWaitSeconds(.3);
+        safeWaitSeconds(.25);
         if (opModeIsActive()) mechOps.scoreClawOpen();
         //safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.autoSpecimenLiftReset();
