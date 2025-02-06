@@ -104,8 +104,8 @@ public class HWProfile {
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .15;
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_AUTON = .85;
     final public double INTAKE_RIGHT_FOREBAR_RETRACT = .72;// started at 1
-    final public double INTAKE_RIGHT_FOREBAR_RETRACT_PART = 0.5;
-    final public double INTAKE_LEFT_FOREBAR_RETRACT_PART = 0.5;
+    final public double INTAKE_RIGHT_FOREBAR_RETRACT_PART = 0.6;
+    final public double INTAKE_LEFT_FOREBAR_RETRACT_PART = 0.4;
     final public double INTAKE_LEFT_FOREBAR_DEPLOY = .72;//started at 1
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_PART = .6; //started at 1
     final public double INTAKE_LEFT_FOREBAR_RETRACT = .28; // started at 0
