@@ -234,7 +234,7 @@ public class RRAuto5SampleLV extends LinearOpMode{
                 mechOps.extClawClose();
                 robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
                 safeWaitSeconds(0.25);
-                mechOps.autoSampleScorePrep();
+                mechOps.auto5SampleScorePrep();
                 safeWaitSeconds(1);
             }
 
@@ -302,7 +302,7 @@ public class RRAuto5SampleLV extends LinearOpMode{
                 mechOps.extClawClose();
                 robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
                 safeWaitSeconds(0.25);
-                mechOps.autoSampleScorePrep();
+                mechOps.auto5SampleScorePrep();
                 safeWaitSeconds(1);
             }
 
@@ -352,7 +352,7 @@ public class RRAuto5SampleLV extends LinearOpMode{
                 mechOps.extClawClose();
                 robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
                 safeWaitSeconds(.4);
-                mechOps.autoSampleScorePrep();
+                mechOps.auto5SampleScorePrep();
                 //safeWaitSeconds(.5);
             }
 

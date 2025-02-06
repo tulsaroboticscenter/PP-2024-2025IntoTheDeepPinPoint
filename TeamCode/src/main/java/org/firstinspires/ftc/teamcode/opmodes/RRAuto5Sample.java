@@ -212,7 +212,7 @@ public class RRAuto5Sample extends LinearOpMode{
             if(opModeIsActive()) mechOps.scoreClawOpen();
                 //safeWaitSeconds(0.2);
             if(opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
-                safeWaitSeconds(0.2);
+            safeWaitSeconds(0.2);
             if(opModeIsActive()) mechOps.auto5SampleScorePrep();
                 safeWaitSeconds(1);
 
