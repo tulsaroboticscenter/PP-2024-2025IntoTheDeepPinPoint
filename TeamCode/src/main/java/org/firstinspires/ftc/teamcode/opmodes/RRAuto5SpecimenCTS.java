@@ -88,8 +88,8 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
         coloredSample1PositionGrab = new Pose2d(-30, 34, Math.toRadians(120));
         coloredSample1PositionDrop = new Pose2d(-17, 28, Math.toRadians(40));
         coloredSample2PositionGrab = new Pose2d(-27, 25, Math.toRadians(118));
-        coloredSample2PositionDrop = new Pose2d(-18, 26, Math.toRadians(50));
-        coloredSample3PositionGrab = new Pose2d(-27, 15.5, Math.toRadians(110));
+        coloredSample2PositionDrop = new Pose2d(-18, 24, Math.toRadians(50));
+        coloredSample3PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));
         coloredSample3PositionDrop = new Pose2d(-12, 19, Math.toRadians(50));
         midwayPose1 = new Pose2d(-19, 30, Math.toRadians(103)); //prep for grabbing first sample
         parkPose = new Pose2d(-20, -5, Math.toRadians(-160));

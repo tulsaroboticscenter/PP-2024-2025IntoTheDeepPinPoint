@@ -117,9 +117,9 @@ public class RRAuto5Sample extends LinearOpMode{
 
         drive = new PinpointDrive(hardwareMap, initPose);
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
-        yellowSample1Position = new Pose2d(10, 17, Math.toRadians(-5));
-        yellowSample2Position = new Pose2d(9, 28, Math.toRadians(-5));
-        yellowSample3Position = new Pose2d(37.5, 8.1, Math.toRadians(90));
+        yellowSample1Position = new Pose2d(10, 21, Math.toRadians(0));
+        yellowSample2Position = new Pose2d(9, 31, Math.toRadians(0));
+        yellowSample3Position = new Pose2d(35, 8.1, Math.toRadians(90));
         yellowSample4PositionHP = new Pose2d(2,-47.2, Math.toRadians(-90));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
@@ -154,7 +154,7 @@ public class RRAuto5Sample extends LinearOpMode{
             if(opModeIsActive()){
                 mechOps.scoreClawOpen();
                 mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
-                mechOps.setExtensionPosition();
+                mechOps.setAutoExtensionPosition();
                 robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
                 mechOps.extForeBarDeploy();
             }
@@ -189,7 +189,7 @@ public class RRAuto5Sample extends LinearOpMode{
             if(opModeIsActive()) {
                 mechOps.scoreClawOpen();
                 mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
-                mechOps.setExtensionPosition();
+                mechOps.setAutoExtensionPosition();
                 robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
                 robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
                 mechOps.extForeBarDeploy();
@@ -207,16 +207,15 @@ public class RRAuto5Sample extends LinearOpMode{
 
 
             // Pick up Sample2
-            if(opModeIsActive()) {
-                mechOps.liftReset();
-                mechOps.scoreForeGrab();
-                mechOps.scoreClawOpen();
+            if(opModeIsActive()) mechOps.liftReset();
+            if(opModeIsActive()) mechOps.scoreForeGrab();
+            if(opModeIsActive()) mechOps.scoreClawOpen();
+                //safeWaitSeconds(0.2);
+            if(opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
                 safeWaitSeconds(0.2);
-                robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
-                safeWaitSeconds(0.25);
-                mechOps.autoSampleScorePrep();
+            if(opModeIsActive()) mechOps.auto5SampleScorePrep();
                 safeWaitSeconds(1);
-            }
+
 
             // Raise Arm to high basket scoring position
 
@@ -257,7 +256,7 @@ public class RRAuto5Sample extends LinearOpMode{
             if(opModeIsActive()) {
                 mechOps.extClawRotateNinety();
                 mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
-                mechOps.setExtensionPosition();
+                mechOps.setAutoExtensionPosition();
                 mechOps.autoExtension();
 
             }
@@ -272,7 +271,7 @@ public class RRAuto5Sample extends LinearOpMode{
             if(opModeIsActive()) {
                 mechOps.extClawClose();
                 safeWaitSeconds(.2);
-                mechOps.autoSampleScorePrep();
+                mechOps.auto5SampleScorePrep();
                 //safeWaitSeconds(.5);
             }
 
@@ -302,7 +301,7 @@ public class RRAuto5Sample extends LinearOpMode{
                 mechOps.extClawRotateZero();
                 mechOps.autoExtension();
                 mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
-                mechOps.setExtensionPosition();
+                mechOps.setAutoExtensionPosition();
                 robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
                 robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
             }
@@ -314,7 +313,7 @@ public class RRAuto5Sample extends LinearOpMode{
                 safeWaitSeconds(.75);
                 robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
                 safeWaitSeconds(.2);
-                mechOps.autoSampleScorePrep();
+                mechOps.auto5SampleScorePrep();
 
             }
 

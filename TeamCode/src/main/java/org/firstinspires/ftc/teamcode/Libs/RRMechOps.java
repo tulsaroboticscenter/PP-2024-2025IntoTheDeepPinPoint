@@ -177,6 +177,11 @@ public class RRMechOps {
     public void extPitchTransfer(){
         robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
     }
+
+    public void extForeBarPart(){
+        robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT_PART);
+        robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT_PART);
+    }
     /**
      * Method: transferSample()
      * How it works:
@@ -265,6 +270,12 @@ public class RRMechOps {
         robot.extendMotor.setTargetPosition(this.extensionPosition);
     }
 
+
+    public void setAutoExtensionPosition(){
+        robot.extendMotor.setPower(0.25);
+        robot.extendMotor.setTargetPosition(this.extensionPosition);
+    }
+
     public void tightenStrings() {
         boolean extensionRetraction = false;
         boolean liftRetraction = false;
@@ -343,8 +354,8 @@ public class RRMechOps {
 
     public void autoSampleScorePrep() {
 
-        extClawClose();
         liftReset();
+        extClawClose();
         scoreForeGrab();
         scoreClawOpen();
         opMode.sleep(200);
@@ -359,6 +370,8 @@ public class RRMechOps {
         opMode.sleep(1000);
 
 
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
+        opMode.sleep(200);
         scoreClawClosed();
         opMode.sleep(100);
         extClawOpen();
@@ -368,5 +381,35 @@ public class RRMechOps {
         scoreForeSample();
 
     }
+
+    public void auto5SampleScorePrep() {
+
+        liftReset();
+        extClawClose();
+        scoreForeGrab();
+        scoreClawOpen();
+        opMode.sleep(200);
+
+
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
+        extForeBarPart();
+        extClawRotateZero();
+
+        this.extensionPosition = (int) robot.EXTENSION_RESET;
+        setAutoExtensionPosition();
+        opMode.sleep(1000);
+
+
+        extForeBarRetract();
+        scoreClawClosed();
+        opMode.sleep(100);
+        extClawOpen();
+        opMode.sleep(100);
+
+        raiseLiftHighBasket();
+        scoreForeSample();
+
+    }
+
 }
 
