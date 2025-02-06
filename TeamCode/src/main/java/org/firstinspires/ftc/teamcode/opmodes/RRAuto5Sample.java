@@ -117,9 +117,9 @@ public class RRAuto5Sample extends LinearOpMode{
 
         drive = new PinpointDrive(hardwareMap, initPose);
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
-        yellowSample1Position = new Pose2d(10, 21, Math.toRadians(0));
-        yellowSample2Position = new Pose2d(9, 31, Math.toRadians(0));
-        yellowSample3Position = new Pose2d(35, 8.1, Math.toRadians(90));
+        yellowSample1Position = new Pose2d(10, 17, Math.toRadians(-5));
+        yellowSample2Position = new Pose2d(9, 28, Math.toRadians(-5));
+        yellowSample3Position = new Pose2d(37.5, 8.1, Math.toRadians(90));
         yellowSample4PositionHP = new Pose2d(2,-47.2, Math.toRadians(-90));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
