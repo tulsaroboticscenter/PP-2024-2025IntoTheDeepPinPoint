@@ -272,7 +272,7 @@ public class RRMechOps {
 
 
     public void setAutoExtensionPosition(){
-        robot.extendMotor.setPower(0.25);
+        robot.extendMotor.setPower(0.55);
         robot.extendMotor.setTargetPosition(this.extensionPosition);
     }
 
@@ -392,7 +392,8 @@ public class RRMechOps {
 
 
         robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
-        extForeBarPart();
+
+        extForeBarRetract();
         extClawRotateZero();
 
         this.extensionPosition = (int) robot.EXTENSION_RESET;
@@ -400,7 +401,6 @@ public class RRMechOps {
         opMode.sleep(1000);
 
 
-        extForeBarRetract();
         scoreClawClosed();
         opMode.sleep(100);
         extClawOpen();

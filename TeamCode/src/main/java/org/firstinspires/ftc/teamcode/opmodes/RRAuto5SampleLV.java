@@ -112,21 +112,24 @@ public class RRAuto5SampleLV extends LinearOpMode{
         Pose2d parkPrepPose = new Pose2d(0, 0, 0);
         Pose2d parkPose = new Pose2d(0, 0, 0);
         double waitSecondsBeforeDrop = 0;
-        PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
 
 
-        drive = new PinpointDrive(hardwareMap, initPose);
+
         sampleScoringPosition = new Pose2d(7, 23, Math.toRadians(-45));
         yellowSample1Position = new Pose2d(9, 14, Math.toRadians(-5));
-        yellowSample2Position = new Pose2d(9, 22, Math.toRadians(-5));
-        yellowSample3Position = new Pose2d(38, 8.1, Math.toRadians(70));
-        yellowSample4PositionHP = new Pose2d(5,-50, Math.toRadians(-90));
-        midwayPose1 = new Pose2d(16,20, Math.toRadians(-45));
+        yellowSample2Position = new Pose2d(10, 26, Math.toRadians(-5));
+        yellowSample3Position = new Pose2d(37, 8.1, Math.toRadians(70));
+        yellowSample4PositionHP = new Pose2d(0,-50, Math.toRadians(-90));
+        midwayPose1 = new Pose2d(10,22, Math.toRadians(-45));
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
         midwayPose3 = new Pose2d(33,1, Math.toRadians(90));
         midwayPose4 = new Pose2d(40,15, Math.toRadians(90));
         parkPrepPose = new Pose2d(10, -90, Math.toRadians(-90));
         parkPose = new Pose2d(15, 45, Math.toRadians(0));
+
+        PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
+        drive = new PinpointDrive(hardwareMap, initPose);
+
 
         /**
          * For Sample Scoring into high basket
@@ -189,8 +192,8 @@ public class RRAuto5SampleLV extends LinearOpMode{
                 safeWaitSeconds(.5);
                 robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
                 mechOps.extClawClose();
-                safeWaitSeconds(.2);
-                mechOps.autoSampleScorePrep();
+                //safeWaitSeconds(.2);
+                mechOps.auto5SampleScorePrep();
             }
 
 
@@ -289,6 +292,7 @@ public class RRAuto5SampleLV extends LinearOpMode{
 
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
+                            .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
                             .strafeToLinearHeading(yellowSample2Position.position, yellowSample2Position.heading)
                             .build());
 
