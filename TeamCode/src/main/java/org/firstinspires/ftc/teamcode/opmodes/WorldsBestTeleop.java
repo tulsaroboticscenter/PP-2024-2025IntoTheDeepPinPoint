@@ -190,7 +190,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
             // a boolean to keep track of whether the claw is opened or closed.
 
-            if (gamepad1.right_bumper && clawRuntime.time() > 0.25) {
+            if (gamepad1.right_bumper && clawRuntime.time() > 0.05) {
                 if (clawOpened) {
                     robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
                     clawOpened = false;
@@ -202,7 +202,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
             }
 
-            if (gamepad1.left_bumper & scoreClawRuntime.time() > 0.25) {
+            if (gamepad1.left_bumper & scoreClawRuntime.time() > 0.05) {
                 if (scoreClawOpened) {
                     robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_CLOSED);
                     scoreClawOpened = false;
@@ -277,9 +277,13 @@ public class WorldsBestTeleop extends LinearOpMode {
 //                }
 
 
-            } else if (gamepad1.y){
+            } else if (gamepad1.y) {
                 liftPosition = robot.LIFT_SCORE_HIGH_BASKET;
                 mechOps.scoreForeSample();
+
+            } else if (gamepad2.a){
+                liftPosition = robot.LIFT_RESET;
+                mechOps.scoreForeSpecimen();
 
 
             } else if (gamepad1.b){
