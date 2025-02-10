@@ -3,9 +3,13 @@ package org.firstinspires.ftc.teamcode.Libs;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.ReadWriteFile;
 
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
+
+import java.io.File;
 
 public class RRMechOps {
 
@@ -410,6 +414,25 @@ public class RRMechOps {
         scoreForeSample();
 
     }
+
+    public void writeToFile (double headingValue, String fileName){
+        File headingValueAfterAuto = AppUtil.getInstance().getSettingsFile(fileName);
+        ReadWriteFile.writeFile(headingValueAfterAuto, String.valueOf(headingValue));
+    }
+
+    public double readFromFile (String fromFileName) {
+
+        // Using the properties of the specified "from" file name,
+        // declare a filename to be used in this method.  See Note 1 above.
+        File myFileName = AppUtil.getInstance().getSettingsFile(fromFileName);
+
+        // Read and store a number from the newly declared filename.
+        // See Note 4 above.
+        double myNumber = Double.parseDouble(ReadWriteFile.readFile(myFileName).trim());
+
+        return myNumber;       // provide the number to the Block calling this myBlock
+
+    }  // end of method readFromFile()
 
 }
 
