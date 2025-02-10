@@ -45,7 +45,7 @@ import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 
 @Disabled
 @Autonomous(name = "Auto - 5 Specimen Test", group = "Competition", preselectTeleOp = "GoBildaRi3D2425")
-public class RRAuto5SpecimenTest extends LinearOpMode{
+public class INACTIVERRAuto5SpecimenTest extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
