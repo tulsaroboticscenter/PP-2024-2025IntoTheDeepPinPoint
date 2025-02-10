@@ -73,9 +73,9 @@ public class RRAuto4SampleV2CTS extends LinearOpMode{
     public void runOpMode() throws InterruptedException {
 
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
-        yellowSample1Position = new Pose2d(11, 16, Math.toRadians(-5));
-        yellowSample2Position = new Pose2d(10.5, 25, Math.toRadians(-5));
-        yellowSample3Position = new Pose2d(38, 8.1, Math.toRadians(90));
+        yellowSample1Position = new Pose2d(11, 17.5, Math.toRadians(-10));
+        yellowSample2Position = new Pose2d(10.5, 25.5, Math.toRadians(-5));
+        yellowSample3Position = new Pose2d(39, 8.1, Math.toRadians(90));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
         midwayPose3 = new Pose2d(33,1, Math.toRadians(90));
@@ -209,6 +209,7 @@ public class RRAuto4SampleV2CTS extends LinearOpMode{
         //Drive to pickup Sample2 Position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+
                         .strafeToLinearHeading(yellowSample2Position.position, yellowSample2Position.heading)
                         .build());
 
@@ -222,6 +223,7 @@ public class RRAuto4SampleV2CTS extends LinearOpMode{
         // drive to scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
 

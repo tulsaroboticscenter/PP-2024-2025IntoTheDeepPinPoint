@@ -86,11 +86,11 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
         //specimenScoringPush = new Pose2d(-28, -8, Math.toRadians(0));
         grabSpecimenPosition = new Pose2d(-2.75, 27, Math.toRadians(-180));
         coloredSample1PositionGrab = new Pose2d(-30, 34, Math.toRadians(120));
-        coloredSample1PositionDrop = new Pose2d(-17, 28, Math.toRadians(40));
+        coloredSample1PositionDrop = new Pose2d(-15, 28, Math.toRadians(40));
         coloredSample2PositionGrab = new Pose2d(-27, 25, Math.toRadians(118));
-        coloredSample2PositionDrop = new Pose2d(-18, 24, Math.toRadians(50));
+        coloredSample2PositionDrop = new Pose2d(-17, 24, Math.toRadians(50));
         coloredSample3PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));
-        coloredSample3PositionDrop = new Pose2d(-12, 19, Math.toRadians(50));
+        coloredSample3PositionDrop = new Pose2d(-11, 19, Math.toRadians(50));
         midwayPose1 = new Pose2d(-19, 30, Math.toRadians(103)); //prep for grabbing first sample
         parkPose = new Pose2d(-20, -5, Math.toRadians(-160));
 
@@ -101,7 +101,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
 //        selectStartingPosition();
         mechOps.scoreClawClosed();
         mechOps.extForeBarRetract();
-        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
         mechOps.tightenStrings();
 
         telemetry.addData("5 Specimen Auto - CTS Ready", "");
@@ -130,6 +130,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
     public void scoreSpecimen1(PinpointDrive drive) {
         //Initialize Pose2d as desired
 
+        if(opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
         if (opModeIsActive()) robot.motorLiftFront.setPower(1);
         if (opModeIsActive()) robot.motorLiftBack.setPower(1);
         if (opModeIsActive()) mechOps.specimenPrepPosition();
