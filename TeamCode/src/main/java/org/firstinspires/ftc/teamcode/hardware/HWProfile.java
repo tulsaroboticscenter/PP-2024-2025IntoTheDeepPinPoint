@@ -203,6 +203,7 @@ public class HWProfile {
                     RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD));
             // Without this, the REV Hub's orientation is assumed to be logo up / USB forward
             imu.initialize(parameters);
+
             pinpoint = hwMap.get(GoBildaPinpointDriverRR.class,"pinpoint");
             pinpoint.resetPosAndIMU();
 

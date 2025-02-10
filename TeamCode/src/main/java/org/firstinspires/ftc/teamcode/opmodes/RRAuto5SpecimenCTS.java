@@ -35,12 +35,18 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.ReadWriteFile;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.firstinspires.ftc.teamcode.PinpointDrive;
 import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
+
+import java.io.File;
 
 
 @Autonomous(name = "Auto - 5 Specimen 5+0", group = "Competition", preselectTeleOp = "GoBildaRi3D2425")
@@ -72,6 +78,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
     public Pose2d midwayPose1 = new Pose2d(0, 0, 0);
     public Pose2d specimenGrabPrep = new Pose2d(0, 0, 0);
     public Pose2d parkPose = new Pose2d(0, 0, 0);
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -110,6 +117,9 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
         telemetry.addLine("PRESS PLAY TO START");
         telemetry.update();
 
+        // intialize the heading file to 0
+        mechOps.writeToFile(0, "HeadingFile");
+
         waitForStart();
 
         if (opModeIsActive() && !isStopRequested()) {
@@ -121,7 +131,13 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
             scoreSpecimen4(drive);
             scoreSpecimen5(drive);
             park(drive);
+
         }
+
+        // write the bot heading to a local file for retreival for field centric drive in TeleOp
+        double botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+        mechOps.writeToFile(botHeading, "HeadingFile");
+
         requestOpModeStop();
     }
 

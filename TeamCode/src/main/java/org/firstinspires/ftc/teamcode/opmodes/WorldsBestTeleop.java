@@ -128,6 +128,7 @@ public class WorldsBestTeleop extends LinearOpMode {
             // The equivalent button is start on Xbox-style controllers.
             if (gamepad1.options) {
                 robot.imu.resetYaw();
+                robot.pinpoint.resetYaw();
             }
 
             robot.pinpoint.update();    //update the IMU value
