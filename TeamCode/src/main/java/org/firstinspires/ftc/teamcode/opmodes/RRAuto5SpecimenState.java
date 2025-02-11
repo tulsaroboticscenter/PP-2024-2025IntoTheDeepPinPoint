@@ -181,7 +181,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
     public void scoreSpecimen1(PinpointDrive drive) {
         //Initialize Pose2d as desired
 
-        if(opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
+        if (opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
         if (opModeIsActive()) robot.motorLiftFront.setPower(1);
         if (opModeIsActive()) robot.motorLiftBack.setPower(1);
         if (opModeIsActive()) mechOps.specimenPrepPosition();
@@ -207,15 +207,11 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-
                         .build());
 
         // Push Color Sample1 into the Observation area
         // Drive to color sample1 Position
 
-//        safeWaitSeconds(0.1);
-//        if (opModeIsActive()) mechOps.extClawClose();
-        //safeWaitSeconds(0.1);
         if(opModeIsActive()) mechOps.extForeBarSweep();
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
@@ -236,7 +232,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
 
         //safeWaitSeconds(0.1);
         if (opModeIsActive()) mechOps.extForeBarSweep();
-        safeWaitSeconds(.1);
+        //safeWaitSeconds(.1);
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -253,7 +249,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
 
         // safeWaitSeconds(0.1);
         if (opModeIsActive()) mechOps.extForeBarSweep();
-        safeWaitSeconds(.1);
+        //safeWaitSeconds(.1);
 
 
         Actions.runBlocking(
