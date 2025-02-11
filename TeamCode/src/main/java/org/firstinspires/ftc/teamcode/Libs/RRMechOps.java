@@ -22,6 +22,7 @@ public class RRMechOps {
     public HWProfile robot;
     public LinearOpMode opMode;
     public int extensionPosition = 0;
+    public int liftPosition = 0;
 
 
     public RRMechOps(HWProfile myRobot, LinearOpMode myOpMode) {
@@ -269,9 +270,21 @@ public class RRMechOps {
         }
     }
 
+    public void extensionPowerMonitor(){
+        if (robot.extendMotor.getCurrentPosition() < robot.EXTENSION_POWER_REDUX) {
+            robot.extendMotor.setPower(0.75);
+        } else robot.extendMotor.setPower(1);
+    }
+
     public void setExtensionPosition(){
         robot.extendMotor.setPower(1);
         robot.extendMotor.setTargetPosition(this.extensionPosition);
+    }
+    public void setLiftPosition(){
+        robot.motorLiftBack.setPower(1);
+        robot.motorLiftBack.setTargetPosition(this.liftPosition);
+        robot.motorLiftFront.setPower(1);
+        robot.motorLiftFront.setTargetPosition(this.liftPosition);
     }
 
 
@@ -283,19 +296,22 @@ public class RRMechOps {
     public void tightenStrings() {
         boolean extensionRetraction = false;
         boolean liftRetraction = false;
+        ElapsedTime retractTime = new ElapsedTime();
+        retractTime.reset();
 
-        int liftPosition = 0;
 
         this.extensionPosition = 0;
         setExtensionPosition();
-        robot.motorLiftFront.setPower(1);
-        robot.motorLiftBack.setPower(1);
+        robot.motorLiftFront.setPower(.75);
+        robot.motorLiftBack.setPower(.75);
         robot.motorLiftFront.setTargetPosition(0);
         robot.motorLiftBack.setTargetPosition(0);
+        robot.extendMotor.setPower(0.5);
+        robot.extendMotor.setTargetPosition(0);
 
-        while (opMode.opModeIsActive() && !extensionRetraction && !liftRetraction) {
+        while (opMode.opModeIsActive() && (!extensionRetraction || !liftRetraction)) {
 
-            if (robot.extendMotor.getCurrent(CurrentUnit.AMPS) > 3) {
+            if ((retractTime.time() > 0.2) && robot.extendMotor.getCurrent(CurrentUnit.AMPS) > 5 && !extensionRetraction) {
                 extensionRetraction = true;
                 robot.extendMotor.setPower(0);
                 robot.extendMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -307,30 +323,30 @@ public class RRMechOps {
                 setExtensionPosition();
             }
 
-            if (robot.motorLiftFront.getCurrent(CurrentUnit.AMPS) > 5) {
+            if ((retractTime.time() > 0.1) && (robot.motorLiftFront.getCurrent(CurrentUnit.AMPS) > 5) && !liftRetraction) {
                 liftRetraction = true;
                 robot.motorLiftFront.setPower(0);
+                robot.motorLiftBack.setPower(0);
                 robot.motorLiftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.motorLiftFront.setTargetPosition(0);
                 robot.motorLiftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.motorLiftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                robot.motorLiftBack.setPower(0);
                 robot.motorLiftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.motorLiftBack.setTargetPosition(0);
                 robot.motorLiftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.motorLiftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             }
             else if(!liftRetraction) {
-                liftPosition = liftPosition - 25;
-                robot.motorLiftBack.setTargetPosition(liftPosition);
-                robot.motorLiftFront.setTargetPosition(liftPosition);
+                this.liftPosition = this.liftPosition - 25;
+                setLiftPosition();
             }
 
         }
+
         this.extensionPosition = (int)robot.EXTENSION_RESET;
         setExtensionPosition();
-        robot.motorLiftFront.setTargetPosition((int)robot.LIFT_RESET);
-        robot.motorLiftBack.setTargetPosition((int)robot.LIFT_RESET);
+        this.liftPosition = (int)robot.LIFT_RESET;
+        setLiftPosition();
     }
 
     public void scoreClawOpen() {

@@ -49,7 +49,7 @@ import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 import java.io.File;
 
 
-@Autonomous(name = "Auto - 5 Specimen 5+0", group = "Competition", preselectTeleOp = "GoBildaRi3D2425")
+@Autonomous(name = "Auto - 5 Specimen 5+0", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
 public class RRAuto5SpecimenCTS extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
@@ -118,7 +118,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
         telemetry.update();
 
         // intialize the heading file to 0
-        mechOps.writeToFile(0, "HeadingFile");
+        mechOps.writeToFile(180, "HeadingFile");
 
         waitForStart();
 
@@ -136,6 +136,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
 
         // write the bot heading to a local file for retreival for field centric drive in TeleOp
         double botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+        botHeading = 180 - botHeading;
         mechOps.writeToFile(botHeading, "HeadingFile");
 
         requestOpModeStop();

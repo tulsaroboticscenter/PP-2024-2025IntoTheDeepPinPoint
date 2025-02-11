@@ -97,7 +97,7 @@ public class brokenBotTESTPROGRAM extends LinearOpMode {
 
         // Pull the stored value from the file
         double storedHeading = mechOps.readFromFile("HeadingFile");
-        double botHeading = robot.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+        double botHeading = robot.pinpoint.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
         telemetry.addData("Stored Heading from File", storedHeading);
         telemetry.addData("Current Bot Heading", botHeading);
         telemetry.update();
@@ -178,7 +178,6 @@ public class brokenBotTESTPROGRAM extends LinearOpMode {
             // it can be freely changed based on preference.
             // The equivalent button is start on Xbox-style controllers.
             if (gamepad1.options) {
-                robot.imu.resetYaw();
                 robot.pinpoint.resetPosAndIMU();
                 storedHeading = 0;
 

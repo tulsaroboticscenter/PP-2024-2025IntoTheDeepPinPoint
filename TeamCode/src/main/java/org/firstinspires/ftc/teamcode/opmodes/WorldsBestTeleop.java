@@ -33,9 +33,9 @@ public class WorldsBestTeleop extends LinearOpMode {
 
 
     public static double NEW_P = 20;
-    public static double NEW_I = 5;
-    public static double NEW_D = .5;
-    public static double NEW_F = 0;
+    public static double NEW_I = 1;
+    public static double NEW_D = 0.005;
+    public static double NEW_F = 1;
 
 
     double cycletime = 0;
@@ -76,6 +76,19 @@ public class WorldsBestTeleop extends LinearOpMode {
         /* Send telemetry message to signify robot waiting */
         telemetry.addLine("Robot Ready.");
         telemetry.update();
+
+        double storedHeading = mechOps.readFromFile("HeadingFile");
+        double botHeading = robot.pinpoint.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+        telemetry.addData("Stored Heading from File", storedHeading);
+        telemetry.addData("Current Bot Heading", botHeading);
+        telemetry.update();
+
+        PIDFCoefficients pidfOrig = robot.extendMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+        PIDFCoefficients pidfNew = new PIDFCoefficients(NEW_P, NEW_I, NEW_D, NEW_F);
+        robot.extendMotor.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfNew);
+        PIDFCoefficients pidfModified = robot.extendMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
         /* Wait for the game driver to press play */
         waitForStart();
         extensionButtionPressTime.reset();
@@ -87,7 +100,6 @@ public class WorldsBestTeleop extends LinearOpMode {
         mechOps.extClawClose();
         mechOps.tightenStrings();
         mechOps.extPitchGrab();
-        double botHeading = robot.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
 
         // Initializes ElapsedTimes. One for total runtime of the program and the others set up for toggles.
         ElapsedTime totalRuntime = new ElapsedTime();
@@ -116,6 +128,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
 
 
+
 //        requestOpModeStop();
         while(opModeIsActive()){
             double y = -gamepad1.left_stick_y;
@@ -127,8 +140,8 @@ public class WorldsBestTeleop extends LinearOpMode {
             // it can be freely changed based on preference.
             // The equivalent button is start on Xbox-style controllers.
             if (gamepad1.options) {
-                robot.imu.resetYaw();
                 robot.pinpoint.resetYaw();
+                storedHeading = 0;
             }
 
             robot.pinpoint.update();    //update the IMU value
@@ -137,13 +150,13 @@ public class WorldsBestTeleop extends LinearOpMode {
             telemetry.addData("Position", data);
 
             //botHeading = robot.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-            botHeading = pos.getHeading(AngleUnit.RADIANS);
+            botHeading = Math.toRadians(pos.getHeading(AngleUnit.DEGREES) - storedHeading);
 
             // Rotate the movement direction counter to the bot's rotation
             double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
             double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
 
-            rotX = rotX * 1.1;  // Counteract imperfect strafing
+            //rotX = rotX * 1.1;  // Counteract imperfect strafing
 
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio,
@@ -158,22 +171,18 @@ public class WorldsBestTeleop extends LinearOpMode {
             robot.leftBackDrive.setPower(backLeftPower);
             robot.rightFrontDrive.setPower(frontRightPower);
             robot.rightBackDrive.setPower(backRightPower);
-            robot.motorLiftFront.setTargetPosition((int)liftPosition);
-            robot.motorLiftBack.setTargetPosition((int)liftPosition);
-            robot.motorLiftFront.setPower(1);
-            robot.motorLiftBack.setPower(1);
+
+            mechOps.liftPosition = (int)liftPosition;
+            mechOps.setLiftPosition();
 
 
-            PIDFCoefficients pidfOrig = robot.extendMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
-            PIDFCoefficients pidfNew = new PIDFCoefficients(NEW_P, NEW_I, NEW_D, NEW_F);
-            robot.extendMotor.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfNew);
-            PIDFCoefficients pidfModified = robot.extendMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
 
 
             mechOps.transferSample();
             mechOps.setExtensionPosition();
+            mechOps.extensionPowerMonitor();
 
             /* Here we handle the three buttons that have direct control of the intake speed.
             These control the continuous rotation servo that pulls elements into the robot,
@@ -380,6 +389,11 @@ public class WorldsBestTeleop extends LinearOpMode {
             }
 
 
+            telemetry.addData("liftPosition = ", mechOps.liftPosition);
+            telemetry.addData("extensionPosition = ", mechOps.extensionPosition);
+            telemetry.addData("motor Lift Front Position", robot.motorLiftFront.getCurrentPosition());
+            telemetry.addData("motor Lift Back Position", robot.motorLiftBack.getCurrentPosition());
+            telemetry.addData("motor Extend Position", robot.extendMotor.getCurrentPosition());
             telemetry.addData("motor Lift Front Current", robot.motorLiftFront.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("motor Lift Back Current", robot.motorLiftBack.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("motor Extend Current", robot.extendMotor.getCurrent(CurrentUnit.AMPS));
@@ -406,6 +420,8 @@ public class WorldsBestTeleop extends LinearOpMode {
 
 
         }
+        // reset the heading value in the HeadingFile to 0
+        mechOps.writeToFile(0,"HeadingFile");
     }
 
 
