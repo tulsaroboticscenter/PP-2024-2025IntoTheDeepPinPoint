@@ -43,8 +43,8 @@ import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
 //@Disabled
-@Autonomous(name = "Auto Samples - 4+0", group = "Competition", preselectTeleOp = "GoBildaRi3D2425")
-public class RRAuto4SampleV2CTS extends LinearOpMode{
+@Autonomous(name = "Auto Samples - 4+0", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
+public class RRAuto4SampleV2State extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
@@ -66,8 +66,6 @@ public class RRAuto4SampleV2CTS extends LinearOpMode{
     public Pose2d midwayPose4 = new Pose2d(0,0,0);
     public Pose2d parkPrepPose = new Pose2d(0, 0, 0);
     public Pose2d parkPose = new Pose2d(0, 0, 0);
-
-
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -92,11 +90,14 @@ public class RRAuto4SampleV2CTS extends LinearOpMode{
         mechOps.extForeBarRetract();
 
         // Wait for the DS start button to be touched.
-        telemetry.addData("4 Sample Auto - CTS Ready", "");
+        telemetry.addData("4 Sample Auto - State Ready", "");
         telemetry.addData("Team Name   : ", TEAM_NAME);
         telemetry.addData("Team Number   : ", TEAM_NUMBER);
         telemetry.addData(">", "Touch Play to start OpMode");
         telemetry.update();
+
+        // intialize the heading file to 0
+        mechOps.writeToFile(0, "HeadingFile");
 
         waitForStart();
 
@@ -108,6 +109,10 @@ public class RRAuto4SampleV2CTS extends LinearOpMode{
             scoreSample3(drive);
             park(drive);
         }
+
+        // write the bot heading to a local file for retreival for field centric drive in TeleOp
+        double botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+        mechOps.writeToFile(botHeading, "HeadingFile");
 
         requestOpModeStop();
     } //end runOpMode();

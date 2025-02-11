@@ -35,22 +35,16 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.ReadWriteFile;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import org.firstinspires.ftc.teamcode.PinpointDrive;
 import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 
-import java.io.File;
-
 
 @Autonomous(name = "Auto - 5 Specimen 5+0", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
-public class RRAuto5SpecimenCTS extends LinearOpMode{
+public class RRAuto5SpecimenState extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
@@ -111,7 +105,7 @@ public class RRAuto5SpecimenCTS extends LinearOpMode{
         robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
         mechOps.tightenStrings();
 
-        telemetry.addData("5 Specimen Auto - CTS Ready", "");
+        telemetry.addData("5 Specimen Auto - State Ready", "");
         telemetry.addData("Team Name   : ", TEAM_NAME);
         telemetry.addData("Team Number   : ", TEAM_NUMBER);
         telemetry.addLine("PRESS PLAY TO START");

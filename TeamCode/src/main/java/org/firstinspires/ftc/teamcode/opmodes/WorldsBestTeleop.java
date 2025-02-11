@@ -175,11 +175,6 @@ public class WorldsBestTeleop extends LinearOpMode {
             mechOps.liftPosition = (int)liftPosition;
             mechOps.setLiftPosition();
 
-
-
-
-
-
             mechOps.transferSample();
             mechOps.setExtensionPosition();
             mechOps.extensionPowerMonitor();
@@ -209,7 +204,6 @@ public class WorldsBestTeleop extends LinearOpMode {
                     clawOpened = true;
                 }
                 clawRuntime.reset();
-
             }
 
             if (gamepad1.left_bumper & scoreClawRuntime.time() > 0.15) {
@@ -221,7 +215,6 @@ public class WorldsBestTeleop extends LinearOpMode {
                     scoreClawOpened = true;
                 }
                 scoreClawRuntime.reset();
-
             }
             /* Here we create a "fudge factor" for the arm position.
             This allows you to adjust (or "fudge") the arm position slightly with the gamepad triggers.
@@ -232,7 +225,6 @@ public class WorldsBestTeleop extends LinearOpMode {
             The FUDGE_FACTOR is the number of degrees that we can adjust the arm by with this function. */
 
            /* ExtensionPositionFudgeFactor = robot * EXTENSION_TICKS_PER_DEGREE(gamepad2.right_trigger + (-gamepad2.left_trigger));
-
 
             /* Here we implement a set of if else statements to set our arm to different scoring positions.
             We check to see if a specific button is pressed, and then move the arm (and sometimes
@@ -266,7 +258,6 @@ public class WorldsBestTeleop extends LinearOpMode {
                     robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY_PART);
                     extensionButtonPress = 1;
                     extensionButtionPressTime.reset();
-
                 }
 
             } else if (gamepad1.x){
@@ -286,7 +277,6 @@ public class WorldsBestTeleop extends LinearOpMode {
 //                    isTransferReady = false;
 //                }
 
-
             } else if (gamepad1.y) {
                 liftPosition = robot.LIFT_SCORE_HIGH_BASKET;
                 mechOps.scoreForeSample();
@@ -294,7 +284,6 @@ public class WorldsBestTeleop extends LinearOpMode {
             } else if (gamepad2.a){
                 liftPosition = robot.LIFT_RESET;
                 mechOps.scoreForeSpecimen();
-
 
             } else if (gamepad1.b){
                 liftPosition = robot.LIFT_RESET;
@@ -306,7 +295,6 @@ public class WorldsBestTeleop extends LinearOpMode {
 
             } else if (gamepad1.dpad_up) {
                 robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
-
 
             } else if (gamepad1.dpad_left) {
                 mechOps.scoreForeSpecimen();
@@ -349,7 +337,6 @@ public class WorldsBestTeleop extends LinearOpMode {
             if (gamepad2.right_trigger > 0.05 && (liftPosition + (20 * -gamepad2.right_stick_y)) < robot.LIFT_SCORE_HIGH_BASKET && (liftPosition + (20 * -gamepad2.right_stick_y)) > robot.LIFT_RESET){
                 liftPosition += (100 * -gamepad2.right_stick_y);
             }
-
 
             if (gamepad1.right_stick_button && rotateClawRuntime.time() > 0.15) {
                 if (clawRotated) {

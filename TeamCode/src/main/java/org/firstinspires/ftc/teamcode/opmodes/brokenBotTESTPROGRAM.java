@@ -83,13 +83,10 @@ public class brokenBotTESTPROGRAM extends LinearOpMode {
         double max;
         double servoWristPosition = robot.INTAKE_WRIST_ROTATED_ZERO;
 
-
-
         robot.init(hardwareMap, true);
 
         telemetry.addData("Status:", "Initialized");
         telemetry.update();
-
 
         /* Send telemetry message to signify robot waiting */
         telemetry.addLine("Robot Ready.");
