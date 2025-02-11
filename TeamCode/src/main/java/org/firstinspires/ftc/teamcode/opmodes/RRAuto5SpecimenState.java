@@ -93,7 +93,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         coloredSample3PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));
         coloredSample3PositionDrop = new Pose2d(-11, 19, Math.toRadians(50));
         midwayPose1 = new Pose2d(-19, 30, Math.toRadians(103)); //prep for grabbing first sample
-        parkPose = new Pose2d(-20, -5, Math.toRadians(-160));
+        parkPose = new Pose2d(-11, 19, Math.toRadians(50));
 
         robot.init(hardwareMap, false);
         PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
@@ -175,7 +175,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
 
 //        safeWaitSeconds(0.1);
 //        if (opModeIsActive()) mechOps.extClawClose();
-        safeWaitSeconds(0.1);
+        //safeWaitSeconds(0.1);
         if(opModeIsActive()) mechOps.extForeBarSweep();
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
@@ -354,7 +354,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
             robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY);
         if (opModeIsActive()) robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
         if (opModeIsActive()) mechOps.extPitchGrab();
-        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
+        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
     }
 
