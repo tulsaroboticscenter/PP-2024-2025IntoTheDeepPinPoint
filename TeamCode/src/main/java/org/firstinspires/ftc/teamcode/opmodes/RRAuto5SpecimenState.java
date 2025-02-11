@@ -72,7 +72,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
     public Pose2d midwayPose1 = new Pose2d(0, 0, 0);
     public Pose2d specimenGrabPrep = new Pose2d(0, 0, 0);
     public Pose2d parkPose = new Pose2d(0, 0, 0);
-
+    public double botHeading = 180;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -112,24 +112,64 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         telemetry.update();
 
         // intialize the heading file to 0
-        mechOps.writeToFile(180, "HeadingFile");
+        mechOps.writeToFile(botHeading, "HeadingFile");
 
         waitForStart();
 
         if (opModeIsActive() && !isStopRequested()) {
 
             scoreSpecimen1(drive);
-            retreiveColoredSamples(drive);
-            scoreSpecimen2(drive);
-            scoreSpecimen3(drive);
-            scoreSpecimen4(drive);
-            scoreSpecimen5(drive);
-            park(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
 
+            retreiveColoredSamples(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
+
+            scoreSpecimen2(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
+
+            scoreSpecimen3(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
+
+            scoreSpecimen4(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
+
+            scoreSpecimen5(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
+
+            park(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
         }
 
-        // write the bot heading to a local file for retreival for field centric drive in TeleOp
-        double botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+        // write the bot heading to a local file for retrieval for field centric drive in TeleOp
+        botHeading = Math.toDegrees(drive.pose.heading.toDouble());
         botHeading = 180 - botHeading;
         mechOps.writeToFile(botHeading, "HeadingFile");
 
