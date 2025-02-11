@@ -43,7 +43,7 @@ import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 
 //@Disabled
-@Autonomous(name = "Auto Samples - 5+0", group = "Competition", preselectTeleOp = "GoBildaRi3D2425")
+@Autonomous(name = "Auto Samples - 5+0 HUMAN PLAYER LAST", group = "Competition", preselectTeleOp = "GoBildaRi3D2425")
 public class RRAuto5Sample extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
