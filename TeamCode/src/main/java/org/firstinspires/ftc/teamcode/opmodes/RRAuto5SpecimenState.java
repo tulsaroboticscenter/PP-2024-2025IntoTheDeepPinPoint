@@ -390,12 +390,12 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         //safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.liftReset();
         if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY);
-        if (opModeIsActive())
-            robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY);
+        if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY);
         if (opModeIsActive()) robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
-        if (opModeIsActive()) mechOps.extPitchGrab();
+        if (opModeIsActive()) mechOps.extPitchHold();
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
+        if(opModeIsActive()) mechOps.extClawClose();
     }
 
     public void park(PinpointDrive drive){

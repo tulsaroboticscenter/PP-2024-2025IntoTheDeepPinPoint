@@ -187,6 +187,9 @@ public class RRMechOps {
         robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT_PART);
         robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT_PART);
     }
+    public void extPitchHold(){
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
+    }
     /**
      * Method: transferSample()
      * How it works:
@@ -275,6 +278,7 @@ public class RRMechOps {
             robot.extendMotor.setPower(0.75);
         } else robot.extendMotor.setPower(1);
     }
+
 
     public void setExtensionPosition(){
         robot.extendMotor.setPower(1);
