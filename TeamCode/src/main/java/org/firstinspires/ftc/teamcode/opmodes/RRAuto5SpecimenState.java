@@ -93,7 +93,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         coloredSample3PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));
         coloredSample3PositionDrop = new Pose2d(-11, 19, Math.toRadians(50));
         midwayPose1 = new Pose2d(-19, 30, Math.toRadians(103)); //prep for grabbing first sample
-        parkPose = new Pose2d(-11, 19, Math.toRadians(50));
+        parkPose = new Pose2d(-5, 19, Math.toRadians(50));
 
         robot.init(hardwareMap, false);
         PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
