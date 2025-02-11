@@ -67,6 +67,7 @@ public class HWProfile {
     as far from the starting position, decrease it. */
 
     public final double LIFT_RESET                = 30;
+    public final double LIFT_RESET_TELEOP         = 110;
     public final double LIFT_SPECIMEN_PREP          = 1475 ;
     public final double LIFT_SPECIMEN_SCORE = 400;
     public final double LIFT_SCORE_HIGH_BASKET = 3100;
