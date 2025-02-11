@@ -66,6 +66,7 @@ public class RRAuto4SampleV2State extends LinearOpMode{
     public Pose2d midwayPose4 = new Pose2d(0,0,0);
     public Pose2d parkPrepPose = new Pose2d(0, 0, 0);
     public Pose2d parkPose = new Pose2d(0, 0, 0);
+    double botHeading = 0;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -97,21 +98,50 @@ public class RRAuto4SampleV2State extends LinearOpMode{
         telemetry.update();
 
         // intialize the heading file to 0
-        mechOps.writeToFile(0, "HeadingFile");
+        mechOps.writeToFile(botHeading, "HeadingFile");
 
         waitForStart();
 
         //Game Play Button  is pressed
         if (opModeIsActive() && !isStopRequested()) {
             scorePreLoadSample(drive);
+            // save heading to local file if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
+
             scoreSample1(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
+
             scoreSample2(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
+
             scoreSample3(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
+
             park(drive);
+            // save heading to local file for teleop if bot gets stopped prematurely
+            if(isStopRequested()){
+                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+                mechOps.writeToFile(botHeading, "HeadingFile");
+            }
         }
 
-        // write the bot heading to a local file for retreival for field centric drive in TeleOp
-        double botHeading = Math.toDegrees(drive.pose.heading.toDouble());
+        // write the bot heading to a local file for retrieval for field centric drive in TeleOp
+        botHeading = Math.toDegrees(drive.pose.heading.toDouble());
         mechOps.writeToFile(botHeading, "HeadingFile");
 
         requestOpModeStop();
