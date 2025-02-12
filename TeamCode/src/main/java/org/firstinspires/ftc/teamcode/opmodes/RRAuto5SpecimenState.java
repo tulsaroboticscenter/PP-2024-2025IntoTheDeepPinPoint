@@ -89,11 +89,11 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         coloredSample1PositionGrab = new Pose2d(-30, 34, Math.toRadians(120));
         coloredSample1PositionDrop = new Pose2d(-15, 28, Math.toRadians(40));
         coloredSample2PositionGrab = new Pose2d(-27, 25, Math.toRadians(118));
-        coloredSample2PositionDrop = new Pose2d(-17, 24, Math.toRadians(50));
+        coloredSample2PositionDrop = new Pose2d(-17, 25, Math.toRadians(50));
         coloredSample3PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));
         coloredSample3PositionDrop = new Pose2d(-11, 19, Math.toRadians(50));
         midwayPose1 = new Pose2d(-19, 30, Math.toRadians(103)); //prep for grabbing first sample
-        parkPose = new Pose2d(-5, 19, Math.toRadians(50));
+        parkPose = new Pose2d(-8, 20, Math.toRadians(60));
 
         robot.init(hardwareMap, false);
         PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
@@ -395,6 +395,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
     public void park(PinpointDrive drive){
 
 
+        if(opModeIsActive()) mechOps.extForePart();
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
         if(opModeIsActive()) mechOps.extClawClose();

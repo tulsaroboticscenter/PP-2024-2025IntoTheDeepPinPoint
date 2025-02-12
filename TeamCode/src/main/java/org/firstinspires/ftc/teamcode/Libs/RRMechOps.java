@@ -234,12 +234,12 @@ public class RRMechOps {
             } else {
                 extPitchReset();
                 extForeBarRetract();
-                this.extensionPosition = (int) robot.EXTENSION_RESET;
+                this.extensionPosition = (int) robot.EXTENSION_RESET_TELEOP;
                 extClawRotateZero();
 
                 scoreForeGrab();
                 scoreClawOpen();
-                if (robot.extendMotor.getCurrentPosition() <= robot.EXTENSION_RESET) {
+                if (robot.extendMotor.getCurrentPosition() <= robot.EXTENSION_RESET_TELEOP) {
                     transferReady = true;
                     sampleTransferTime.reset();
                 }
@@ -275,7 +275,7 @@ public class RRMechOps {
 
     public void extensionPowerMonitor(){
         if (robot.extendMotor.getCurrentPosition() < robot.EXTENSION_POWER_REDUX) {
-            robot.extendMotor.setPower(0.75);
+            robot.extendMotor.setPower(0.5);
         } else robot.extendMotor.setPower(1);
     }
 

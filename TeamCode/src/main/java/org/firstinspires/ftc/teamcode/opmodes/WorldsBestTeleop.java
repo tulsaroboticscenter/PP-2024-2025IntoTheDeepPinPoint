@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -33,7 +36,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
 
     public static double NEW_P = 20;
-    public static double NEW_I = 1;
+    public static double NEW_I = 3;
     public static double NEW_D = 0.005;
     public static double NEW_F = 1;
 
@@ -46,7 +49,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
 
     /* Variables that are used to set the arm to a specific position */
-    double liftPosition = robot.LIFT_RESET;
+    double liftPosition = robot.LIFT_RESET_TELEOP;
     double elbowPositionFudgeFactor;
     private HardwareMap hwMap;
 
@@ -56,6 +59,9 @@ public class WorldsBestTeleop extends LinearOpMode {
         /*
         These variables are private to the OpMode, and are used to control the drivetrain.
          */
+
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+
         double left;
         double right;
         double forward;
@@ -127,6 +133,7 @@ public class WorldsBestTeleop extends LinearOpMode {
         boolean isTransferReady = false;
 
 
+        TelemetryPacket packet = new TelemetryPacket();
 
 
 //        requestOpModeStop();
@@ -177,7 +184,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
             mechOps.transferSample();
             mechOps.setExtensionPosition();
-            mechOps.extensionPowerMonitor();
+            //mechOps.extensionPowerMonitor();
 
             /* Here we handle the three buttons that have direct control of the intake speed.
             These control the continuous rotation servo that pulls elements into the robot,
@@ -348,6 +355,10 @@ public class WorldsBestTeleop extends LinearOpMode {
 
                     rotateClawRuntime.reset();
                 }
+            }
+
+            if(gamepad2.x){
+                mechOps.tightenStrings();
             }
 
             looptime = getRuntime();
