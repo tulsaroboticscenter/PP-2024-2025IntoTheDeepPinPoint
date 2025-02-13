@@ -128,8 +128,8 @@ public class HWProfile {
     public final double EXTENSION_OUT_MAX = 660;
     public final int    EXTENSION_DOWN_MAX = 1600;
     public final double EXTENSION_RESET = 5;
-    public final double EXTENSION_RESET_TELEOP = 30;
-    public final int    EXTENSION_POWER_REDUX = 40;
+    public final double EXTENSION_RESET_TELEOP = 60;// was set to 30
+    public final int    EXTENSION_POWER_REDUX = 65;
 
 
 
