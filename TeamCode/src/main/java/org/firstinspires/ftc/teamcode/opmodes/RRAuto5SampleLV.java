@@ -119,7 +119,7 @@ public class RRAuto5SampleLV extends LinearOpMode{
         yellowSample1Position = new Pose2d(9, 14, Math.toRadians(-5));
         yellowSample2Position = new Pose2d(10, 26, Math.toRadians(-5));
         yellowSample3Position = new Pose2d(37, 8.1, Math.toRadians(70));
-        yellowSample4PositionHP = new Pose2d(0,-50, Math.toRadians(-90));
+        yellowSample4PositionHP = new Pose2d(0,-40, Math.toRadians(-90));
         midwayPose1 = new Pose2d(10,22, Math.toRadians(-45));
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
         midwayPose3 = new Pose2d(33,1, Math.toRadians(90));

@@ -298,11 +298,13 @@ public class brokenBotTESTPROGRAM extends LinearOpMode {
             }else if (gamepad1.x){
                 mechOps.transferSample = true;
 
-            } else if (gamepad1.y){
+            } else if (gamepad1.y) {
                 mechOps.scoreForeGrab();
-                liftPosition = robot.LIFT_SCORE_HIGH_BASKET;
+                liftPosition = robot.LIFT_SCORE_HIGH_BASKET_TELEOP;
                 mechOps.scoreForeSample();
 
+            }else if (gamepad1.left_stick_button){
+                liftPosition = robot.LIFT_SCORE_HIGH_BASKET;
             } else if (gamepad1.dpad_down){
                 mechOps.scoreForeGrab();
 

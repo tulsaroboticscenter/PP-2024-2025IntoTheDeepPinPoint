@@ -223,6 +223,20 @@ public class WorldsBestTeleop extends LinearOpMode {
                 }
                 scoreClawRuntime.reset();
             }
+
+            if (gamepad1.right_stick_button && rotateClawRuntime.time() > 0.15) {
+                if (clawRotated) {
+                    servoWristPosition = robot.INTAKE_WRIST_ROTATED_ZERO;
+                    clawRotated = false;
+                } else if (!clawRotated) {
+                    servoWristPosition = robot.INTAKE_WRIST_ROTATED_NINETY;
+                    clawRotated = true;
+
+                    rotateClawRuntime.reset();
+                }
+            }
+
+
             /* Here we create a "fudge factor" for the arm position.
             This allows you to adjust (or "fudge") the arm position slightly with the gamepad triggers.
             We want the left trigger to move the arm down, and right trigger to move the arm up.
@@ -241,7 +255,7 @@ public class WorldsBestTeleop extends LinearOpMode {
             turns the intake on to the COLLECT mode.*/
 
             if (gamepad1.a) {
-                if((extensionButtonPress == 1) && (extensionButtionPressTime.time() > 0.1)) {
+                if((extensionButtonPress == 1) && (extensionButtionPressTime.time() > 0.2)) {
                     /* This is the intaking/collecting arm position */
 //                    robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
                     mechOps.extensionPosition = (int) robot.EXTENSION_OUT_MAX;
@@ -251,7 +265,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
                     extensionButtonPress = 2;
                     extensionButtionPressTime.reset();
-                } else if((extensionButtonPress == 2) && extensionButtionPressTime.time() > 0.1){
+                } else if((extensionButtonPress == 2) && extensionButtionPressTime.time() > 0.2){
                     robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY);
                     robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY);
 //                    mechOps.extensionPosition = (int) robot.EXTENSION_OUT_MAX;
@@ -260,7 +274,7 @@ public class WorldsBestTeleop extends LinearOpMode {
                     extensionButtonPress = 3;
                     extensionButtionPressTime.reset();
 
-                }else if((extensionButtonPress == 3) && extensionButtionPressTime.time() > 0.1){
+                }else if((extensionButtonPress == 3) && extensionButtionPressTime.time() > 0.2){
                     robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY_PART);
                     robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY_PART);
                     extensionButtonPress = 1;
@@ -285,7 +299,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 //                }
 
             } else if (gamepad1.y) {
-                liftPosition = robot.LIFT_SCORE_HIGH_BASKET;
+                liftPosition = robot.LIFT_SCORE_HIGH_BASKET_TELEOP;
                 mechOps.scoreForeSample();
 
             } else if (gamepad2.a){
@@ -316,7 +330,7 @@ public class WorldsBestTeleop extends LinearOpMode {
                 liftPosition = robot.LIFT_SCORE_SPECIMEN;
 
             } else if (gamepad2.dpad_down){
-                liftPosition = robot.LIFT_SCORE_SPECIMEN;
+                liftPosition = robot.LIFT_SCORE_SPECIMEN_TELEOP;
 
             } else if (gamepad2.dpad_left) {
                 robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_CLOSED);
@@ -335,6 +349,9 @@ public class WorldsBestTeleop extends LinearOpMode {
 
             } else if (gamepad2.left_bumper){
                 mechOps.autoSampleScorePrep();
+
+            } else if (gamepad1.right_stick_button){
+                liftPosition = robot.LIFT_CLIMB;
             }
 
             if (gamepad2.left_trigger > 0.05 && (mechOps.extensionPosition + (40 * -gamepad2.right_stick_y)) > 0 && (mechOps.extensionPosition + (40 * -gamepad2.right_stick_y)) < robot.EXTENSION_DOWN_MAX){
@@ -345,17 +362,6 @@ public class WorldsBestTeleop extends LinearOpMode {
                 liftPosition += (100 * -gamepad2.right_stick_y);
             }
 
-            if (gamepad1.right_stick_button && rotateClawRuntime.time() > 0.15) {
-                if (clawRotated) {
-                    servoWristPosition = robot.INTAKE_WRIST_ROTATED_ZERO;
-                    clawRotated = false;
-                } else if (!clawRotated) {
-                    servoWristPosition = robot.INTAKE_WRIST_ROTATED_NINETY;
-                    clawRotated = true;
-
-                    rotateClawRuntime.reset();
-                }
-            }
 
             if(gamepad2.x){
                 mechOps.tightenStrings();

@@ -68,10 +68,13 @@ public class HWProfile {
 
     public final double LIFT_RESET                = 30;
     public final double LIFT_RESET_TELEOP         = 115;
-    public final double LIFT_SPECIMEN_PREP          = 1475 ;
+    public final double LIFT_SPECIMEN_PREP          = 1550 ;
     public final double LIFT_SPECIMEN_SCORE = 400;
     public final double LIFT_SCORE_HIGH_BASKET = 3100;
+    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3200;
+    public final double LIFT_CLIMB              = 2000;
     public final double LIFT_SCORE_SPECIMEN = 1000;
+    public final double LIFT_SCORE_SPECIMEN_TELEOP = 1200;
 
 
 
@@ -83,7 +86,7 @@ public class HWProfile {
     public final double INTAKE_WRIST_FOLDED_PARTIAL = .25;
 
 
-    public final double INTAKE_CLAW_PITCH_GRAB = .95;
+    public final double INTAKE_CLAW_PITCH_GRAB = 1;
     public final double INTAKE_CLAW_PITCH_HOLD = 0.5;
     public final double INTAKE_CLAW_PITCH_AUTON = .9;
     public final double INTAKE_CLAW_PITCH_TRANSFER = 0.05;
@@ -100,24 +103,24 @@ public class HWProfile {
     public final double SCORE_CLAW_CLOSED = .15;
 
 
-    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.28;//started at 0
+    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.25;//started at 0
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_PART = .4;//started at 0
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .15;
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_AUTON = .85;
     final public double INTAKE_RIGHT_FOREBAR_RETRACT = .75;// started at 1
     final public double INTAKE_RIGHT_FOREBAR_RETRACT_PART = 0.6;
     final public double INTAKE_LEFT_FOREBAR_RETRACT_PART = 0.4;
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .72;//started at 1
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .75;//started at 1
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_PART = .6; //started at 1
     final public double INTAKE_LEFT_FOREBAR_RETRACT = .28; // started at 0
 
     final public double SCORE_RIGHT_FOREBAR_RESET = 0; //started at 1
-    final public double SCORE_RIGHT_FOREBAR_GRAB = 0.15; //started at 1
+    final public double SCORE_RIGHT_FOREBAR_GRAB = 0.13; //started at 1
     final public double SCORE_RIGHT_FOREBAR_SPECIMEN = 1;
     final public double SCORE_RIGHT_FOREBAR_SCORE = 0.7;
     final public double SCORE_LEFT_FOREBAR_SPECIMEN = 0;
     final public double SCORE_LEFT_FOREBAR_RESET = 1; //started at 0
-    final public double SCORE_LEFT_FOREBAR_GRAB = 0.85;//tarted at 0
+    final public double SCORE_LEFT_FOREBAR_GRAB = 0.87;//tarted at 0
     final public double SCORE_LEFT_FOREBAR_SCORE = 0.3;
 
 
@@ -128,8 +131,8 @@ public class HWProfile {
     public final double EXTENSION_OUT_MAX = 660;
     public final int    EXTENSION_DOWN_MAX = 1600;
     public final double EXTENSION_RESET = 5;
-    public final double EXTENSION_RESET_TELEOP = 60;// was set to 30
-    public final int    EXTENSION_POWER_REDUX = 65;
+    public final double EXTENSION_RESET_TELEOP = 35;// was set to 30
+    public final int    EXTENSION_POWER_REDUX = 55;
 
 
 
