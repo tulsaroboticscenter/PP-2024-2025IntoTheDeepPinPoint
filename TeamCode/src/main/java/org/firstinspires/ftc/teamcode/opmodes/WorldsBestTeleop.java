@@ -69,6 +69,8 @@ public class WorldsBestTeleop extends LinearOpMode {
         double max;
         double servoWristPosition = robot.INTAKE_WRIST_ROTATED_ZERO;
         int extensionButtonPress = 1;
+        int clawRotateButtonPress = 1;
+        ElapsedTime clawRotateButtonPressTime = new ElapsedTime();
         ElapsedTime extensionButtionPressTime = new ElapsedTime();
 
 
@@ -97,6 +99,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
         /* Wait for the game driver to press play */
         waitForStart();
+        clawRotateButtonPressTime.reset();
         extensionButtionPressTime.reset();
         mechOps.extForeBarRetract();
         mechOps.scoreForeGrab();
@@ -122,6 +125,7 @@ public class WorldsBestTeleop extends LinearOpMode {
         rotateClawRuntime.reset();
         armExtensionRuntime.reset();
         armClimbRuntime.reset();
+
 
 
         // booleans for keeping track of toggles
@@ -254,6 +258,28 @@ public class WorldsBestTeleop extends LinearOpMode {
             it folds out the wrist to make sure it is in the correct orientation to intake, and it
             turns the intake on to the COLLECT mode.*/
 
+            if (gamepad1.right_stick_button) {
+                if((clawRotateButtonPress == 1) && (clawRotateButtonPressTime.time() > 0.2)){
+                    robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
+
+                    clawRotateButtonPress = 2;
+                    clawRotateButtonPressTime.reset();
+
+                } else if ((clawRotateButtonPress == 2) && (clawRotateButtonPressTime.time() > 0.2)){
+                    robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_45);
+
+                    clawRotateButtonPress = 3;
+                    clawRotateButtonPressTime.reset();
+
+                } else if ((clawRotateButtonPress == 3) && (clawRotateButtonPressTime.time() > 0.2)){
+                    robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
+
+                    clawRotateButtonPress = 1;
+                    clawRotateButtonPressTime.reset();
+                }
+
+            }
+
             if (gamepad1.a) {
                 if((extensionButtonPress == 1) && (extensionButtionPressTime.time() > 0.2)) {
                     /* This is the intaking/collecting arm position */
@@ -312,22 +338,23 @@ public class WorldsBestTeleop extends LinearOpMode {
             }
 
             if (gamepad1.dpad_right) {
-                robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
+                robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_45);
 
             } else if (gamepad1.dpad_up) {
-                robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
+                robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
 
-            } else if (gamepad1.dpad_left) {
-                mechOps.scoreForeSpecimen();
-
-            } else if (gamepad1.dpad_right) {
-                liftPosition = robot.LIFT_SPECIMEN_PREP;
+//            } else if (gamepad1.dpad_left) {
+//                mechOps.scoreForeSpecimen();
+//
+//            } else if (gamepad1.dpad_right) {
+//                liftPosition = robot.LIFT_SPECIMEN_PREP;
 
             } else if (gamepad2.dpad_up) {
                 liftPosition = robot.LIFT_SPECIMEN_PREP;
 
             } else if (gamepad1.dpad_down){
-                liftPosition = robot.LIFT_SCORE_SPECIMEN;
+                robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
+                //liftPosition = robot.LIFT_SCORE_SPECIMEN;
 
             } else if (gamepad2.dpad_down){
                 liftPosition = robot.LIFT_SCORE_SPECIMEN_TELEOP;
@@ -350,7 +377,7 @@ public class WorldsBestTeleop extends LinearOpMode {
             } else if (gamepad2.left_bumper){
                 mechOps.autoSampleScorePrep();
 
-            } else if (gamepad1.right_stick_button){
+            } else if (gamepad1.left_stick_button){
                 liftPosition = robot.LIFT_CLIMB;
             }
 
