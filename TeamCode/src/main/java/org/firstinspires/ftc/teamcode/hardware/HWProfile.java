@@ -66,14 +66,14 @@ public class HWProfile {
     If you'd like it to move further, increase that number. If you'd like it to not move
     as far from the starting position, decrease it. */
 
-    public final double LIFT_RESET                = 30;
+    public final double LIFT_RESET                = 20;
     public final double LIFT_RESET_TELEOP         = 115;
-    public final double LIFT_SPECIMEN_PREP          = 1550 ;
+    public final double LIFT_SPECIMEN_PREP          = 1500 ;
     public final double LIFT_SPECIMEN_SCORE = 400;
     public final double LIFT_SCORE_HIGH_BASKET = 3100;
     public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3200;
     public final double LIFT_CLIMB              = 2000;
-    public final double LIFT_SCORE_SPECIMEN = 1000;
+    public final double LIFT_SCORE_SPECIMEN = 1300;
     public final double LIFT_SCORE_SPECIMEN_TELEOP = 1200;
 
 
@@ -86,10 +86,10 @@ public class HWProfile {
     public final double INTAKE_WRIST_FOLDED_PARTIAL = .25;
 
 
-    public final double INTAKE_CLAW_PITCH_GRAB = 1;
+    public final double INTAKE_CLAW_PITCH_GRAB = .95;
     public final double INTAKE_CLAW_PITCH_HOLD = 0.5;
     public final double INTAKE_CLAW_PITCH_AUTON = .9;
-    public final double INTAKE_CLAW_PITCH_TRANSFER = 0.05;
+    public final double INTAKE_CLAW_PITCH_TRANSFER = 0.02;
 
 
     /* A number in degrees that the triggers can adjust the arm position by */
@@ -103,14 +103,14 @@ public class HWProfile {
     public final double SCORE_CLAW_CLOSED = .15;
 
 
-    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.25;//started at 0
+    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.24;//started at 0
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_PART = .4;//started at 0
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .15;
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_AUTON = .85;
     final public double INTAKE_RIGHT_FOREBAR_RETRACT = .75;// started at 1
     final public double INTAKE_RIGHT_FOREBAR_RETRACT_PART = 0.6;
     final public double INTAKE_LEFT_FOREBAR_RETRACT_PART = 0.4;
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .75;//started at 1
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .76;//started at 1
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_PART = .6; //started at 1
     final public double INTAKE_LEFT_FOREBAR_RETRACT = .28; // started at 0
 
