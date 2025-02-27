@@ -20,7 +20,7 @@ public class LimelightTest extends LinearOpMode {
     Limelight3A limelight;
     double currentPipeline;
     double howMuchToExtend;
-   
+
     public static double higherTyLimit = 10;
     public static double howMuchToDevideDistance = 0.9;
     public static double tuneThisForExtensionLength = 0.0095;
