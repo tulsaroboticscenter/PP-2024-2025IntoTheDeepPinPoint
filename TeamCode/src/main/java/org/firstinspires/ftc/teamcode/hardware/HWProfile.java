@@ -101,6 +101,7 @@ public class HWProfile {
 
 
     public final double SCORE_CLAW_OPEN = 0.5;
+    public final double SCORE_CLAW_OPEN_TELEOP = 0.25;
     public final double SCORE_CLAW_CLOSED = .15;
 
 

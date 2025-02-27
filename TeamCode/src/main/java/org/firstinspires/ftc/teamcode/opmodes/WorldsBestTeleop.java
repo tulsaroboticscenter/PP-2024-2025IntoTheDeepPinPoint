@@ -222,7 +222,7 @@ public class WorldsBestTeleop extends LinearOpMode {
                     robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_CLOSED);
                     scoreClawOpened = false;
                 } else {
-                    robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_OPEN);
+                    robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_OPEN_TELEOP);
                     scoreClawOpened = true;
                 }
                 scoreClawRuntime.reset();
