@@ -74,7 +74,7 @@ public class RRAuto4SampleV2State extends LinearOpMode{
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
         yellowSample1Position = new Pose2d(11, 16, Math.toRadians(-5));
         yellowSample2Position = new Pose2d(11, 25.5, Math.toRadians(-5));
-        yellowSample3Position = new Pose2d(38.5, 8.1, Math.toRadians(90));
+        yellowSample3Position = new Pose2d(38.5, 7.1, Math.toRadians(90));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
         midwayPose3 = new Pose2d(33,1, Math.toRadians(90));

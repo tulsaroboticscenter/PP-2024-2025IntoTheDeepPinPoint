@@ -68,13 +68,14 @@ public class HWProfile {
 
     public final double LIFT_RESET                = 20;
     public final double LIFT_RESET_TELEOP         = 115;
-    public final double LIFT_SPECIMEN_PREP          = 1500 ;
+    public final double LIFT_SPECIMEN_PREP          = 1500;
+    public final double LIFT_SPECIMEN_PREP_TELEOP = 1600;
     public final double LIFT_SPECIMEN_SCORE = 400;
     public final double LIFT_SCORE_HIGH_BASKET = 3100;
     public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3200;
     public final double LIFT_CLIMB              = 2000;
     public final double LIFT_SCORE_SPECIMEN = 1300;
-    public final double LIFT_SCORE_SPECIMEN_TELEOP = 1200;
+    public final double LIFT_SCORE_SPECIMEN_TELEOP = 1100;
 
 
 

@@ -343,14 +343,14 @@ public class WorldsBestTeleop extends LinearOpMode {
             } else if (gamepad1.dpad_up) {
                 robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
 
-//            } else if (gamepad1.dpad_left) {
-//                mechOps.scoreForeSpecimen();
+            } else if (gamepad1.dpad_left) {
+                mechOps.scoreForeSpecimen();
 //
 //            } else if (gamepad1.dpad_right) {
 //                liftPosition = robot.LIFT_SPECIMEN_PREP;
 
             } else if (gamepad2.dpad_up) {
-                liftPosition = robot.LIFT_SPECIMEN_PREP;
+                liftPosition = robot.LIFT_SPECIMEN_PREP_TELEOP;
 
             } else if (gamepad1.dpad_down){
                 robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
@@ -378,8 +378,9 @@ public class WorldsBestTeleop extends LinearOpMode {
                 mechOps.autoSampleScorePrep();
 
             } else if (gamepad1.left_stick_button){
-                liftPosition = robot.LIFT_CLIMB;
+                mechOps.extensionPosition = (int) robot.EXTENSION_RESET;
             }
+
 
             if (gamepad2.left_trigger > 0.05 && (mechOps.extensionPosition + (40 * -gamepad2.right_stick_y)) > 0 && (mechOps.extensionPosition + (40 * -gamepad2.right_stick_y)) < robot.EXTENSION_DOWN_MAX){
                 mechOps.extensionPosition += (20 * -gamepad2.right_stick_y);
