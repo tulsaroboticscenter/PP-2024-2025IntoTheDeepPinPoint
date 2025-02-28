@@ -87,7 +87,7 @@ public class HWProfile {
     public final double INTAKE_WRIST_FOLDED_PARTIAL = .25;
 
 
-    public final double INTAKE_CLAW_PITCH_GRAB = .95;
+    public final double INTAKE_CLAW_PITCH_GRAB = .97;
     public final double INTAKE_CLAW_PITCH_HOLD = 0.5;
     public final double INTAKE_CLAW_PITCH_AUTON = .9;
     public final double INTAKE_CLAW_PITCH_TRANSFER = 0.02;
