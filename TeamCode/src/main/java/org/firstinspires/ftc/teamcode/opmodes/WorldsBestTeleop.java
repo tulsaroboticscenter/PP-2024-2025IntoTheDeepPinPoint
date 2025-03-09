@@ -285,13 +285,14 @@ public class WorldsBestTeleop extends LinearOpMode {
                     /* This is the intaking/collecting arm position */
 //                    robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
                     mechOps.extensionPosition = (int) robot.EXTENSION_OUT_MAX;
-                    robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
+                    robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_PREP);
                     robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY_PART);
                     robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY_PART);
 
                     extensionButtonPress = 2;
                     extensionButtionPressTime.reset();
                 } else if((extensionButtonPress == 2) && extensionButtionPressTime.time() > 0.2){
+                    robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
                     robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY);
                     robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY);
 //                    mechOps.extensionPosition = (int) robot.EXTENSION_OUT_MAX;
@@ -339,8 +340,12 @@ public class WorldsBestTeleop extends LinearOpMode {
 
             if (gamepad1.dpad_right) {
                 robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_45);
+                liftPosition = robot.LIFT_RESET;
+                mechOps.scoreForeSpecimen();
+
 
             } else if (gamepad1.dpad_up) {
+                liftPosition = robot.LIFT_SPECIMEN_PREP_TELEOP;
                 robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
 
             } else if (gamepad1.dpad_left) {
@@ -354,7 +359,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
             } else if (gamepad1.dpad_down){
                 robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
-                //liftPosition = robot.LIFT_SCORE_SPECIMEN;
+                liftPosition = robot.LIFT_SCORE_SPECIMEN;
 
             } else if (gamepad2.dpad_down){
                 liftPosition = robot.LIFT_SCORE_SPECIMEN_TELEOP;

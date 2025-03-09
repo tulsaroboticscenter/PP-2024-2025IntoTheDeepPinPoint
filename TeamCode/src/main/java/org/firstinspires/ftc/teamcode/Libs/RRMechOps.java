@@ -232,7 +232,7 @@ public class RRMechOps {
                     transferReady = false;
                 }
             } else {
-                extPitchReset();
+                extPitchGrab();
                 extForeBarRetract();
                 this.extensionPosition = (int) robot.EXTENSION_RESET_TELEOP;
                 extClawRotateZero();
@@ -385,7 +385,7 @@ public class RRMechOps {
         opMode.sleep(200);
 
 
-        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
         extForeBarRetract();
         extClawRotateZero();
 
@@ -394,7 +394,7 @@ public class RRMechOps {
         opMode.sleep(1000);
 
 
-        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
         opMode.sleep(200);
         scoreClawClosed();
         opMode.sleep(100);

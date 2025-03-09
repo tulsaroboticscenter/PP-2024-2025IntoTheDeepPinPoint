@@ -88,6 +88,7 @@ public class HWProfile {
 
 
     public final double INTAKE_CLAW_PITCH_GRAB = .97;
+    public final double INTAKE_CLAW_PITCH_PREP = 0.75;
     public final double INTAKE_CLAW_PITCH_HOLD = 0.5;
     public final double INTAKE_CLAW_PITCH_AUTON = .9;
     public final double INTAKE_CLAW_PITCH_TRANSFER = 0.02;
@@ -102,19 +103,19 @@ public class HWProfile {
 
     public final double SCORE_CLAW_OPEN = 0.5;
     public final double SCORE_CLAW_OPEN_TELEOP = 0.65;
-    public final double SCORE_CLAW_CLOSED = .15;
+    public final double SCORE_CLAW_CLOSED = .13;
 
 
-    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.24;//started at 0
+    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.3;//started at 0
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_PART = .4;//started at 0
-    final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .15;
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY_AUTON = .85;
-    final public double INTAKE_RIGHT_FOREBAR_RETRACT = .75;// started at 1
-    final public double INTAKE_RIGHT_FOREBAR_RETRACT_PART = 0.6;
+    final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .23;
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY_AUTON = .77;
+    final public double INTAKE_RIGHT_FOREBAR_RETRACT = 1;// started at 1
+    final public double INTAKE_RIGHT_FOREBAR_RETRACT_PART = 0.7;
     final public double INTAKE_LEFT_FOREBAR_RETRACT_PART = 0.4;
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .76;//started at 1
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .7;//started at 1
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_PART = .6; //started at 1
-    final public double INTAKE_LEFT_FOREBAR_RETRACT = .28; // started at 0
+    final public double INTAKE_LEFT_FOREBAR_RETRACT = 0; // started at 0
 
     final public double SCORE_RIGHT_FOREBAR_RESET = 0; //started at 1
     final public double SCORE_RIGHT_FOREBAR_GRAB = 0.13; //started at 1

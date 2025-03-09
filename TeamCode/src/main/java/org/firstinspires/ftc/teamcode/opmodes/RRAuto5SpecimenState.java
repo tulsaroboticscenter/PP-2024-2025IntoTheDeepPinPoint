@@ -76,7 +76,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
 
     @Override
     public void runOpMode() throws InterruptedException {
-        specimenScoringPosition = new Pose2d(-28, 2, Math.toRadians(0));
+        specimenScoringPosition = new Pose2d(-28.5, 2, Math.toRadians(0));
         specimenScoringPosition2 = new Pose2d(-27.5, 0, Math.toRadians(5));
         specimenScoringPosition3 = new Pose2d(-27, -1, Math.toRadians(5));
         specimenScoringPosition4 = new Pose2d(-26.5, -3, Math.toRadians(5));
@@ -89,11 +89,11 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         coloredSample1PositionGrab = new Pose2d(-30, 34, Math.toRadians(125));
         coloredSample1PositionDrop = new Pose2d(-15, 28, Math.toRadians(40));
         coloredSample2PositionGrab = new Pose2d(-27, 25, Math.toRadians(118));
-        coloredSample2PositionDrop = new Pose2d(-17, 27, Math.toRadians(50));
+        coloredSample2PositionDrop = new Pose2d(-17, 25, Math.toRadians(50));
         coloredSample3PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));
-        coloredSample3PositionDrop = new Pose2d(-11, 25, Math.toRadians(50));
+        coloredSample3PositionDrop = new Pose2d(-11, 22, Math.toRadians(50));
         midwayPose1 = new Pose2d(-19, 30, Math.toRadians(103)); //prep for grabbing first sample
-        parkPose = new Pose2d(-8, 30, Math.toRadians(60));
+        parkPose = new Pose2d(-5, 40, Math.toRadians(90));
 
         robot.init(hardwareMap, false);
         PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
@@ -101,8 +101,8 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         //Key Pay inputs to selecting Starting Position of robot
 //        selectStartingPosition();
         mechOps.scoreClawClosed();
-        mechOps.extForeBarRetract();
-        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
+        mechOps.extForeBarPart();
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
         mechOps.tightenStrings();
 
         telemetry.addData("5 Specimen Auto - State Ready", "");
@@ -263,11 +263,10 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
         if (opModeIsActive()) mechOps.setExtensionPosition();
         if (opModeIsActive()) mechOps.scoreForeSpecimen();
-        if (opModeIsActive()) mechOps.extPitchTransfer();
-        if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY);
-        if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY);
+        if (opModeIsActive()) mechOps.extPitchGrab();
+        if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT);
+        if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
         if (opModeIsActive()) robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
-        if(opModeIsActive()) mechOps.extForePart();
 
 
         Actions.runBlocking(
@@ -385,7 +384,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
 //
 
         if (opModeIsActive()) mechOps.specimenScorePosition();
-        safeWaitSeconds(.3);
+        safeWaitSeconds(.35);
         if (opModeIsActive()) mechOps.scoreClawOpen();
         //safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.liftReset();
