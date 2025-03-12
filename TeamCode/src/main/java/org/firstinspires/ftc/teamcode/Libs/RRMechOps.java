@@ -40,7 +40,7 @@ public class RRMechOps {
         robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
     }
 
-    public void extPitchReset(){robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);}
+    public void extPitchReset(){robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);}
 
     public void extClawClose() {
         robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
@@ -109,6 +109,10 @@ public class RRMechOps {
         robot.motorLiftFront.setTargetPosition((int)robot.LIFT_SPECIMEN_SCORE);
     }
 
+    public void liftPark(){
+        robot.motorLiftBack.setTargetPosition((int)robot.LIFT_PARK);
+        robot.motorLiftFront.setTargetPosition((int)robot.LIFT_PARK);
+    }
 
     public void raiseLiftHighBasket() {
         robot.motorLiftBack.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET);
@@ -129,10 +133,10 @@ public class RRMechOps {
     }
 
     public void autoSpecimenLiftReset(){
-        robot.motorLiftFront.setTargetPosition((int) robot.LIFT_RESET);
-        robot.motorLiftBack.setTargetPosition((int) robot.LIFT_RESET);
         robot.motorLiftFront.setPower(1);
         robot.motorLiftBack.setPower(1);
+        robot.motorLiftFront.setTargetPosition((int) robot.LIFT_RESET);
+        robot.motorLiftBack.setTargetPosition((int) robot.LIFT_RESET);
         robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SPECIMEN);
         robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SPECIMEN);
     }
@@ -158,7 +162,7 @@ public class RRMechOps {
         robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
         robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
         robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
-        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
 
     }
     public void extForeBarSweep(){
@@ -172,15 +176,16 @@ public class RRMechOps {
     public void foreBarUp(){
         robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY_PART);
         robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY_PART);
-        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
         robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_ZERO);
     }
     public void extPitchGrab(){
         robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
     }
 
-    public void extPitchTransfer(){
-        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
+    public void scoreForeHold(){
+        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_HOLD);
+        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_HOLD);
     }
 
     public void extForeBarPart(){
@@ -232,6 +237,7 @@ public class RRMechOps {
                     transferReady = false;
                 }
             } else {
+                scoreForeGrab();
                 extPitchGrab();
                 extForeBarRetract();
                 this.extensionPosition = (int) robot.EXTENSION_RESET_TELEOP;
@@ -391,7 +397,7 @@ public class RRMechOps {
 
         this.extensionPosition = (int) robot.EXTENSION_RESET;
         setExtensionPosition();
-        opMode.sleep(1000);
+        opMode.sleep(500);
 
 
         robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
@@ -415,7 +421,7 @@ public class RRMechOps {
         opMode.sleep(200);
 
 
-        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_TRANSFER);
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
 
         extForeBarRetract();
         extClawRotateZero();

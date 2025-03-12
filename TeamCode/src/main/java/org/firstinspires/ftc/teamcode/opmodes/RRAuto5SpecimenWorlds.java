@@ -44,7 +44,7 @@ import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 
 
 @Autonomous(name = "Auto - 5 Specimen 5+0", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
-public class RRAuto5SpecimenState extends LinearOpMode{
+public class RRAuto5SpecimenWorlds extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
@@ -93,7 +93,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         coloredSample3PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));
         coloredSample3PositionDrop = new Pose2d(-11, 22, Math.toRadians(50));
         midwayPose1 = new Pose2d(-19, 30, Math.toRadians(103)); //prep for grabbing first sample
-        parkPose = new Pose2d(-5, 40, Math.toRadians(90));
+        parkPose = new Pose2d(-5, 45, Math.toRadians(-180));
 
         robot.init(hardwareMap, false);
         PinpointDrive drive = new PinpointDrive(hardwareMap, initPose);
@@ -311,7 +311,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         if (opModeIsActive()) mechOps.scoreClawClosed();
         safeWaitSeconds(.1);
         if (opModeIsActive()) mechOps.specimenPrepPosition();
-        if (opModeIsActive()) mechOps.extPitchHold();
+        if (opModeIsActive()) mechOps.extPitchGrab();
 
 
         // Raise Arm to high basket scoring position
@@ -388,6 +388,7 @@ public class RRAuto5SpecimenState extends LinearOpMode{
         if (opModeIsActive()) mechOps.scoreClawOpen();
         //safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.liftReset();
+        if (opModeIsActive()) mechOps.scoreForeHold();
 
 
 

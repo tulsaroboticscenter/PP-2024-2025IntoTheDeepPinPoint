@@ -43,8 +43,8 @@ import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
 //@Disabled
-@Autonomous(name = "Auto Samples - 4+0", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
-public class RRAuto4SampleV2State extends LinearOpMode{
+@Autonomous(name = "Auto Samples - 4+0 SUB PARK", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
+public class RRAuto4SampleWorldsSUBPark extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
@@ -79,8 +79,8 @@ public class RRAuto4SampleV2State extends LinearOpMode{
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
         midwayPose3 = new Pose2d(33,1, Math.toRadians(90));
         midwayPose4 = new Pose2d(15,15, Math.toRadians(0));
-        parkPrepPose = new Pose2d(5, -20, Math.toRadians(0));
-        parkPose = new Pose2d(3, -80, Math.toRadians(0));
+        parkPrepPose = new Pose2d(54, 10, Math.toRadians(90));
+        parkPose = new Pose2d(50, -13, Math.toRadians(90));
 
         //Initialize hardware
         robot.init(hardwareMap, false);
@@ -329,11 +329,13 @@ public class RRAuto4SampleV2State extends LinearOpMode{
 
         // Lower the arm & reset the mechanisms
         if (opModeIsActive()) mechOps.liftReset();
-        if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY_PART);
-        if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY_PART);
+        if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT);
+        if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
         if (opModeIsActive()) mechOps.extPitchGrab();
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
         if (opModeIsActive()) mechOps.setExtensionPosition();
+        if (opModeIsActive()) mechOps.liftPark();
+
     }
 
     // method to part the robot
@@ -343,9 +345,10 @@ public class RRAuto4SampleV2State extends LinearOpMode{
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
-                        .strafeToLinearHeading(parkPrepPose.position, parkPrepPose.heading)
+                        .strafeToLinearHeading(parkPrepPose.position,parkPrepPose.heading)
                         .strafeToLinearHeading(parkPose.position, parkPose.heading)
                         .build());
+
 
     }
 
