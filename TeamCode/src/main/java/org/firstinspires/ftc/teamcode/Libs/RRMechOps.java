@@ -195,6 +195,11 @@ public class RRMechOps {
     public void extPitchHold(){
         robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
     }
+
+    public void extForeBarRetractHalf(){
+        robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT_HALF);
+        robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT_HALF);
+    }
     /**
      * Method: transferSample()
      * How it works:

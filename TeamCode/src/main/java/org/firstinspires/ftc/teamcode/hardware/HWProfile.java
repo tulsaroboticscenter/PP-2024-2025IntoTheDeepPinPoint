@@ -67,7 +67,7 @@ public class HWProfile {
     as far from the starting position, decrease it. */
 
     public final double LIFT_RESET                = 20;
-    public final double LIFT_RESET_TELEOP         = 115;
+    public final double LIFT_RESET_TELEOP         = 50;
     public final double LIFT_SPECIMEN_PREP          = 1500;
     public final double LIFT_SPECIMEN_PREP_TELEOP = 1700;
     public final double LIFT_SPECIMEN_SCORE = 400;
@@ -109,15 +109,19 @@ public class HWProfile {
 
 
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.3;//started at 0
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .7;//started at 1
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_PART = .4;//started at 0
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY_PART = .6; //started at 1
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .23;
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_AUTON = .77;
     final public double INTAKE_RIGHT_FOREBAR_RETRACT = 1;// started at 1
+    final public double INTAKE_LEFT_FOREBAR_RETRACT = 0; // started at 0
     final public double INTAKE_RIGHT_FOREBAR_RETRACT_PART = 0.7;
     final public double INTAKE_LEFT_FOREBAR_RETRACT_PART = 0.4;
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .7;//started at 1
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY_PART = .6; //started at 1
-    final public double INTAKE_LEFT_FOREBAR_RETRACT = 0; // started at 0
+    final public double INTAKE_RIGHT_FOREBAR_RETRACT_HALF = 0.5;
+    final public double INTAKE_LEFT_FOREBAR_RETRACT_HALF = 0.5;
+
+
 
     final public double SCORE_RIGHT_FOREBAR_RESET = 0; //started at 1
     final public double SCORE_RIGHT_FOREBAR_GRAB = 0.13;//started at 1

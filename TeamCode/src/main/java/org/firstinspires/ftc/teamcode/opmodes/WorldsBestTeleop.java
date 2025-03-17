@@ -302,9 +302,8 @@ public class WorldsBestTeleop extends LinearOpMode {
                     extensionButtionPressTime.reset();
 
                 }else if((extensionButtonPress == 3) && extensionButtionPressTime.time() > 0.2){
-                    robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_RETRACT);
-                    robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY_PART);
-                    robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY_PART);
+                    robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
+                    mechOps.extForeBarRetractHalf();
                     extensionButtonPress = 1;
                     extensionButtionPressTime.reset();
                 }
@@ -335,7 +334,7 @@ public class WorldsBestTeleop extends LinearOpMode {
                 mechOps.scoreForeSpecimen();
 
             } else if (gamepad1.b){
-                liftPosition = robot.LIFT_RESET;
+                liftPosition = robot.LIFT_RESET_TELEOP;
                 mechOps.scoreForeHold();
             }
 
