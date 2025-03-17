@@ -208,7 +208,7 @@ public class RRAuto4SampleWorldsHPPark extends LinearOpMode{
         // Pick up Sample1 from the field and prepare to score the sample
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
-        safeWaitSeconds(0.5);
+        safeWaitSeconds(0.25);
         if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
         safeWaitSeconds(0.25);
         if (opModeIsActive()) mechOps.autoSampleScorePrep();
@@ -254,7 +254,7 @@ public class RRAuto4SampleWorldsHPPark extends LinearOpMode{
         // Pick up Sample2 and prepare to score in the high basket
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
-        safeWaitSeconds(.5);
+        safeWaitSeconds(.25);
         if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
         safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.autoSampleScorePrep();
@@ -306,7 +306,7 @@ public class RRAuto4SampleWorldsHPPark extends LinearOpMode{
         // Pick up Sample3 and prepare to score in the high basket
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
-        safeWaitSeconds(.5);
+        safeWaitSeconds(.25);
         if (opModeIsActive()) mechOps.extClawClose();
         safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.autoSampleScorePrep();
