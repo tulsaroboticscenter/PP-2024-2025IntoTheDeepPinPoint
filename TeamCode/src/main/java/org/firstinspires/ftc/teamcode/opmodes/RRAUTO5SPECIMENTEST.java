@@ -86,8 +86,8 @@ public class RRAUTO5SPECIMENTEST extends LinearOpMode{
         specimenScoringPrep = new Pose2d(-20, 2, Math.toRadians(0));
         //specimenScoringPush = new Pose2d(-28, -8, Math.toRadians(0));
         grabSpecimenPosition = new Pose2d(-2.75, 27, Math.toRadians(-180));
-        coloredSample3PositionGrab = new Pose2d(-30, 31.5, Math.toRadians(125));
-        coloredSample3PositionDrop = new Pose2d(-15, 28, Math.toRadians(40));
+        coloredSample3PositionGrab = new Pose2d(-30, 31, Math.toRadians(125));
+        coloredSample3PositionDrop = new Pose2d(-15, 29, Math.toRadians(40));
         coloredSample2PositionGrab = new Pose2d(-27, 25, Math.toRadians(118));
         coloredSample2PositionDrop = new Pose2d(-17, 25, Math.toRadians(50));
         coloredSample1PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));

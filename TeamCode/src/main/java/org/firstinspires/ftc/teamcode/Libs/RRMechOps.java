@@ -122,6 +122,16 @@ public class RRMechOps {
         robot.motorLiftFront.setPower(1);
         robot.motorLiftBack.setPower(1);
     }
+    public void raiseLiftHighBasketTeleop() {
+        robot.motorLiftBack.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET_TELEOP);
+        robot.motorLiftFront.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET_TELEOP);
+        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE);
+        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE);
+        robot.motorLiftFront.setPower(1);
+        robot.motorLiftBack.setPower(1);
+        scoreForeSample();
+    }
+
 
     public void liftReset() {
         robot.motorLiftFront.setTargetPosition((int) robot.LIFT_RESET);

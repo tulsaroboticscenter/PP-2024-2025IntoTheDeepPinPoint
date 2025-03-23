@@ -72,7 +72,7 @@ public class HWProfile {
     public final double LIFT_SPECIMEN_PREP_TELEOP = 1700;
     public final double LIFT_SPECIMEN_SCORE = 400;
     public final double LIFT_SCORE_HIGH_BASKET = 3100;
-    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3200;
+    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3300;
     public final double LIFT_CLIMB              = 2000;
     public final double LIFT_SCORE_SPECIMEN = 1200;
     public final double LIFT_SCORE_SPECIMEN_TELEOP = 1000;
@@ -83,7 +83,7 @@ public class HWProfile {
     /* Variables to store the positions that the wrist should be set to when folding in, or folding out. */
     public final double INTAKE_WRIST_ROTATED_ZERO = 0;
     public final double INTAKE_WRIST_ROTATED_45 = 0.16;
-    public final double INTAKE_WRIST_ROTATED_NINETY = 0.33;
+    public final double INTAKE_WRIST_ROTATED_NINETY = 0.3;
     public final double INTAKE_WRIST_ROTATED_180  = 1;
     public final double INTAKE_WRIST_FOLDED_PARTIAL = .25;
 
@@ -108,8 +108,8 @@ public class HWProfile {
     public final double SCORE_CLAW_CLOSED = .13;
 
 
-    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.3;//started at 0
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .7;//started at 1
+    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.32;//started at 0
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .68;//started at 1
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_PART = .4;//started at 0
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_PART = .6; //started at 1
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .23;
@@ -128,6 +128,8 @@ public class HWProfile {
     final public double SCORE_RIGHT_FOREBAR_HOLD = 0.3;
     final public double SCORE_LEFT_FOREBAR_HOLD = 0.7;
     final public double SCORE_RIGHT_FOREBAR_SPECIMEN = 1;
+    final public double SCORE_RIGHT_FOREBAR_SCORE_PART = 0.9;
+    final public double SCORE_LEFT_FOREBAR_SCORE_PART = 0.1;
     final public double SCORE_RIGHT_FOREBAR_SCORE = 0.7;
     final public double SCORE_LEFT_FOREBAR_SPECIMEN = 0;
     final public double SCORE_LEFT_FOREBAR_RESET = 1; //started at 0
