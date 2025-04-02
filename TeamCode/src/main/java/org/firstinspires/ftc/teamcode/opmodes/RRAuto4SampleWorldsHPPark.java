@@ -72,9 +72,9 @@ public class RRAuto4SampleWorldsHPPark extends LinearOpMode{
     public void runOpMode() throws InterruptedException {
 
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
-        yellowSample1Position = new Pose2d(11, 16, Math.toRadians(-5));
-        yellowSample2Position = new Pose2d(11, 25.5, Math.toRadians(-5));
-        yellowSample3Position = new Pose2d(38.5, 7.1, Math.toRadians(90));
+        yellowSample1Position = new Pose2d(12, 16, Math.toRadians(-5));
+        yellowSample2Position = new Pose2d(12, 25.5, Math.toRadians(-5));
+        yellowSample3Position = new Pose2d(38, 7.1, Math.toRadians(90));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
         midwayPose3 = new Pose2d(33,1, Math.toRadians(90));
@@ -208,7 +208,7 @@ public class RRAuto4SampleWorldsHPPark extends LinearOpMode{
         // Pick up Sample1 from the field and prepare to score the sample
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
-        safeWaitSeconds(0.25);
+        safeWaitSeconds(0.5);
         if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
         safeWaitSeconds(0.25);
         if (opModeIsActive()) mechOps.autoSampleScorePrep();
@@ -254,7 +254,7 @@ public class RRAuto4SampleWorldsHPPark extends LinearOpMode{
         // Pick up Sample2 and prepare to score in the high basket
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
-        safeWaitSeconds(.25);
+        safeWaitSeconds(.5);
         if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
         safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.autoSampleScorePrep();
@@ -306,7 +306,7 @@ public class RRAuto4SampleWorldsHPPark extends LinearOpMode{
         // Pick up Sample3 and prepare to score in the high basket
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
-        safeWaitSeconds(.25);
+        safeWaitSeconds(.5);
         if (opModeIsActive()) mechOps.extClawClose();
         safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.autoSampleScorePrep();

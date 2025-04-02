@@ -68,15 +68,15 @@ public class HWProfile {
 
     public final double LIFT_RESET                = 20;
     public final double LIFT_RESET_TELEOP         = 50;
-    public final double LIFT_SPECIMEN_PREP          = 1500;
-    public final double LIFT_SPECIMEN_PREP_TELEOP = 1700;
+    public final double LIFT_SPECIMEN_PREP          = 1250;
+    public final double LIFT_SPECIMEN_PREP_TELEOP = 1400;
     public final double LIFT_SPECIMEN_SCORE = 400;
-    public final double LIFT_SCORE_HIGH_BASKET = 3100;
-    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3300;
+    public final double LIFT_SCORE_HIGH_BASKET = 2550;
+    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 2600;
     public final double LIFT_CLIMB              = 2000;
-    public final double LIFT_SCORE_SPECIMEN = 1200;
-    public final double LIFT_SCORE_SPECIMEN_TELEOP = 1000;
-    public final double LIFT_PARK = 1225;
+    public final double LIFT_SCORE_SPECIMEN = 800;
+    public final double LIFT_SCORE_SPECIMEN_TELEOP = 700;
+    public final double LIFT_PARK = 1000;
 
 
 
@@ -108,12 +108,12 @@ public class HWProfile {
     public final double SCORE_CLAW_CLOSED = .13;
 
 
-    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.32;//started at 0
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .68;//started at 1
+    final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.3;//started at 0
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .7;//started at 1
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_PART = .4;//started at 0
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_PART = .6; //started at 1
-    final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .23;
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY_AUTON = .77;
+    final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .21;
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY_AUTON = .79;
     final public double INTAKE_RIGHT_FOREBAR_RETRACT = 1;// started at 1
     final public double INTAKE_LEFT_FOREBAR_RETRACT = 0; // started at 0
     final public double INTAKE_RIGHT_FOREBAR_RETRACT_PART = 0.7;
@@ -140,7 +140,7 @@ public class HWProfile {
 
     public final double EXTENSION_TICKS_PER_MM = (111132.0 / 289.0) / 120.0;
     public final double EXTENSION_COLLAPSED = 0 * EXTENSION_TICKS_PER_MM;
-    public final double EXTENSION_MAX = 900;
+    public final double EXTENSION_MAX = 800;
     public final double EXTENSION_OUT_MAX = 660;
     public final int    EXTENSION_DOWN_MAX = 1600;
     public final double EXTENSION_RESET = 5;
@@ -258,7 +258,7 @@ public class HWProfile {
 
 
         extendMotor = ahwMap.get(DcMotorEx.class, "motorExtend");
-        extendMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        extendMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         extendMotor.setTargetPosition(0);
         extendMotor.setPower(0);
         extendMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

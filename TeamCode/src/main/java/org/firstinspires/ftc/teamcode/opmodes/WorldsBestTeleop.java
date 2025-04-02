@@ -300,7 +300,7 @@ public class WorldsBestTeleop extends LinearOpMode {
             }else if((liftButtonPress==2)&&(liftButtonPressTime.time() > 0.2)){
 
 
-                    liftPosition = robot.LIFT_SCORE_HIGH_BASKET_TELEOP;
+                    liftPosition = robot.LIFT_SCORE_HIGH_BASKET;
                     robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE_PART);
                     robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE_PART);
 

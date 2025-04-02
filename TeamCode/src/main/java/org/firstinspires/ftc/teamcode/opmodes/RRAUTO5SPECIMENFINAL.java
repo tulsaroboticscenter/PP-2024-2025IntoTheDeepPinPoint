@@ -43,8 +43,8 @@ import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 
 
-@Autonomous(name = "Auto - 5 Specimen 5+0", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
-public class RRAuto5SpecimenWorlds extends LinearOpMode{
+@Autonomous(name = "Auto - 5 Specimen WORLDS", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
+public class RRAUTO5SPECIMENFINAL extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
@@ -86,13 +86,13 @@ public class RRAuto5SpecimenWorlds extends LinearOpMode{
         specimenScoringPrep = new Pose2d(-20, 2, Math.toRadians(0));
         //specimenScoringPush = new Pose2d(-28, -8, Math.toRadians(0));
         grabSpecimenPosition = new Pose2d(-2.75, 27, Math.toRadians(-180));
-        coloredSample1PositionGrab = new Pose2d(-30, 34, Math.toRadians(125));
-        coloredSample1PositionDrop = new Pose2d(-15, 28, Math.toRadians(40));
+        coloredSample3PositionGrab = new Pose2d(-30, 31, Math.toRadians(125));
+        coloredSample3PositionDrop = new Pose2d(-15, 29, Math.toRadians(40));
         coloredSample2PositionGrab = new Pose2d(-27, 25, Math.toRadians(118));
         coloredSample2PositionDrop = new Pose2d(-17, 25, Math.toRadians(50));
-        coloredSample3PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));
-        coloredSample3PositionDrop = new Pose2d(-13, 22, Math.toRadians(50));
-        midwayPose1 = new Pose2d(-29, 34.5, Math.toRadians(120)); //prep for grabbing first sample
+        coloredSample1PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));
+        coloredSample1PositionDrop = new Pose2d(-13, 22, Math.toRadians(40));
+        midwayPose1 = new Pose2d(-29, 18, Math.toRadians(125)); //prep for grabbing first sample
         parkPose = new Pose2d(-5, 45, Math.toRadians(-180));
 
         robot.init(hardwareMap, false);
