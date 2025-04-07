@@ -255,12 +255,11 @@ public class InspectionMode extends LinearOpMode {
 
             if (gamepad1.a) {
                 /* This is the intaking/collecting arm position */
-                robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
                 mechOps.extensionPosition = (int) robot.EXTENSION_OUT_MAX;
-                robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY);
-                robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY);
+                robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
+                mechOps.extForeBarRetractHalf();
                 liftPosition = robot.LIFT_SCORE_HIGH_BASKET;
-                mechOps.scoreForeSample();
+                mechOps.scoreForeSpecimen();
 
             }
             //else if (gamepad1.x){

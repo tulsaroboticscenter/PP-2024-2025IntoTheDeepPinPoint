@@ -210,6 +210,16 @@ public class RRMechOps {
         robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT_HALF);
         robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT_HALF);
     }
+
+    public void l3Reset(){
+        robot.level3RightServo.setPosition(robot.L3RESETRIGHT);
+        robot.level3LeftServo.setPosition(robot.L3RESETLEFT);
+    }
+
+    public void l3Up(){
+        robot.level3LeftServo.setPosition(robot.L3UPLEFT);
+        robot.level3RightServo.setPosition(robot.L3UPRIGHT);
+    }
     /**
      * Method: transferSample()
      * How it works:
@@ -306,15 +316,15 @@ public class RRMechOps {
         robot.extendMotor.setTargetPosition(this.extensionPosition);
     }
     public void setLiftPosition(){
-        robot.motorLiftBack.setPower(1);
+        robot.motorLiftBack.setPower(1.5);
         robot.motorLiftBack.setTargetPosition(this.liftPosition);
-        robot.motorLiftFront.setPower(1);
+        robot.motorLiftFront.setPower(1.5);
         robot.motorLiftFront.setTargetPosition(this.liftPosition);
     }
 
 
     public void setAutoExtensionPosition(){
-        robot.extendMotor.setPower(0.55);
+        robot.extendMotor.setPower(1);
         robot.extendMotor.setTargetPosition(this.extensionPosition);
     }
 

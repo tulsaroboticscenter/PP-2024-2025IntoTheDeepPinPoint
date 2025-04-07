@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_TO_POSITION;
+import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
 import com.acmerobotics.roadrunner.ftc.GoBildaPinpointDriverRR;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
@@ -34,6 +35,8 @@ public class HWProfile {
     public Servo scoreGrabServo = null; // scoreGrab CH0
     public Servo scoreForeLeftServo = null; // scoreForeLeft CH1
     public Servo scoreForeRightServo = null; // scoreForeRight CH2
+    public Servo level3RightServo = null;
+    public Servo level3LeftServo = null;
     public MotorGroup lift = null;
 
     //CH3 is odo pod y axis
@@ -67,16 +70,17 @@ public class HWProfile {
     as far from the starting position, decrease it. */
 
     public final double LIFT_RESET                = 20;
-    public final double LIFT_RESET_TELEOP         = 50;
-    public final double LIFT_SPECIMEN_PREP          = 1250;
-    public final double LIFT_SPECIMEN_PREP_TELEOP = 1400;
+    public final double LIFT_RESET_CLIMB = 0;
+    public final double LIFT_RESET_TELEOP         = 100;
+    public final double LIFT_SPECIMEN_PREP          = 1500;
+    public final double LIFT_SPECIMEN_PREP_TELEOP = 1700;
     public final double LIFT_SPECIMEN_SCORE = 400;
-    public final double LIFT_SCORE_HIGH_BASKET = 2550;
-    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 2600;
+    public final double LIFT_SCORE_HIGH_BASKET = 3200;
+    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3400;
     public final double LIFT_CLIMB              = 2000;
-    public final double LIFT_SCORE_SPECIMEN = 800;
-    public final double LIFT_SCORE_SPECIMEN_TELEOP = 700;
-    public final double LIFT_PARK = 1000;
+    public final double LIFT_SCORE_SPECIMEN = 1200;
+    public final double LIFT_SCORE_SPECIMEN_TELEOP = 1000;
+    public final double LIFT_PARK = 1225;
 
 
 
@@ -88,11 +92,11 @@ public class HWProfile {
     public final double INTAKE_WRIST_FOLDED_PARTIAL = .25;
 
 
-    public final double INTAKE_CLAW_PITCH_GRAB = .97;
+    public final double INTAKE_CLAW_PITCH_GRAB = .88;
     public final double INTAKE_CLAW_PITCH_PREP = 0.75;
     public final double INTAKE_CLAW_PITCH_HOLD = 0.5;
     public final double INTAKE_CLAW_PITCH_RETRACT = 0.25;
-    public final double INTAKE_CLAW_PITCH_AUTON = .9;
+    public final double INTAKE_CLAW_PITCH_AUTON = .85;
     public final double INTAKE_CLAW_PITCH_TRANSFER = 0.02;
 
 
@@ -109,7 +113,7 @@ public class HWProfile {
 
 
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY = 0.3;//started at 0
-    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .7;//started at 1
+    final public double INTAKE_LEFT_FOREBAR_DEPLOY = .70;//started at 1
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_PART = .4;//started at 0
     final public double INTAKE_LEFT_FOREBAR_DEPLOY_PART = .6; //started at 1
     final public double INTAKE_RIGHT_FOREBAR_DEPLOY_AUTON = .21;
@@ -130,22 +134,27 @@ public class HWProfile {
     final public double SCORE_RIGHT_FOREBAR_SPECIMEN = 1;
     final public double SCORE_RIGHT_FOREBAR_SCORE_PART = 0.9;
     final public double SCORE_LEFT_FOREBAR_SCORE_PART = 0.1;
-    final public double SCORE_RIGHT_FOREBAR_SCORE = 0.7;
+    final public double SCORE_RIGHT_FOREBAR_SCORE = 0.8;
     final public double SCORE_LEFT_FOREBAR_SPECIMEN = 0;
     final public double SCORE_LEFT_FOREBAR_RESET = 1; //started at 0
     final public double SCORE_LEFT_FOREBAR_GRAB = 0.87;//tarted at 0
-    final public double SCORE_LEFT_FOREBAR_SCORE = 0.3;
+    final public double SCORE_LEFT_FOREBAR_SCORE = 0.2;
+
+    final public double L3RESETRIGHT = 0;
+    final public double L3RESETLEFT = 0;
+    final public double L3UPRIGHT = 1;
+    final public double L3UPLEFT = 1;
 
 
 
     public final double EXTENSION_TICKS_PER_MM = (111132.0 / 289.0) / 120.0;
     public final double EXTENSION_COLLAPSED = 0 * EXTENSION_TICKS_PER_MM;
     public final double EXTENSION_MAX = 800;
-    public final double EXTENSION_OUT_MAX = 660;
+    public final double EXTENSION_OUT_MAX = 625;
     public final int    EXTENSION_DOWN_MAX = 1600;
     public final double EXTENSION_RESET = 5;
-    public final double EXTENSION_RESET_TELEOP = 35;// was set to 30
-    public final int    EXTENSION_POWER_REDUX = 55;
+    public final double EXTENSION_RESET_TELEOP = 30;// was set to 30
+    public final int    EXTENSION_POWER_REDUX = 30;
 
 
 
@@ -301,6 +310,10 @@ public class HWProfile {
         scoreForeRightServo = hwMap.get(Servo.class, "scoreForeRight");
 
         scoreForeLeftServo = hwMap.get(Servo.class, "scoreForeLeft");
+
+        level3LeftServo = hwMap.get(Servo.class, "L3LeftServo");
+
+        level3RightServo = hwMap.get(Servo.class, "L3RightServo");
 
 
 

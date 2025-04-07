@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
 @Config
 @TeleOp(name="Robot Tuner", group="Robot")
-@Disabled
+
 public class RobotTuner extends LinearOpMode {
 
 

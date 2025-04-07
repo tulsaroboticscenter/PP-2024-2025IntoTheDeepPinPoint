@@ -35,9 +35,9 @@ public class WorldsBestTeleop extends LinearOpMode {
     private final RRMechOps mechOps = new RRMechOps(robot,opMode);
 
 
-    public static double NEW_P = 20;
-    public static double NEW_I = 3;
-    public static double NEW_D = 0.005;
+    public static double NEW_P = 15;
+    public static double NEW_I = 1;
+    public static double NEW_D = 0.001;
     public static double NEW_F = 1;
 
 
@@ -113,6 +113,9 @@ public class WorldsBestTeleop extends LinearOpMode {
         mechOps.extClawClose();
         mechOps.tightenStrings();
         mechOps.extPitchGrab();
+
+
+
 
         // Initializes ElapsedTimes. One for total runtime of the program and the others set up for toggles.
         ElapsedTime totalRuntime = new ElapsedTime();
@@ -272,16 +275,12 @@ public class WorldsBestTeleop extends LinearOpMode {
                     clawRotateButtonPressTime.reset();
 
                 } else if ((clawRotateButtonPress == 2) && (clawRotateButtonPressTime.time() > 0.2)){
-                    robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_45);
-
-                    clawRotateButtonPress = 3;
-                    clawRotateButtonPressTime.reset();
-
-                } else if ((clawRotateButtonPress == 3) && (clawRotateButtonPressTime.time() > 0.2)){
                     robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
 
                     clawRotateButtonPress = 1;
                     clawRotateButtonPressTime.reset();
+
+
                 }
 
             }
@@ -293,13 +292,10 @@ public class WorldsBestTeleop extends LinearOpMode {
                     robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_GRAB);
                     robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_GRAB);
 
-
                     liftButtonPress = 2;
                     liftButtonPressTime.reset();
 
             }else if((liftButtonPress==2)&&(liftButtonPressTime.time() > 0.2)){
-
-
                     liftPosition = robot.LIFT_SCORE_HIGH_BASKET;
                     robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE_PART);
                     robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE_PART);
@@ -308,7 +304,7 @@ public class WorldsBestTeleop extends LinearOpMode {
                     liftButtonPressTime.reset();
 
                 } else if ((liftButtonPress == 3) && (liftButtonPressTime.time() > 0.2)){
-                    liftPosition=robot.LIFT_SCORE_HIGH_BASKET_TELEOP;
+                    liftPosition = robot.LIFT_SCORE_HIGH_BASKET_TELEOP;
                     robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE);
                     robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE);
 
@@ -390,6 +386,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
             } else if (gamepad1.dpad_left) {
                 mechOps.scoreForeSpecimen();
+                liftPosition = robot.LIFT_RESET_TELEOP;
 //
 //            } else if (gamepad1.dpad_right) {
 //                liftPosition = robot.LIFT_SPECIMEN_PREP;
@@ -438,8 +435,11 @@ public class WorldsBestTeleop extends LinearOpMode {
             }
 
 
-            if(gamepad2.x){
-                mechOps.tightenStrings();
+            if(gamepad2.right_bumper){
+                mechOps.l3Up();
+            }
+            if(gamepad2.left_bumper){
+                mechOps.l3Reset();
             }
 
             looptime = getRuntime();

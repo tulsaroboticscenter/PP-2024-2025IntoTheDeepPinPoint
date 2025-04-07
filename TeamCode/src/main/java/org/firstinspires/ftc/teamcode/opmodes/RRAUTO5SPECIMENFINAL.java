@@ -86,11 +86,11 @@ public class RRAUTO5SPECIMENFINAL extends LinearOpMode{
         specimenScoringPrep = new Pose2d(-20, 2, Math.toRadians(0));
         //specimenScoringPush = new Pose2d(-28, -8, Math.toRadians(0));
         grabSpecimenPosition = new Pose2d(-2.75, 27, Math.toRadians(-180));
-        coloredSample3PositionGrab = new Pose2d(-30, 31, Math.toRadians(125));
+        coloredSample3PositionGrab = new Pose2d(-30, 33, Math.toRadians(125));
         coloredSample3PositionDrop = new Pose2d(-15, 29, Math.toRadians(40));
-        coloredSample2PositionGrab = new Pose2d(-27, 25, Math.toRadians(118));
+        coloredSample2PositionGrab = new Pose2d(-27, 26, Math.toRadians(118));
         coloredSample2PositionDrop = new Pose2d(-17, 25, Math.toRadians(50));
-        coloredSample1PositionGrab = new Pose2d(-27, 16.5, Math.toRadians(110));
+        coloredSample1PositionGrab = new Pose2d(-27, 19.5, Math.toRadians(120));
         coloredSample1PositionDrop = new Pose2d(-13, 22, Math.toRadians(40));
         midwayPose1 = new Pose2d(-29, 18, Math.toRadians(125)); //prep for grabbing first sample
         parkPose = new Pose2d(-5, 45, Math.toRadians(-180));
