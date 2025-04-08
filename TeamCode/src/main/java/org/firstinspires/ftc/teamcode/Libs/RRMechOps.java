@@ -220,6 +220,11 @@ public class RRMechOps {
         robot.level3LeftServo.setPosition(robot.L3UPLEFT);
         robot.level3RightServo.setPosition(robot.L3UPRIGHT);
     }
+
+    public void l3Stop(){
+        robot.level3RightServo.setPosition(robot.L3HALFR);
+        robot.level3LeftServo.setPosition(robot.L3HALFL);
+    }
     /**
      * Method: transferSample()
      * How it works:

@@ -417,7 +417,8 @@ public class WorldsBestTeleop extends LinearOpMode {
                 robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
 
             } else if (gamepad2.left_bumper){
-                mechOps.autoSampleScorePrep();
+                mechOps.l3Reset();
+
 
             } else if (gamepad1.left_stick_button){
                 mechOps.extensionPosition = (int) robot.EXTENSION_RESET;
@@ -438,9 +439,11 @@ public class WorldsBestTeleop extends LinearOpMode {
             if(gamepad2.right_bumper){
                 mechOps.l3Up();
             }
-            if(gamepad2.left_bumper){
-                mechOps.l3Reset();
+
+            if(gamepad2.left_stick_button){
+                mechOps.l3Stop();
             }
+
 
             looptime = getRuntime();
             cycletime = looptime - oldtime;
