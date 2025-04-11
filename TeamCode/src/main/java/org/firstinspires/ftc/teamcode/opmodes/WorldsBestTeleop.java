@@ -71,9 +71,14 @@ public class WorldsBestTeleop extends LinearOpMode {
         int extensionButtonPress = 1;
         int clawRotateButtonPress = 1;
         int liftButtonPress = 1;
+        int clawGrabButtonPress = 1;
+        int scoreClawButtonPress = 1;
         ElapsedTime clawRotateButtonPressTime = new ElapsedTime();
         ElapsedTime extensionButtionPressTime = new ElapsedTime();
         ElapsedTime liftButtonPressTime = new ElapsedTime();
+        ElapsedTime clawGrabButtonPressTime = new ElapsedTime();
+        ElapsedTime scoreClawGrabButtonPressTime = new ElapsedTime();
+
 
 
 
@@ -105,6 +110,8 @@ public class WorldsBestTeleop extends LinearOpMode {
         clawRotateButtonPressTime.reset();
         extensionButtionPressTime.reset();
         liftButtonPressTime.reset();
+        clawGrabButtonPressTime.reset();
+        scoreClawGrabButtonPressTime.reset();
         mechOps.extForeBarRetract();
         mechOps.scoreForeHold();
         mechOps.extClawRotateZero();
@@ -126,6 +133,9 @@ public class WorldsBestTeleop extends LinearOpMode {
         ElapsedTime armClimbRuntime = new ElapsedTime();
         ElapsedTime twoStageTransferRuntime = new ElapsedTime();
         ElapsedTime liftRuntime = new ElapsedTime();
+        ElapsedTime clawGrabRuntime = new ElapsedTime();
+        ElapsedTime scoreClawGrabRuntime = new ElapsedTime();
+
 
         totalRuntime.reset();
         clawRuntime.reset();
@@ -134,16 +144,17 @@ public class WorldsBestTeleop extends LinearOpMode {
         armExtensionRuntime.reset();
         armClimbRuntime.reset();
         liftRuntime.reset();
+        clawGrabRuntime.reset();
+        scoreClawGrabRuntime.reset();
 
 
 
         // booleans for keeping track of toggles
-        boolean clawOpened = false;
         boolean clawRotated = false;
         boolean armRetracted = true;
         boolean armClimb = false;
-        boolean scoreClawOpened = false;
         boolean isTransferReady = false;
+
 
 
         TelemetryPacket packet = new TelemetryPacket();
@@ -216,25 +227,37 @@ public class WorldsBestTeleop extends LinearOpMode {
             // a boolean to keep track of whether the claw is opened or closed.
 
             if (gamepad1.right_bumper && clawRuntime.time() > 0.15) {
-                if (clawOpened) {
-                    robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
-                    clawOpened = false;
-                } else if (!clawOpened) {
+                if((clawGrabButtonPress == 1) && (clawGrabButtonPressTime.time() > 0.2)){
                     robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
-                    clawOpened = true;
+
+                    clawGrabButtonPress = 2;
+                    clawGrabButtonPressTime.reset();
+
+                } else if ((clawGrabButtonPress == 2) && (clawGrabButtonPressTime.time() > 0.2)) {
+                    robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
+
+                    clawGrabButtonPress = 1;
+                    clawGrabButtonPressTime.reset();
+
+
                 }
-                clawRuntime.reset();
             }
 
+
             if (gamepad1.left_bumper & scoreClawRuntime.time() > 0.15) {
-                if (scoreClawOpened) {
-                    robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_CLOSED);
-                    scoreClawOpened = false;
-                } else {
+                if((scoreClawButtonPress == 1) && (scoreClawGrabButtonPressTime.time() > 0.2)){
                     robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_OPEN_TELEOP);
-                    scoreClawOpened = true;
+
+                    scoreClawButtonPress = 2;
+                    scoreClawGrabRuntime.reset();
+
+                } else if ((scoreClawButtonPress == 2) && (scoreClawGrabButtonPressTime.time() > 0.2)) {
+                    robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_CLOSED);
+
+                    scoreClawButtonPress = 1;
+                    scoreClawGrabRuntime.reset();
+
                 }
-                scoreClawRuntime.reset();
             }
 
             if (gamepad1.right_stick_button && rotateClawRuntime.time() > 0.15) {
@@ -344,6 +367,7 @@ public class WorldsBestTeleop extends LinearOpMode {
 
             } else if (gamepad1.x){
                 mechOps.transferSample = true;
+                clawGrabButtonPress = 1;
 //                // ready the transfer (stage 1)
 //                if (!isTransferReady) {
 //                    mechOps.twoStageTransfer(1);
@@ -371,6 +395,7 @@ public class WorldsBestTeleop extends LinearOpMode {
                 liftPosition = robot.LIFT_RESET_TELEOP;
                 mechOps.scoreForeHold();
                 liftButtonPress = 2;
+                clawGrabButtonPress = 2;
 
             }
 
@@ -442,6 +467,17 @@ public class WorldsBestTeleop extends LinearOpMode {
 
             if(gamepad2.left_stick_button){
                 mechOps.l3Stop();
+            }
+
+            if(gamepad2.right_stick_button){
+                liftPosition = robot.LIFT_RESET;
+                robot.extendMotor.setPower(0.0);
+                robot.motorLiftBack.setPower(3);
+                robot.motorLiftFront.setPower(3);
+                robot.leftBackDrive.setPower(0);
+                robot.rightFrontDrive.setPower(0);
+                robot.leftFrontDrive.setPower(0);
+                robot.rightBackDrive.setPower(0);
             }
 
 
