@@ -48,8 +48,8 @@ public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
-    public double yAxisOffset = 5;
-    public double xAxisOffset = 50;
+    public double yAxisOffset = 10;
+    public double xAxisOffset = 48;
     public double buttonPressDelay = 0.2;       // button press delay for menu
 
     public final static HWProfile robot = new HWProfile();
@@ -81,7 +81,7 @@ public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
         yellowSample1Position = new Pose2d(12, 16, Math.toRadians(-5));
         yellowSample2Position = new Pose2d(12, 25.5, Math.toRadians(-5));
-        yellowSample3Position = new Pose2d(37, 40, Math.toRadians(90));
+        yellowSample3Position = new Pose2d(15, 28, Math.toRadians(45));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
         midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
         midwayPose3 = new Pose2d(30,1, Math.toRadians(90));
@@ -141,7 +141,7 @@ public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
                 mechOps.writeToFile(botHeading, "HeadingFile");
             }
 
-            //scoreSample3(drive);
+            scoreSample3(drive);
             // save heading to local file for teleop if bot gets stopped prematurely
             if(isStopRequested()){
                 botHeading = Math.toDegrees(drive.pose.heading.toDouble());
@@ -328,16 +328,16 @@ public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
 //                        .build());
 
         // prepare the mechanisms for grabbing sample 3
-        if (opModeIsActive()) mechOps.extClawRotateNinety();
-//        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
-//        if (opModeIsActive()) mechOps.setExtensionPosition();
+        if (opModeIsActive()) mechOps.extClawRotate45();
+        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
+        if (opModeIsActive()) mechOps.setExtensionPosition();
         if (opModeIsActive()) mechOps.autoExtension();
 
 
         // drive to sample 3 position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose3.position, midwayPose3.heading)
+
                         .strafeToLinearHeading(yellowSample3Position.position, yellowSample3Position.heading)
                         .build());
 
@@ -583,12 +583,14 @@ public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
                 case SAMPLE_5:
                     telemetry.addLine("Select the coordinates for Sample 5");
                     telemetry.addLine("Press A When Done");
-                    telemetry.addLine("Press DPAD_UP to Increment X");
-                    telemetry.addLine("Press DPAD_DOWN to Decrement X");
-                    telemetry.addLine("Press DPAD_RIGHT to Increment Y");
-                    telemetry.addLine("Press DPAD_LEFT to Decrement Y");
+                    telemetry.addLine("Press DPAD_UP to Increment X - AWAY FROM YOU");
+                    telemetry.addLine("Press DPAD_DOWN to Decrement X - CLOSER TO YOU");
+                    telemetry.addLine("Press DPAD_RIGHT to Increment Y - MORE LEFT");
+                    telemetry.addLine("Press DPAD_LEFT to Decrement Y - MORE RIGHT");
                     telemetry.addData("X = ", x5);
                     telemetry.addData("Y = ", y5);
+                    telemetry.addLine("MAX X Increment without crossing center: ");
+                    telemetry.addLine("To hit center of submersible, change Y increment to: ");
                     telemetry.update();
                     if (gamepad1.dpad_up && delay.time() > buttonPressDelay){
                         x5++;
