@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -20,9 +21,9 @@ import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 import java.util.Locale;
 
 /** @noinspection ALL*/
-@TeleOp(name="Worlds Best Teleop gang", group="Robot")
+@TeleOp(name="Worlds Best Teleop Beta Testing", group="Robot")
 //@Disabled
-public class WorldsBestTeleop extends LinearOpMode {
+public class WorldsBestTeleopBeta extends LinearOpMode {
 
 
     private final static HWProfile robot = new HWProfile();
@@ -79,6 +80,11 @@ public class WorldsBestTeleop extends LinearOpMode {
 
 
         robot.init(hardwareMap, true);
+
+
+        Motor motorLiftBack = new Motor(hardwareMap, "motorLiftR", Motor.GoBILDA.RPM_435 );
+        Motor motorLiftFront = new Motor(hardwareMap, "motorLiftF", Motor.GoBILDA.RPM_435);
+
 
         telemetry.addData("Status:", "Initialized");
         telemetry.update();
@@ -316,7 +322,7 @@ public class WorldsBestTeleop extends LinearOpMode {
                     liftButtonPress = 2;
                     liftButtonPressTime.reset();
 
-            }else if((liftButtonPress==2)&&(liftButtonPressTime.time() > 0.2)){
+                }else if((liftButtonPress==2)&&(liftButtonPressTime.time() > 0.2)){
                     liftPosition = robot.LIFT_SCORE_HIGH_BASKET;
                     robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE_PART);
                     robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE_PART);
@@ -497,6 +503,9 @@ public class WorldsBestTeleop extends LinearOpMode {
                 mechOps.l2Stop();
             }
 
+            motorLiftFront.setTargetPosition((int) liftPosition);
+            motorLiftBack.setTargetPosition((int) liftPosition);
+
 
             telemetry.addData("liftPosition = ", mechOps.liftPosition);
             telemetry.addData("extensionPosition = ", mechOps.extensionPosition);
@@ -535,12 +544,10 @@ public class WorldsBestTeleop extends LinearOpMode {
 
 
     public void climb(){
-        robot.motorLiftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.motorLiftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        mechOps.l2Down();
-        sleep(1250);
-        mechOps.l2Stop();
 
+        mechOps.l2Down();
+        sleep(1000);
+        mechOps.l2Stop();
         int liftPosition = (robot.motorLiftBack.getCurrentPosition() +robot.motorLiftFront.getCurrentPosition())/2;
         while(opModeIsActive()){
             if(liftPosition > 20) {
@@ -550,19 +557,22 @@ public class WorldsBestTeleop extends LinearOpMode {
                 robot.motorLiftBack.setPower(-0.5);
                 robot.motorLiftFront.setPower(-0.5);
             }
-            telemetry.addData("liftPosition = ", mechOps.liftPosition);
-            telemetry.addData("extensionPosition = ", mechOps.extensionPosition);
-            telemetry.addData("motor Lift Front Position", robot.motorLiftFront.getCurrentPosition());
-            telemetry.addData("motor Lift Back Position", robot.motorLiftBack.getCurrentPosition());
-            telemetry.addData("motor Extend Position", robot.extendMotor.getCurrentPosition());
-            telemetry.addData("motor Lift Front Current", robot.motorLiftFront.getCurrent(CurrentUnit.AMPS));
-            telemetry.addData("motor Lift Back Current", robot.motorLiftBack.getCurrent(CurrentUnit.AMPS));
-            telemetry.addData("motor Extend Current", robot.extendMotor.getCurrent(CurrentUnit.AMPS));
-            telemetry.addLine("----------------------------------------");
-            //telemetry.addData("Time Total", totalRuntime.time());
-            telemetry.update();
         }
 
     }
+
+    public void setLiftPositionRWE(){
+        double motorPower = 1;
+        int currentPosition = (robot.motorLiftBack.getCurrentPosition() + robot.motorLiftFront.getCurrentPosition())/2;
+        if(currentPosition < liftPosition){
+            robot.motorLiftBack.setPower(1);
+            robot.motorLiftFront.setPower(1);
+        } else if (currentPosition > liftPosition){
+            robot.motorLiftFront.setPower(-1);
+            robot.motorLiftBack.setPower(-1);
+        }
+
+    }
+
 
 }

@@ -211,17 +211,17 @@ public class RRMechOps {
         robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT_HALF);
     }
 
-    public void l3Reset(){
-        robot.level3RightServo.setPosition(robot.L3RESETRIGHT);
-        robot.level3LeftServo.setPosition(robot.L3RESETLEFT);
+    public void l2Down(){
+        robot.level3RightServo.setPosition(robot.L3DOWNRIGHT);
+        robot.level3LeftServo.setPosition(robot.L3DOWNLEFT);
     }
 
-    public void l3Up(){
+    public void l2Up(){
         robot.level3LeftServo.setPosition(robot.L3UPLEFT);
         robot.level3RightServo.setPosition(robot.L3UPRIGHT);
     }
 
-    public void l3Stop(){
+    public void l2Stop(){
         robot.level3RightServo.setPosition(robot.L3HALFR);
         robot.level3LeftServo.setPosition(robot.L3HALFL);
     }

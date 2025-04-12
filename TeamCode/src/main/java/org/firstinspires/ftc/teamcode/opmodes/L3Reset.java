@@ -3,16 +3,12 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
-import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.PoseVelocity2d;
-import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
@@ -20,7 +16,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
-import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 import java.util.Locale;
 
@@ -102,7 +97,7 @@ public class L3Reset extends LinearOpMode {
         clawRotateButtonPressTime.reset();
         extensionButtionPressTime.reset();
         liftButtonPressTime.reset();
-        mechOps.l3Reset();
+        mechOps.l2Down();
 
 
         // Initializes ElapsedTimes. One for total runtime of the program and the others set up for toggles.
@@ -180,7 +175,17 @@ public class L3Reset extends LinearOpMode {
             robot.rightFrontDrive.setPower(frontRightPower);
             robot.rightBackDrive.setPower(backRightPower);
 
+            if(gamepad1.a){
+                mechOps.l2Down();
+            }
 
+            if(gamepad1.b){
+                mechOps.l2Stop();
+            }
+
+            if (gamepad1.x){
+                mechOps.l2Up();
+            }
             //mechOps.extensionPowerMonitor();
 
             /* Here we handle the three buttons that have direct control of the intake speed.

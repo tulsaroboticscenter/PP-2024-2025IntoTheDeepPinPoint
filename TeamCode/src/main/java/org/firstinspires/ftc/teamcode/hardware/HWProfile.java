@@ -1,18 +1,15 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_TO_POSITION;
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
 import com.acmerobotics.roadrunner.ftc.GoBildaPinpointDriverRR;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class HWProfile {
@@ -75,8 +72,8 @@ public class HWProfile {
     public final double LIFT_SPECIMEN_PREP          = 1500;
     public final double LIFT_SPECIMEN_PREP_TELEOP = 1700;
     public final double LIFT_SPECIMEN_SCORE = 400;
-    public final double LIFT_SCORE_HIGH_BASKET = 3200;
-    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3400;
+    public final double LIFT_SCORE_HIGH_BASKET = 3300;
+    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3500;
     public final double LIFT_CLIMB              = 2000;
     public final double LIFT_SCORE_SPECIMEN = 1200;
     public final double LIFT_SCORE_SPECIMEN_TELEOP = 1000;
@@ -140,8 +137,8 @@ public class HWProfile {
     final public double SCORE_LEFT_FOREBAR_GRAB = 0.87;//tarted at 0
     final public double SCORE_LEFT_FOREBAR_SCORE = 0.2;
 
-    final public double L3RESETRIGHT = 1;
-    final public double L3RESETLEFT = 1;
+    final public double L3DOWNRIGHT = 1;
+    final public double L3DOWNLEFT = 1;
     final public double L3HALFR = 0.5;
     final public double L3HALFL = 0.5;
     final public double L3UPRIGHT = 0;
