@@ -225,6 +225,9 @@ public class RRMechOps {
         robot.level3RightServo.setPosition(robot.L3HALFR);
         robot.level3LeftServo.setPosition(robot.L3HALFL);
     }
+    public void extClawRotate45(){
+        robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_45);
+    }
     /**
      * Method: transferSample()
      * How it works:
