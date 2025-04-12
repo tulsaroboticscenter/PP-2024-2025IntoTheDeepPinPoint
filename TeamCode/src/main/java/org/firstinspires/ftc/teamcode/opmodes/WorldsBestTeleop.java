@@ -506,6 +506,9 @@ public class WorldsBestTeleop extends LinearOpMode {
                 gamepad1.setLedColor(13, 36, 65, 30000);
             }
 
+            if(gamepad2.right_bumper){
+                climb();
+            }
 
             telemetry.addData("liftPosition = ", mechOps.liftPosition);
             telemetry.addData("extensionPosition = ", mechOps.extensionPosition);
@@ -543,5 +546,20 @@ public class WorldsBestTeleop extends LinearOpMode {
     }
 
 
+    public void climb(){
+        robot.motorLiftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.motorLiftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        int liftPosition = (robot.motorLiftBack.getCurrentPosition() +robot.motorLiftFront.getCurrentPosition())/2;
+        while(opModeIsActive()){
+            if(liftPosition > 20) {
+                robot.motorLiftFront.setPower(1);
+                robot.motorLiftBack.setPower(1);
+            } else if(liftPosition < 20){
+                robot.motorLiftBack.setPower(0.2);
+                robot.motorLiftFront.setPower(0.2);
+            }
+        }
+
+    }
 
 }
