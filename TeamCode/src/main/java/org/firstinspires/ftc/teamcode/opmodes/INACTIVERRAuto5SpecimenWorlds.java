@@ -44,7 +44,7 @@ import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 
 
-@Autonomous(name = "Auto - 5 Specimen 5+0 OLD", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
+@Autonomous(name = "Auto - 5 Specimen 5+0 OLD", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
 @Disabled
 public class INACTIVERRAuto5SpecimenWorlds extends LinearOpMode{
 

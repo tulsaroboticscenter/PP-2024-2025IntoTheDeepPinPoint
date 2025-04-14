@@ -22,6 +22,7 @@ public class HWProfile {
     public DcMotorEx  extendMotor      = null; //motorExtend EX3
     public DcMotorEx  motorLiftFront       = null; //motorLiftF CH2
     public DcMotorEx motorLiftBack       = null; //motorLiftR EX2
+    public DcMotorEx motorLiftTop       = null;
     public IMU      imu              = null;
     public GoBildaPinpointDriverRR pinpoint; // pinpoint CH i2C port 1
     public Servo  extForeRightServo = null; // extForeRight EH3
@@ -67,17 +68,18 @@ public class HWProfile {
     as far from the starting position, decrease it. */
 
     public final double LIFT_RESET                = 20;
-    public final double LIFT_RESET_CLIMB = 0;
-    public final double LIFT_RESET_TELEOP         = 100;
+    public final double LIFT_RESET_CLIMB = -50;
+    public final double LIFT_RESET_TELEOP         = 40;
     public final double LIFT_SPECIMEN_PREP          = 1500;
     public final double LIFT_SPECIMEN_PREP_TELEOP = 1700;
     public final double LIFT_SPECIMEN_SCORE = 400;
-    public final double LIFT_SCORE_HIGH_BASKET = 3300;
-    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3500;
+    public final double LIFT_SCORE_HIGH_BASKET = 3100;
+    public final double LIFT_SCORE_HIGH_BASKET_TELEOP = 3300;
     public final double LIFT_CLIMB              = 2000;
     public final double LIFT_SCORE_SPECIMEN = 1200;
     public final double LIFT_SCORE_SPECIMEN_TELEOP = 1000;
     public final double LIFT_PARK = 1225;
+    public final double LIFT_CLIMB_SECURE = 3000;
 
 
 
@@ -238,7 +240,7 @@ public class HWProfile {
         }
 
 
-        motorLiftFront = ahwMap.get(DcMotorEx.class, "motorLiftF");
+        motorLiftFront = ahwMap.get(DcMotorEx.class, "motorLiftF"); //same side as motorLiftTop
         motorLiftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         motorLiftFront.setTargetPosition(0);
         motorLiftFront.setPower(0);
@@ -251,6 +253,14 @@ public class HWProfile {
         motorLiftBack.setPower(0);
         motorLiftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorLiftBack.setMode(RUN_TO_POSITION);
+
+
+        motorLiftTop = ahwMap.get(DcMotorEx.class, "motorLiftT"); //same side as motorLiftFront
+        motorLiftTop.setDirection(DcMotorSimple.Direction.FORWARD);
+        motorLiftTop.setTargetPosition(0);
+        motorLiftTop.setPower(0);
+        motorLiftTop.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorLiftTop.setMode(RUN_TO_POSITION);
 
             /*
             motorLiftFront  = new MotorEx(ahwMap, "motorLiftF", Motor.GoBILDA.RPM_435);
@@ -281,13 +291,7 @@ public class HWProfile {
             lift.resetEncoder();
 */
 
-        lift = new MotorGroup(
-                new Motor(hwMap, "motorLiftF", Motor.GoBILDA.RPM_435),
-                new Motor(hwMap, "motorLiftR", Motor.GoBILDA.RPM_435)
-        );
-        lift.setTargetPosition(0);
-        lift.set(0);
-        lift.setRunMode(Motor.RunMode.PositionControl);
+
 
 
 

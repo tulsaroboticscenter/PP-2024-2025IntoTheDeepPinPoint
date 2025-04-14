@@ -43,7 +43,7 @@ import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
 //@Disabled
-@Autonomous(name = "Auto Samples - 7+0 NO PARK", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
+@Autonomous(name = "Auto Samples - 7+0 NO PARK", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
 public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
@@ -196,6 +196,7 @@ public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
         if (opModeIsActive()) mechOps.extClawOpen();
         if (opModeIsActive()) robot.motorLiftBack.setPower(1);
         if (opModeIsActive()) robot.motorLiftFront.setPower(1);
+        if (opModeIsActive()) robot.motorLiftTop.setPower(1);
         if (opModeIsActive()) mechOps.raiseLiftHighBasketPrep();
         //safeWaitSeconds(.95);
 

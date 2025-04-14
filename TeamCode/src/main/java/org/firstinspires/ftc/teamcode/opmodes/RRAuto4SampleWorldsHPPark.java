@@ -43,7 +43,7 @@ import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
 //@Disabled
-@Autonomous(name = "Auto Samples - 4+0 HUMAN PARK", group = "Competition", preselectTeleOp = "WorldsBestTeleop")
+@Autonomous(name = "Auto Samples - 4+0 HUMAN PARK", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
 public class RRAuto4SampleWorldsHPPark extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
