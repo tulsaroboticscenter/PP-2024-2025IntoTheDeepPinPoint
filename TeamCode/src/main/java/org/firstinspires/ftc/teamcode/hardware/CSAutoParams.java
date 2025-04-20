@@ -78,16 +78,12 @@ public class CSAutoParams {
     final public int MAX_LIFT_VALUE = 2200;
     final public int MIN_LIFT_VALUE = 1;
 
-    final public int LIFT_RESET = 0;
-    final public int LIFT_AUTO_SCORE = 500;
-    final public int LIFT_AUTO_FIRST_WHITE_PIXEL = 400;
-    final public int LIFT_AUTO_2ND_WHITE_PIXEL = 500;
-    final public int LIFT_AUTO_3RD_WHITE_PIXEL = 600;
-    final public int LIFT_DEPLOY_PLUNGER = 151;        // height that the lift needs to be to deploy the plunger
-    final public int LIFT_LOW=211;
-    final public int LIFT_SCORE=53;
+    final public int LIFT_RESET = 20;
+    final public int LIFT_PARK = 1220;
+    final public int LIFT_SCORE=3100;
     final public int LIFT_MID=633;
     final public int LIFT_HIGH=1477;
+    final public int LIFT_LOW = 1;
 
     // climb constants
     final public int CLIMB_RETRACT = 211;

@@ -97,7 +97,6 @@ public class L3Reset extends LinearOpMode {
         clawRotateButtonPressTime.reset();
         extensionButtionPressTime.reset();
         liftButtonPressTime.reset();
-        mechOps.l2Down();
 
 
         // Initializes ElapsedTimes. One for total runtime of the program and the others set up for toggles.

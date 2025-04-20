@@ -31,9 +31,14 @@ package org.firstinspires.ftc.teamcode.opmodes;
 
 import static com.qualcomm.robotcore.util.ElapsedTime.Resolution.SECONDS;
 
+import androidx.annotation.NonNull;
+
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -42,9 +47,9 @@ import org.firstinspires.ftc.teamcode.PinpointDrive;
 import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
-//@Disabled
+@Disabled
 @Autonomous(name = "Auto Samples - 7+0 NO PARK", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
-public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
+public class RRAuto7SampleWorldsSUBParkCTS extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
@@ -87,7 +92,7 @@ public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
         midwayPose3 = new Pose2d(30,1, Math.toRadians(90));
         midwayPose4 = new Pose2d(15,15, Math.toRadians(0));
         parkPrepPose = new Pose2d(54, 10, Math.toRadians(90));
-        parkPose = new Pose2d(50, -13, Math.toRadians(90));
+        parkPose = new Pose2d(5, -13, Math.toRadians(90));
 
         //Initialize hardware
         robot.init(hardwareMap, false);
@@ -254,7 +259,7 @@ public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
         if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
         safeWaitSeconds(0.2);
         if (opModeIsActive()) mechOps.autoSampleScorePrep();
-        safeWaitSeconds(0.25);
+        safeWaitSeconds(0.5);
 
         // Drive to scoring position
         Actions.runBlocking(
@@ -302,7 +307,7 @@ public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
         if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
         safeWaitSeconds(0.25);
         if (opModeIsActive()) mechOps.autoSampleScorePrep();
-        safeWaitSeconds(0.25);
+        safeWaitSeconds(0.5);
 
         // drive to scoring position
         Actions.runBlocking(
@@ -676,6 +681,26 @@ public class RRAuto4SampleWorldsSUBParkCTS extends LinearOpMode{
                     selectionsDone = true;
                     break;
             }
+        }
+
+    }
+
+    public class SetLiftPosition implements Action {
+        int targetPosition;
+
+        public SetLiftPosition(int targetPosition) {
+            this.targetPosition = targetPosition;
+        }
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            robot.motorLiftBack.setPower(1);
+            robot.motorLiftBack.setTargetPosition(this.targetPosition);
+            robot.motorLiftFront.setPower(1);
+            robot.motorLiftFront.setTargetPosition(this.targetPosition);
+            robot.motorLiftTop.setPower(1);
+            robot.motorLiftTop.setTargetPosition(this.targetPosition);
+            return false;
         }
     }
 

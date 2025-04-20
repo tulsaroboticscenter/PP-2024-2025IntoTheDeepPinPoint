@@ -92,6 +92,8 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
         motorLiftTop.resetEncoder();
         motorLiftFront.resetEncoder();
         motorLiftBack.resetEncoder();
+        motorLiftFront.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
+        motorLiftBack.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
 
         telemetry.addData("Status:", "Initialized");
         telemetry.update();
@@ -165,7 +167,6 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
         boolean armClimb = false;
         boolean isTransferReady = false;
         boolean l2ClimbDeploy = false;
-
 
 
         TelemetryPacket packet = new TelemetryPacket();
@@ -250,31 +251,33 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
                     clawGrabButtonPress = 1;
                     clawGrabButtonPressTime.reset();
 
-
                 }
+                clawGrabRuntime.reset();
             }
 
 
-            if (gamepad1.left_bumper & scoreClawRuntime.time() > 0.15) {
+            if (gamepad1.left_bumper && scoreClawRuntime.time() > 0.5) {
                 if((scoreClawButtonPress == 1) && (scoreClawGrabButtonPressTime.time() > 0.2)){
-                    robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_OPEN_TELEOP);
-
-                    scoreClawButtonPress = 2;
-                    scoreClawGrabRuntime.reset();
-
-                } else if ((scoreClawButtonPress == 2) && (scoreClawGrabButtonPressTime.time() > 0.2)) {
                     robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_CLOSED);
 
+                    scoreClawButtonPress = 2;
+                    scoreClawGrabButtonPressTime.reset();
+
+                } else if ((scoreClawButtonPress == 2) && (scoreClawGrabButtonPressTime.time() > 0.2)) {
+                    robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_OPEN_TELEOP);
+
                     scoreClawButtonPress = 1;
-                    scoreClawGrabRuntime.reset();
+                    scoreClawGrabButtonPressTime.reset();
 
                 }
+                scoreClawGrabRuntime.reset();
             }
 
             if (gamepad1.right_stick_button && rotateClawRuntime.time() > 0.15) {
                 if (clawRotated) {
                     servoWristPosition = robot.INTAKE_WRIST_ROTATED_ZERO;
                     clawRotated = false;
+
                 } else if (!clawRotated) {
                     servoWristPosition = robot.INTAKE_WRIST_ROTATED_NINETY;
                     clawRotated = true;
@@ -333,6 +336,7 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
                     liftPosition = robot.LIFT_SCORE_HIGH_BASKET;
                     robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE_PART);
                     robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE_PART);
+                    scoreClawButtonPress = 2;
 
                     liftButtonPress = 3;
                     liftButtonPressTime.reset();
@@ -341,6 +345,8 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
                     liftPosition = robot.LIFT_SCORE_HIGH_BASKET_TELEOP;
                     robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE);
                     robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE);
+                    scoreClawButtonPress = 2;
+
 
 
                     liftButtonPress = 1;
@@ -502,16 +508,30 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
                 l2ClimbDeploy = false;
             }
 
-            if (l2ClimbDeploy && l2ClimbDeployRuntime.time() > 2 && gamepad2.right_bumper) {
+            if (l2ClimbDeploy && l2ClimbDeployRuntime.time() < 0.1 && gamepad2.right_bumper) {
                 mechOps.l2Up();
-            } else if (l2ClimbDeploy && l2ClimbDeployRuntime.time() > 2) {
+            } else if (l2ClimbDeploy && l2ClimbDeployRuntime.time() > 5.75) {
                 mechOps.l2Stop();
+            }
+            if(gamepad2.x){
+                liftPosition = robot.LIFT_CLIMB_SECURE;
             }
 
             motorLiftFront.setTargetPosition((int) liftPosition);
             motorLiftBack.setTargetPosition((int) liftPosition);
             motorLiftTop.setTargetPosition((int) liftPosition);
 
+
+
+            if(motorLiftTop.getCurrentPosition() == liftPosition){
+                motorLiftTop.set(1);
+                motorLiftBack.set(0);
+                motorLiftFront.set(0);
+            } else {
+                motorLiftTop.set(1);
+                motorLiftBack.set(1);
+                motorLiftFront.set(1);
+            }
 
             telemetry.addData("liftPosition = ", mechOps.liftPosition);
             telemetry.addData("extensionPosition = ", mechOps.extensionPosition);
@@ -523,6 +543,7 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
             telemetry.addData("motor Lift Back Current", robot.motorLiftBack.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("motor Lift Top Current", robot.motorLiftTop.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("motor Extend Current", robot.extendMotor.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("score claw position", robot.scoreGrabServo.getPosition());
             telemetry.addLine("----------------------------------------");
             telemetry.addData("Time Total", totalRuntime.time());
             telemetry.update();
@@ -553,7 +574,9 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
 
     public void climb(){
 
-        liftPosition = robot.LIFT_CLIMB_SECURE;
+        robot.motorLiftFront.setTargetPosition((int)robot.LIFT_CLIMB_SECURE);
+        robot.motorLiftBack.setTargetPosition((int)robot.LIFT_CLIMB_SECURE);
+        robot.motorLiftTop.setTargetPosition((int)robot.LIFT_CLIMB_SECURE);
         mechOps.l2Down();
         sleep(2000);
         mechOps.l2Stop();

@@ -31,6 +31,10 @@ package org.firstinspires.ftc.teamcode.opmodes;
 
 import static com.qualcomm.robotcore.util.ElapsedTime.Resolution.SECONDS;
 
+import androidx.annotation.NonNull;
+
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -43,7 +47,7 @@ import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
 //@Disabled
-@Autonomous(name = "Auto Samples - 7+0 NO PARK", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
+@Autonomous(name = "Auto Samples - 5+0 PARK", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
 public class RRAutoSampleWorlds70TEST extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
@@ -79,15 +83,15 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
     public void runOpMode() throws InterruptedException {
 
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
-        yellowSample1Position = new Pose2d(12, 16, Math.toRadians(-5));
-        yellowSample2Position = new Pose2d(12, 25.5, Math.toRadians(-5));
-        yellowSample3Position = new Pose2d(37, 7.1, Math.toRadians(90));
+        yellowSample1Position = new Pose2d(11.5, 16, Math.toRadians(-5));
+        yellowSample2Position = new Pose2d(11.5, 25, Math.toRadians(-5));
+        yellowSample3Position = new Pose2d(37.5, 7.1, Math.toRadians(90));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
-        midwayPose2 = new Pose2d(10,0, Math.toRadians(0));
-        midwayPose3 = new Pose2d(30,1, Math.toRadians(90));
+        midwayPose2 = new Pose2d(20,20, Math.toRadians(-45));
+        midwayPose3 = new Pose2d(35,5, Math.toRadians(90));
         midwayPose4 = new Pose2d(15,15, Math.toRadians(0));
-        parkPrepPose = new Pose2d(54, 10, Math.toRadians(90));
-        parkPose = new Pose2d(50, -13, Math.toRadians(90));
+        parkPrepPose = new Pose2d(48, 20, Math.toRadians(90));
+        parkPose = new Pose2d(53, -12, Math.toRadians(90));
 
         //Initialize hardware
         robot.init(hardwareMap, false);
@@ -197,15 +201,18 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         if (opModeIsActive()) robot.motorLiftBack.setPower(1);
         if (opModeIsActive()) robot.motorLiftFront.setPower(1);
         if (opModeIsActive()) robot.motorLiftTop.setPower(1);
-        if (opModeIsActive()) mechOps.raiseLiftHighBasketPrep();
+        //if (opModeIsActive()) mechOps.raiseLiftHighBasketPrep7();
+
         //safeWaitSeconds(.95);
 
         // Drive to scoring prep position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        .stopAndAdd(new SetLiftPosition(params.LIFT_SCORE))
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .waitSeconds(.2)
+                        .stopAndAdd(new SetServoPositionScoreSample())
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
-
                         .build());
 
         // score the sample into the high basket
@@ -226,19 +233,20 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         // Drive to prep position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        .stopAndAdd(new SetServoPositionScoreReset())
+                        .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
                         .strafeToLinearHeading(yellowSample1Position.position, yellowSample1Position.heading)
                         .build());
 
         // lower the arm and prepare to grab sample from the field
-        if (opModeIsActive()) mechOps.liftReset();
+        //if (opModeIsActive()) mechOps.liftReset();
         if (opModeIsActive()) mechOps.scoreForeGrab();
         if (opModeIsActive()) mechOps.scoreClawOpen();
 //        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
 //        if (opModeIsActive()) mechOps.setExtensionPosition();
         if (opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
         if (opModeIsActive()) mechOps.extForeBarDeploy();
-        if (opModeIsActive()) mechOps.liftReset();
         if (opModeIsActive()) mechOps.scoreForeGrab();
 
         // Drive to pick up Sample1 Position
@@ -253,13 +261,16 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         safeWaitSeconds(0.5);
         if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
         safeWaitSeconds(0.2);
-        if (opModeIsActive()) mechOps.autoSampleScorePrep();
-        safeWaitSeconds(0.25);
+        if (opModeIsActive()) mechOps.auto7SampleScorePrep();
+        safeWaitSeconds(0.15);
 
         // Drive to scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        .stopAndAdd(new SetLiftPosition(params.LIFT_SCORE))
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .stopAndAdd(new SetServoPositionScoreSample())
+                        .waitSeconds(.2)
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
 
@@ -274,12 +285,14 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         // Drive to prep position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        .stopAndAdd(new SetServoPositionScoreReset())
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
                         .strafeToLinearHeading(yellowSample2Position.position, yellowSample2Position.heading)
                         .build());
 
         // lower the lift and prepare to grab the sample from the field
-        if (opModeIsActive()) mechOps.liftReset();
+        //if (opModeIsActive()) mechOps.liftReset();
         if (opModeIsActive()) mechOps.extClawRotateZero();
         if (opModeIsActive()) mechOps.autoExtension();
 //        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
@@ -300,14 +313,16 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         if (opModeIsActive()) mechOps.setExtensionPosition();
         safeWaitSeconds(0.5);
         if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
-        safeWaitSeconds(0.25);
-        if (opModeIsActive()) mechOps.autoSampleScorePrep();
-        safeWaitSeconds(0.25);
+        safeWaitSeconds(0.2);
+        if (opModeIsActive()) mechOps.auto7SampleScorePrep();
+        //safeWaitSeconds(0.1);
 
         // drive to scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .stopAndAdd(new SetServoPositionScoreSample())
+                        .waitSeconds(.2)
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
 
@@ -322,10 +337,11 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
                         .build());
 
         // reset the lift to prepare to grab the next sample
-        if (opModeIsActive()) mechOps.liftReset();
+        //if (opModeIsActive()) mechOps.liftReset();
         if (opModeIsActive()) mechOps.scoreForeHold();
 
         // Drive to Sample3 Position
@@ -343,7 +359,7 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         safeWaitSeconds(0.5);
         if (opModeIsActive()) mechOps.extClawClose();
         safeWaitSeconds(.2);
-        if (opModeIsActive()) mechOps.autoSampleScorePrep();
+        if (opModeIsActive()) mechOps.auto7SampleScorePrep();
         //safeWaitSeconds(0.5);
 
 
@@ -361,7 +377,9 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         // drive to scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        .stopAndAdd(new SetLiftPosition(params.LIFT_SCORE))
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .stopAndAdd(new SetServoPositionScoreSample())
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
 
@@ -372,10 +390,12 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .stopAndAdd(new SetServoPositionScoreReset())
+                        .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
                         .build());
 
         // Lower the arm & reset the mechanisms
-        if (opModeIsActive()) mechOps.liftReset();
+        //if (opModeIsActive()) mechOps.liftReset();
         if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT);
         if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
         if (opModeIsActive()) mechOps.extPitchGrab();
@@ -394,7 +414,7 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
 //                        .build());
 //
 //        // reset the lift to prepare to grab the next sample
-//        if (opModeIsActive()) mechOps.liftReset();
+//
 //
 
         // prepare the mechanisms for grabbing sample 3
@@ -415,12 +435,13 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.extClawClose();
         safeWaitSeconds(0.2);
-        if (opModeIsActive()) mechOps.autoSampleScorePrep();
+        if (opModeIsActive()) mechOps.auto7SampleScorePrep();
         //safeWaitSeconds(0.5);
 
         // drive to scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        .stopAndAdd(new SetServoPositionScoreSample())
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
 
@@ -434,7 +455,7 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
                         .build());
 
         // Lower the arm & reset the mechanisms
-        if (opModeIsActive()) mechOps.liftPark();
+        if(opModeIsActive()) mechOps.liftPark();
         if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT);
         if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
         if (opModeIsActive()) mechOps.extPitchGrab();
@@ -463,7 +484,7 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         safeWaitSeconds(.2);
         if (opModeIsActive()) mechOps.extClawClose();
         safeWaitSeconds(0.2);
-        if (opModeIsActive()) mechOps.autoSampleScorePrep();
+        if (opModeIsActive()) mechOps.auto7SampleScorePrep();
         //safeWaitSeconds(0.5);
 
         // drive to scoring position
@@ -536,10 +557,11 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .stopAndAdd(new SetServoPositionScoreReset())
+                        .stopAndAdd(new SetLiftPosition(params.LIFT_PARK))
                         .build());
 
         // Lower the arm & reset the mechanisms
-        if (opModeIsActive()) mechOps.liftReset();
         if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT);
         if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
         if (opModeIsActive()) mechOps.extPitchGrab();
@@ -554,7 +576,7 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
+//                        .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
                         .strafeToLinearHeading(parkPrepPose.position,parkPrepPose.heading)
                         .strafeToLinearHeading(parkPose.position, parkPose.heading)
                         .build());
@@ -679,6 +701,52 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
             }
         }
     }
+    public class SetLiftPosition implements Action {
+        int targetPosition;
+
+        public SetLiftPosition(int targetPosition) {
+            this.targetPosition = targetPosition;
+        }
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            robot.motorLiftBack.setPower(1);
+            robot.motorLiftBack.setTargetPosition(this.targetPosition);
+            robot.motorLiftFront.setPower(1);
+            robot.motorLiftFront.setTargetPosition(this.targetPosition);
+            robot.motorLiftTop.setPower(1);
+            robot.motorLiftTop.setTargetPosition(this.targetPosition);
+            return false;
+        }
+    }
+
+    public class SetServoPositionScoreSample implements Action {
+
+
+        public SetServoPositionScoreSample() {
+        }
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE);
+            robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE);
+            return false;
+        }
+    }
+    public class SetServoPositionScoreReset implements Action {
+
+
+        public SetServoPositionScoreReset() {
+        }
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_GRAB);
+            robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_GRAB);
+            return false;
+        }
+    }
+
 
 
     enum State {
