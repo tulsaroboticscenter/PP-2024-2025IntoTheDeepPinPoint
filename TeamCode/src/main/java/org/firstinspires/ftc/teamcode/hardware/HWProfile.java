@@ -78,7 +78,7 @@ public class HWProfile {
     public final double LIFT_CLIMB              = 2000;
     public final double LIFT_SCORE_SPECIMEN = 1200;
     public final double LIFT_SCORE_SPECIMEN_TELEOP = 1000;
-    public final double LIFT_PARK = 1225;
+    public final double LIFT_PARK = 675; //1225
     public final double LIFT_CLIMB_SECURE = 3000;
 
 
@@ -130,6 +130,8 @@ public class HWProfile {
     final public double SCORE_RIGHT_FOREBAR_GRAB = 0.13;//started at 1
     final public double SCORE_RIGHT_FOREBAR_HOLD = 0.3;
     final public double SCORE_LEFT_FOREBAR_HOLD = 0.7;
+    final public double SCORE_RIGHT_FOREBAR_HOLD_AUTON = 0.4;
+    final public double SCORE_LEFT_FOREBAR_HOLD_AUTON = 0.6;
     final public double SCORE_RIGHT_FOREBAR_SPECIMEN = 1;
     final public double SCORE_RIGHT_FOREBAR_SCORE_PART = 0.87;
     final public double SCORE_LEFT_FOREBAR_SCORE_PART = 0.13;

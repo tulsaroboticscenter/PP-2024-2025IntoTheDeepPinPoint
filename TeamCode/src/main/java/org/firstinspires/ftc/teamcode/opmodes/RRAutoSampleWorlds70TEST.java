@@ -85,7 +85,7 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
         yellowSample1Position = new Pose2d(11.5, 16, Math.toRadians(-5));
         yellowSample2Position = new Pose2d(11.5, 25, Math.toRadians(-5));
-        yellowSample3Position = new Pose2d(37.5, 7.1, Math.toRadians(90));
+        yellowSample3Position = new Pose2d(37.5, 7.5, Math.toRadians(90));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
         midwayPose2 = new Pose2d(20,20, Math.toRadians(-45));
         midwayPose3 = new Pose2d(35,5, Math.toRadians(90));
@@ -557,7 +557,7 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .stopAndAdd(new SetServoPositionScoreReset())
+                        .stopAndAdd(new SetServoPositionScorePark())
                         .stopAndAdd(new SetLiftPosition(params.LIFT_PARK))
                         .build());
 
@@ -747,7 +747,19 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         }
     }
 
+    public class SetServoPositionScorePark implements Action {
 
+
+        public SetServoPositionScorePark() {
+        }
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_HOLD_AUTON);
+            robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_HOLD_AUTON);
+            return false;
+        }
+    }
 
     enum State {
         SAMPLE_5, SAMPLE_6, SAMPLE_7, EXIT
