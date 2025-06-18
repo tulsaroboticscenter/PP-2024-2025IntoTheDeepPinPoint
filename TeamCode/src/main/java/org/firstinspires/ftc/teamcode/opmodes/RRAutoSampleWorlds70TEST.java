@@ -353,9 +353,11 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
 
         // prepare the mechanisms for grabbing sample 3
         if (opModeIsActive()) mechOps.extClawRotateNinety();
+        //if (opModeIsActive()) mechOps.extClawRotate45(); POSSIBILITY 1
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
-        if (opModeIsActive()) mechOps.autoExtension();
+        //if (opModeIsActive()) mechOps.autoExtension();
+        if (opModeIsActive()) mechOps.autoExtensionThirdSample(); //POSSIBILITY 2
         safeWaitSeconds(0.5);
         if (opModeIsActive()) mechOps.extClawClose();
         safeWaitSeconds(.2);
@@ -607,8 +609,8 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
                     telemetry.addLine("Press A When Done");
                     telemetry.addLine("Press DPAD_UP to Increment X - AWAY FROM YOU");
                     telemetry.addLine("Press DPAD_DOWN to Decrement X - CLOSER TO YOU");
-                    telemetry.addLine("Press DPAD_RIGHT to Increment Y - MORE LEFT");
-                    telemetry.addLine("Press DPAD_LEFT to Decrement Y - MORE RIGHT");
+                    telemetry.addLine("Press DPAD_RIGHT to Increment Y - MORE RIGHT");
+                    telemetry.addLine("Press DPAD_LEFT to Decrement Y - MORE LEFT");
                     telemetry.addData("X = ", x5);
                     telemetry.addData("Y = ", y5);
                     telemetry.addLine("MAX X Increment without crossing center: 5");
@@ -621,10 +623,10 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
                         x5--;
                         delay.reset();
                     }else if (gamepad1.dpad_right && delay.time() > buttonPressDelay){
-                        y5++;
+                        y5--;
                         delay.reset();
                     }else if (gamepad1.dpad_left && delay.time() > buttonPressDelay){
-                        y5--;
+                        y5++;
                         delay.reset();
                     }else if(gamepad1.a && delay.time() > 0.5) {
                         selectionState = State.SAMPLE_6;

@@ -580,6 +580,7 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
         mechOps.l2Down();
         sleep(2000);
         mechOps.l2Stop();
+        sleep(1000);
         int liftPosition = (robot.motorLiftBack.getCurrentPosition() + robot.motorLiftFront.getCurrentPosition() + robot.motorLiftTop.getCurrentPosition())/3;
         while(opModeIsActive()){
             if(liftPosition > 20) {

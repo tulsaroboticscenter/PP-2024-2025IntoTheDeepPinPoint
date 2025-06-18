@@ -128,6 +128,16 @@ public class RRMechOps {
         robot.motorLiftBack.setPower(1);
         robot.motorLiftTop.setPower(1);
     }
+    public void raiseLiftHighBasketAUTON() {
+        robot.motorLiftBack.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET);
+        robot.motorLiftFront.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET);
+        robot.motorLiftTop.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET);
+        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE_AUTON);
+        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE_AUTON);
+        robot.motorLiftFront.setPower(1);
+        robot.motorLiftBack.setPower(1);
+        robot.motorLiftTop.setPower(1);
+    }
     public void raiseLiftHighBasketTeleop() {
         robot.motorLiftBack.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET_TELEOP);
         robot.motorLiftFront.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET_TELEOP);
@@ -172,6 +182,7 @@ public class RRMechOps {
         robot.motorLiftTop.setPower(1);
         scoreForeSample();
     }
+
     public void raiseLiftHighBasketPrep7() {
         robot.motorLiftBack.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET);
         robot.motorLiftFront.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET);
@@ -187,6 +198,13 @@ public class RRMechOps {
         robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY);
         robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
         robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
+
+    }
+    public void autoExtensionThirdSample(){
+        robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_DEPLOY);
+        robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_DEPLOY);
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
+        robot.extGrabServo.setPosition(robot.INTAKE_CLAW_PARTIAL_OPEN);
 
     }
 
@@ -529,7 +547,7 @@ public class RRMechOps {
         extClawOpen();
         opMode.sleep(100);
 
-        raiseLiftHighBasketPrep7();
+        raiseLiftHighBasket();
 
     }
 

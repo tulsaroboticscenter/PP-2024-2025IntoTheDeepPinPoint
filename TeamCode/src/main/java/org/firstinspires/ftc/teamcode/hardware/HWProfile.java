@@ -140,6 +140,8 @@ public class HWProfile {
     final public double SCORE_LEFT_FOREBAR_RESET = 1; //started at 0
     final public double SCORE_LEFT_FOREBAR_GRAB = 0.87;//tarted at 0
     final public double SCORE_LEFT_FOREBAR_SCORE = 0.2;
+    final public double SCORE_RIGHT_FOREBAR_SCORE_AUTON = 0.9;
+    final public double SCORE_LEFT_FOREBAR_SCORE_AUTON = 0.1;
 
     final public double L3DOWNRIGHT = 1;
     final public double L3DOWNLEFT = 1;
