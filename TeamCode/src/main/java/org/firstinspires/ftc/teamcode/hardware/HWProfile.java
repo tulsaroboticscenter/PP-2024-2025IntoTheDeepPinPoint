@@ -84,9 +84,9 @@ public class HWProfile {
 
 
     /* Variables to store the positions that the wrist should be set to when folding in, or folding out. */
-    public final double INTAKE_WRIST_ROTATED_ZERO = 0;
+    public final double INTAKE_WRIST_ROTATED_ZERO = .060;
     public final double INTAKE_WRIST_ROTATED_45 = 0.16;
-    public final double INTAKE_WRIST_ROTATED_NINETY = 0.3;
+    public final double INTAKE_WRIST_ROTATED_NINETY = 0.625;
     public final double INTAKE_WRIST_ROTATED_180  = 1;
     public final double INTAKE_WRIST_FOLDED_PARTIAL = .25;
 

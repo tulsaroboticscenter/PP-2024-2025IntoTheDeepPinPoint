@@ -578,7 +578,12 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
         robot.motorLiftBack.setTargetPosition((int)robot.LIFT_CLIMB_SECURE);
         robot.motorLiftTop.setTargetPosition((int)robot.LIFT_CLIMB_SECURE);
         mechOps.l2Down();
+
         sleep(2000);
+        robot.rightBackDrive.setPower(0);
+        robot.rightFrontDrive.setPower(0);
+        robot.leftFrontDrive.setPower(0);
+        robot.leftBackDrive.setPower(0);
         mechOps.l2Stop();
         sleep(1000);
         int liftPosition = (robot.motorLiftBack.getCurrentPosition() + robot.motorLiftFront.getCurrentPosition() + robot.motorLiftTop.getCurrentPosition())/3;
