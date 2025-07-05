@@ -215,7 +215,7 @@ public class RRAuto5Sample extends LinearOpMode{
             if(opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
             safeWaitSeconds(0.2);
             if(opModeIsActive()) mechOps.auto5SampleScorePrep();
-                safeWaitSeconds(1);
+            safeWaitSeconds(1);
 
 
             // Raise Arm to high basket scoring position
