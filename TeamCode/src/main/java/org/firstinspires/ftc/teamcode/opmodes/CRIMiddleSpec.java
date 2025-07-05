@@ -309,6 +309,32 @@ public class CRIMiddleSpec extends LinearOpMode{
                         //.strafeToLinearHeading(coloredSample5PositionGrab.position,coloredSample5PositionGrab.heading)
                         .build());
 
+        if (opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
+        if (opModeIsActive()) robot.motorLiftFront.setPower(1);
+        if (opModeIsActive()) robot.motorLiftBack.setPower(1);
+        if (opModeIsActive()) mechOps.specimenPrepPosition();
+
+        // Drive to scoring position
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(specimenScoringPosition.position, specimenScoringPosition.heading)
+                        .build());
+
+        //Release the sample into the basket
+        // Lower the arm
+        if (opModeIsActive()) mechOps.specimenScorePosition();
+        safeWaitSeconds(.25);
+        if (opModeIsActive()) mechOps.scoreClawOpen();
+        if (opModeIsActive()) mechOps.autoSpecimenLiftReset();
+
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(grabSpecimenPosition.position, grabSpecimenPosition.heading)
+                        .build());
+
+
+
+
 
 
 

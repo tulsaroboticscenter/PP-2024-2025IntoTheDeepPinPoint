@@ -80,6 +80,9 @@ public class HWProfile {
     public final double LIFT_SCORE_SPECIMEN_TELEOP = 1000;
     public final double LIFT_PARK = 675; //1225
     public final double LIFT_CLIMB_SECURE = 3000;
+    public final double LIFT_SPECIMEN_LOWCHAMBER = 1000;
+    public final double LIFT_SPECIMEN_LOWSCORE = 800;
+
 
 
 
