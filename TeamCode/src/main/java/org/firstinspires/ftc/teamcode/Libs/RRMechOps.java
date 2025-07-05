@@ -103,6 +103,21 @@ public class RRMechOps {
         robot.motorLiftFront.setTargetPosition((int)robot.LIFT_SPECIMEN_PREP);
         robot.motorLiftTop.setTargetPosition((int)robot.LIFT_SPECIMEN_PREP);
     }
+    public void specimenPrepPositionCRI() {
+        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_HOLD);
+        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_HOLD);
+        robot.motorLiftBack.setTargetPosition((int)robot.LIFT_SPECIMEN_PREP);
+        robot.motorLiftFront.setTargetPosition((int)robot.LIFT_SPECIMEN_PREP);
+        robot.motorLiftTop.setTargetPosition((int)robot.LIFT_SPECIMEN_PREP);
+    }
+
+    public void specimenPrepPositionCRILow() {
+        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_HOLD);
+        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_HOLD);
+        robot.motorLiftBack.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWCHAMBER);
+        robot.motorLiftFront.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWCHAMBER);
+        robot.motorLiftTop.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWCHAMBER);
+    }
 
     public void specimenScorePosition() {
         robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SPECIMEN);
@@ -110,6 +125,14 @@ public class RRMechOps {
         robot.motorLiftBack.setTargetPosition((int)robot.LIFT_SPECIMEN_SCORE);
         robot.motorLiftFront.setTargetPosition((int)robot.LIFT_SPECIMEN_SCORE);
         robot.motorLiftTop.setTargetPosition((int)robot.LIFT_SPECIMEN_SCORE);
+    }
+
+    public void specimenScorePositionLow() {
+        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SPECIMEN);
+        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SPECIMEN);
+        robot.motorLiftBack.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWSCORE);
+        robot.motorLiftFront.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWSCORE);
+        robot.motorLiftTop.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWSCORE);
     }
 
     public void liftPark(){
