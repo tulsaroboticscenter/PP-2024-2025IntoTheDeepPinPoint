@@ -47,7 +47,7 @@ import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
 //@Disabled
-@Autonomous(name = "CRI Right 1 Spec + 3 Sample", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
+@Autonomous(name = "CRI BLUE Right 1 Spec + 3 Sample", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
 public class CRI13RightAuto extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";

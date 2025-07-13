@@ -114,9 +114,7 @@ public class RRMechOps {
     public void specimenPrepPositionCRILow() {
         robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_HOLD);
         robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_HOLD);
-        robot.motorLiftBack.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWCHAMBER);
-        robot.motorLiftFront.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWCHAMBER);
-        robot.motorLiftTop.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWCHAMBER);
+
     }
 
     public void specimenScorePosition() {
@@ -128,11 +126,9 @@ public class RRMechOps {
     }
 
     public void specimenScorePositionLow() {
-        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SPECIMEN);
-        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SPECIMEN);
-        robot.motorLiftBack.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWSCORE);
-        robot.motorLiftFront.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWSCORE);
-        robot.motorLiftTop.setTargetPosition((int)robot.LIFT_SPECIMEN_LOWSCORE);
+        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE_LOW);
+        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE_LOW);
+
     }
 
     public void liftPark(){
@@ -151,12 +147,12 @@ public class RRMechOps {
         robot.motorLiftBack.setPower(1);
         robot.motorLiftTop.setPower(1);
     }
-    public void raiseLiftHighBasketAUTON() {
-        robot.motorLiftBack.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET);
-        robot.motorLiftFront.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET);
-        robot.motorLiftTop.setTargetPosition((int) robot.LIFT_SCORE_HIGH_BASKET);
-        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE_AUTON);
-        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE_AUTON);
+    public void lowBarScore() {
+        robot.motorLiftBack.setTargetPosition((int) robot.LIFT_RESET);
+        robot.motorLiftFront.setTargetPosition((int) robot.LIFT_RESET);
+        robot.motorLiftTop.setTargetPosition((int) robot.LIFT_RESET);
+        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SCORE_LOW);
+        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SCORE_LOW);
         robot.motorLiftFront.setPower(1);
         robot.motorLiftBack.setPower(1);
         robot.motorLiftTop.setPower(1);

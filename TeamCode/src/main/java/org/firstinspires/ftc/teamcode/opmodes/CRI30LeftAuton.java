@@ -47,8 +47,8 @@ import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
 //@Disabled
-@Autonomous(name = "CRI Right 2 Spec + 2 Sample", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
-public class CRI22RightAuton extends LinearOpMode{
+@Autonomous(name = "CRI BLUE Left 3 High Spec + 0 Sample", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
+public class CRI30LeftAuton extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
@@ -73,6 +73,7 @@ public class CRI22RightAuton extends LinearOpMode{
     public Pose2d specimenPrepPosition = new Pose2d(0, 0, 0);
     public Pose2d specimenScorePosition = new Pose2d(0,0,0);
     public Pose2d specimenScore2Position = new Pose2d(0,0,0);
+    public Pose2d specimenScore3Position = new Pose2d(0,0,0);
     public Pose2d specimenScoreDrive = new Pose2d(0,0,0);
     public Pose2d humanPlayerSpecGrabPrep = new Pose2d(0,0,0);
     public Pose2d humanPlayerSpecGrab = new Pose2d(0,0,0);
@@ -92,16 +93,17 @@ public class CRI22RightAuton extends LinearOpMode{
         yellowSample1Position = new Pose2d(10.75, -15.75, Math.toRadians(0));
         yellowSample2Position = new Pose2d(12, -25, Math.toRadians(5));
         yellowSample3Position = new Pose2d(37.5, -7.5, Math.toRadians(-90));
-        specimenPrepPosition = new Pose2d(55,-6, Math.toRadians(-90));
-        specimenScorePosition = new Pose2d(55,-3.75, Math.toRadians(-90));
-        specimenScore2Position = new Pose2d(58,-3.9, Math.toRadians(-90));
+        specimenPrepPosition = new Pose2d(55,10, Math.toRadians(90));
+        specimenScorePosition = new Pose2d(60,3.25, Math.toRadians(90));
+        specimenScore2Position = new Pose2d(57,3, Math.toRadians(90));
+        specimenScore3Position = new Pose2d(54,3.25, Math.toRadians(90));
         specimenScoreDrive = new Pose2d(55,-5, Math.toRadians(-85));
-        humanPlayerSpecGrabPrep = new Pose2d(15,57.4, Math.toRadians(0));
-        humanPlayerSpecGrab = new Pose2d(2.7, 57.4, Math.toRadians(0));
-        midwayPose1 = new Pose2d(15,-23, Math.toRadians(45));
-        midwayPose2 = new Pose2d(9,0, Math.toRadians(0));
+        humanPlayerSpecGrabPrep = new Pose2d(8.7,-55, Math.toRadians(0));
+        humanPlayerSpecGrab = new Pose2d(2, -55, Math.toRadians(0));
+        midwayPose1 = new Pose2d(15,30, Math.toRadians(0));
+        midwayPose2 = new Pose2d(20,8, Math.toRadians(0));
         midwayPose3 = new Pose2d(36,-5, Math.toRadians(-90));
-        midwayPose4 = new Pose2d(55,-4, Math.toRadians(0));
+        midwayPose4 = new Pose2d(55,10, Math.toRadians(0));
         parkPrepPose = new Pose2d(48, -20, Math.toRadians(90));
         parkPose = new Pose2d(53, -12, Math.toRadians(90));
 
@@ -145,14 +147,14 @@ public class CRI22RightAuton extends LinearOpMode{
                 mechOps.writeToFile(botHeading, "HeadingFile");
             }
 
-            scoreSample1(drive);
+            //scoreSample1(drive);
             // save heading to local file for teleop if bot gets stopped prematurely
             if(isStopRequested()){
                 botHeading = Math.toDegrees(drive.pose.heading.toDouble());
                 mechOps.writeToFile(botHeading, "HeadingFile");
             }
 
-            scoreSample2(drive);
+            //scoreSample2(drive);
             // save heading to local file for teleop if bot gets stopped prematurely
             if(isStopRequested()){
                 botHeading = Math.toDegrees(drive.pose.heading.toDouble());
@@ -223,7 +225,7 @@ public class CRI22RightAuton extends LinearOpMode{
         // Drive to scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
+                        //.strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
                         .strafeToLinearHeading(specimenPrepPosition.position, specimenPrepPosition.heading)
                         .strafeToLinearHeading(specimenScorePosition.position, specimenScorePosition.heading)
                         .build());
@@ -231,9 +233,9 @@ public class CRI22RightAuton extends LinearOpMode{
         //Release the sample into the basket
         // Lower the arm
         if (opModeIsActive()) mechOps.scoreForeSpecimen();
-        safeWaitSeconds(.5);
+        safeWaitSeconds(.1);
         if (opModeIsActive()) mechOps.specimenScorePosition();
-        safeWaitSeconds(.5);
+        safeWaitSeconds(.35);
         if (opModeIsActive()) mechOps.scoreClawOpen();
         if (opModeIsActive()) mechOps.autoSpecimenLiftReset();
         if (opModeIsActive()) mechOps.extClawOpen();
@@ -429,7 +431,7 @@ public class CRI22RightAuton extends LinearOpMode{
     public void specGrab2(PinpointDrive drive) {
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .strafeToLinearHeading(specimenPrepPosition.position, specimenPrepPosition.heading)
                         .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
                         .build());
 
@@ -445,46 +447,80 @@ public class CRI22RightAuton extends LinearOpMode{
 
         if (opModeIsActive()) mechOps.scoreClawClosed();
         safeWaitSeconds(.1);
-        if (opModeIsActive()) mechOps.specimenPrepPositionCRILow();
+        if (opModeIsActive()) mechOps.specimenPrepPosition();
 
 
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
+                        //.strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
                         .strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
-                        .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
+                        //.strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
                         .strafeToLinearHeading(specimenPrepPosition.position,specimenPrepPosition.heading)
                         .strafeToLinearHeading(specimenScore2Position.position, specimenScore2Position.heading)
                         .build());
 
-        if (opModeIsActive()) mechOps.scoreForeSpecimen();
-        safeWaitSeconds(.1);
-        if (opModeIsActive()) mechOps.specimenScorePositionLow();
-        safeWaitSeconds(.75);
+//        if (opModeIsActive()) mechOps.scoreForeSpecimen();
+//        safeWaitSeconds(.1);
+        if (opModeIsActive()) mechOps.specimenScorePosition();
+        safeWaitSeconds(.35);
 
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        //.strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
-                        //.strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
-                        .strafeToLinearHeading(specimenScoreDrive.position,specimenScoreDrive.heading)
-                        //.strafeToLinearHeading(specimenScore2Position.position, specimenScore2Position.heading)
-                        .build());
 
 
         if (opModeIsActive()) mechOps.scoreClawOpen();
         if (opModeIsActive()) mechOps.liftReset();
-        if (opModeIsActive()) mechOps.scoreForeGrab();
+        if (opModeIsActive()) mechOps.scoreForeSpecimen();
+
+
+
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(specimenPrepPosition.position,specimenPrepPosition.heading)
+                        //.strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
+                        //.strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
+                        .strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
+                        .strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
+                        .strafeToLinearHeading(humanPlayerSpecGrab.position,humanPlayerSpecGrab.heading)
+                        //.strafeToLinearHeading(specimenScore2Position.position, specimenScore2Position.heading)
+                        .build());
+        if (opModeIsActive()) mechOps.scoreClawClosed();
+        safeWaitSeconds(.1);
+        if (opModeIsActive()) mechOps.specimenPrepPosition();
 
 
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         //.strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
-                        //.strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
+                        .strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
+                        //.strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
+                        .strafeToLinearHeading(specimenPrepPosition.position,specimenPrepPosition.heading)
+                        .strafeToLinearHeading(specimenScore3Position.position, specimenScore3Position.heading)
+                        .build());
+
+        if (opModeIsActive()) mechOps.scoreForeSpecimen();
+        safeWaitSeconds(.1);
+        if (opModeIsActive()) mechOps.specimenScorePosition();
+        safeWaitSeconds(.75);
+
+
+
+        if (opModeIsActive()) mechOps.scoreClawOpen();
+        if (opModeIsActive()) mechOps.liftReset();
+        if (opModeIsActive()) mechOps.scoreForeSpecimen();
+
+
+
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        //.strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
                         .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
+                        .strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
+                        .strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
+                        .strafeToLinearHeading(humanPlayerSpecGrab.position,humanPlayerSpecGrab.heading)
                         //.strafeToLinearHeading(specimenScore2Position.position, specimenScore2Position.heading)
                         .build());
+
 
     }
 

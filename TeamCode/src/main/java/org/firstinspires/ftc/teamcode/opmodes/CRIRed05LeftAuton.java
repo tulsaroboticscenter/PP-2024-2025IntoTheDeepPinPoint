@@ -38,6 +38,7 @@ import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -46,14 +47,14 @@ import org.firstinspires.ftc.teamcode.PinpointDrive;
 import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
-//@Disabled
-@Autonomous(name = "CRI Right 2 Spec + 2 Sample", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
-public class CRI22RightAuton extends LinearOpMode{
+
+@Autonomous(name = "CRI RED 5 Samples + 0 Spec", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
+public class CRIRed05LeftAuton extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
-    public double yAxisOffset = 8;
-    public double xAxisOffset = 48;
+    public double xAxisOffset = 33;
+    public double yAxisOffset = -30;
     public double buttonPressDelay = 0.2;       // button press delay for menu
 
     public final static HWProfile robot = new HWProfile();
@@ -70,12 +71,6 @@ public class CRI22RightAuton extends LinearOpMode{
     public Pose2d yellowSample5Position = new Pose2d(0, 0, 0);
     public Pose2d yellowSample6Position = new Pose2d(0, 0, 0);
     public Pose2d yellowSample7Position = new Pose2d(0, 0, 0);
-    public Pose2d specimenPrepPosition = new Pose2d(0, 0, 0);
-    public Pose2d specimenScorePosition = new Pose2d(0,0,0);
-    public Pose2d specimenScore2Position = new Pose2d(0,0,0);
-    public Pose2d specimenScoreDrive = new Pose2d(0,0,0);
-    public Pose2d humanPlayerSpecGrabPrep = new Pose2d(0,0,0);
-    public Pose2d humanPlayerSpecGrab = new Pose2d(0,0,0);
     public Pose2d midwayPose1 = new Pose2d(0, 0, 0);
     public Pose2d midwayPose2 = new Pose2d(0, 0, 0);
     public Pose2d midwayPose3 = new Pose2d(0, 0, 0);
@@ -88,22 +83,16 @@ public class CRI22RightAuton extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
 
-        sampleScoringPosition = new Pose2d(9.5, -25, Math.toRadians(45));
-        yellowSample1Position = new Pose2d(10.75, -15.75, Math.toRadians(0));
-        yellowSample2Position = new Pose2d(12, -25, Math.toRadians(5));
-        yellowSample3Position = new Pose2d(37.5, -7.5, Math.toRadians(-90));
-        specimenPrepPosition = new Pose2d(55,-6, Math.toRadians(-90));
-        specimenScorePosition = new Pose2d(55,-3.75, Math.toRadians(-90));
-        specimenScore2Position = new Pose2d(58,-3.9, Math.toRadians(-90));
-        specimenScoreDrive = new Pose2d(55,-5, Math.toRadians(-85));
-        humanPlayerSpecGrabPrep = new Pose2d(15,57.4, Math.toRadians(0));
-        humanPlayerSpecGrab = new Pose2d(2.7, 57.4, Math.toRadians(0));
-        midwayPose1 = new Pose2d(15,-23, Math.toRadians(45));
-        midwayPose2 = new Pose2d(9,0, Math.toRadians(0));
-        midwayPose3 = new Pose2d(36,-5, Math.toRadians(-90));
-        midwayPose4 = new Pose2d(55,-4, Math.toRadians(0));
-        parkPrepPose = new Pose2d(48, -20, Math.toRadians(90));
-        parkPose = new Pose2d(53, -12, Math.toRadians(90));
+        sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
+        yellowSample1Position = new Pose2d(11.5, 16, Math.toRadians(-5));
+        yellowSample2Position = new Pose2d(11.75, 24, Math.toRadians(-5));
+        yellowSample3Position = new Pose2d(37.5, 7.5, Math.toRadians(90));
+        midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
+        midwayPose2 = new Pose2d(20,20, Math.toRadians(-45));
+        midwayPose3 = new Pose2d(35,5, Math.toRadians(90));
+        midwayPose4 = new Pose2d(15,-25, Math.toRadians(0));
+        parkPrepPose = new Pose2d(48, 20, Math.toRadians(90));
+        parkPose = new Pose2d(5, -50, Math.toRadians(-90));
 
         //Initialize hardware
         robot.init(hardwareMap, false);
@@ -115,17 +104,15 @@ public class CRI22RightAuton extends LinearOpMode{
 
         mechOps.scoreClawClosed();
         mechOps.extForeBarRetract();
-        mechOps.scoreForeHold();
-        mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
-        mechOps.setExtensionPosition();
 
-
-        //selectYellowSamples();
+        selectYellowSamples();
 
         // Wait for the DS start button to be touched.
-
-        //telemetry.addLine("-------------------------------------------------");
-        telemetry.addData("2 Specimen, 2 Sample", "");
+        telemetry.addData("5th Sample Location: ", yellowSample5Position);
+        telemetry.addData("6th Sample Location: ", yellowSample6Position);
+        telemetry.addData("7th Sample Location: ", yellowSample7Position);
+        telemetry.addLine("-------------------------------------------------");
+        telemetry.addData("7 Sample Auto - State Ready", "");
         telemetry.addData("Team Name   : ", TEAM_NAME);
         telemetry.addData("Team Number   : ", TEAM_NUMBER);
         telemetry.addData(">", "Touch Play to start OpMode");
@@ -138,7 +125,7 @@ public class CRI22RightAuton extends LinearOpMode{
 
         //Game Play Button  is pressed
         if (opModeIsActive() && !isStopRequested()) {
-            scorePreLoadSpec(drive);
+            scorePreLoadSample(drive);
             // save heading to local file if bot gets stopped prematurely
             if(isStopRequested()){
                 botHeading = Math.toDegrees(drive.pose.heading.toDouble());
@@ -159,14 +146,14 @@ public class CRI22RightAuton extends LinearOpMode{
                 mechOps.writeToFile(botHeading, "HeadingFile");
             }
 
-            //scoreSample3(drive);
+            scoreSample3(drive);
             // save heading to local file for teleop if bot gets stopped prematurely
             if(isStopRequested()){
                 botHeading = Math.toDegrees(drive.pose.heading.toDouble());
                 mechOps.writeToFile(botHeading, "HeadingFile");
             }
 
-            specGrab2(drive);
+            scoreSample5(drive);
             // save heading to local file for teleop if bot gets stopped prematurely
             if(isStopRequested()){
                 botHeading = Math.toDegrees(drive.pose.heading.toDouble());
@@ -187,7 +174,7 @@ public class CRI22RightAuton extends LinearOpMode{
                 mechOps.writeToFile(botHeading, "HeadingFile");
             }
 
-            //park(drive);
+            park(drive);
             // save heading to local file for teleop if bot gets stopped prematurely
             if(isStopRequested()){
                 botHeading = Math.toDegrees(drive.pose.heading.toDouble());
@@ -203,7 +190,7 @@ public class CRI22RightAuton extends LinearOpMode{
     } //end runOpMode();
 
     // method to score the preloaded sample into the high basket
-    public void scorePreLoadSpec(PinpointDrive drive) {
+    public void scorePreLoadSample(PinpointDrive drive) {
 
         /**
          * For Sample Scoring into high basket
@@ -211,35 +198,34 @@ public class CRI22RightAuton extends LinearOpMode{
         telemetry.addLine("program has started");
         telemetry.update();
 
-
-        if (opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
-        if (opModeIsActive()) robot.motorLiftFront.setPower(1);
+        if (opModeIsActive()) mechOps.extClawOpen();
         if (opModeIsActive()) robot.motorLiftBack.setPower(1);
-        if (opModeIsActive()) mechOps.specimenPrepPositionCRI();
+        if (opModeIsActive()) robot.motorLiftFront.setPower(1);
+        if (opModeIsActive()) robot.motorLiftTop.setPower(1);
+        //if (opModeIsActive()) mechOps.raiseLiftHighBasketPrep7();
 
+        //safeWaitSeconds(.95);
 
+        // Drive to scoring prep position
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        .stopAndAdd(new SetLiftPosition(params.LIFT_SCORE))
+                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+                        .waitSeconds(.2)
+                        .stopAndAdd(new SetServoPositionScoreSample())
+                        .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
+                        .build());
+
+        // score the sample into the high basket
 
 
         // Drive to scoring position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
-                        .strafeToLinearHeading(specimenPrepPosition.position, specimenPrepPosition.heading)
-                        .strafeToLinearHeading(specimenScorePosition.position, specimenScorePosition.heading)
-                        .build());
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .build());
 
-        //Release the sample into the basket
-        // Lower the arm
-        if (opModeIsActive()) mechOps.scoreForeSpecimen();
-        safeWaitSeconds(.5);
-        if (opModeIsActive()) mechOps.specimenScorePosition();
-        safeWaitSeconds(.5);
+        // Release the preloaded sample into the basket
         if (opModeIsActive()) mechOps.scoreClawOpen();
-        if (opModeIsActive()) mechOps.autoSpecimenLiftReset();
-        if (opModeIsActive()) mechOps.extClawOpen();
-        if (opModeIsActive()) mechOps.extPitchGrab();
-        if (opModeIsActive()) mechOps.extForeBarPart();
-
 
     }
 
@@ -248,12 +234,11 @@ public class CRI22RightAuton extends LinearOpMode{
         // Drive to prep position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose2.position, midwayPose2.heading)
                         .stopAndAdd(new SetServoPositionScoreReset())
                         .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
+                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
                         .strafeToLinearHeading(yellowSample1Position.position, yellowSample1Position.heading)
                         .build());
-
 
         // lower the arm and prepare to grab sample from the field
         //if (opModeIsActive()) mechOps.liftReset();
@@ -278,7 +263,7 @@ public class CRI22RightAuton extends LinearOpMode{
         if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
         safeWaitSeconds(0.2);
         if (opModeIsActive()) mechOps.auto7SampleScorePrep();
-        safeWaitSeconds(0.25);
+        safeWaitSeconds(0.15);
 
         // Drive to scoring position
         Actions.runBlocking(
@@ -338,7 +323,7 @@ public class CRI22RightAuton extends LinearOpMode{
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
                         .stopAndAdd(new SetServoPositionScoreSample())
-                        .waitSeconds(.5)
+                        .waitSeconds(.2)
                         .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
                         .build());
 
@@ -349,7 +334,6 @@ public class CRI22RightAuton extends LinearOpMode{
     // method to retrieve the third sample from the field and score into the high basket
     public void scoreSample3(PinpointDrive drive) {
 
-
         // Drive to prep position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -359,7 +343,6 @@ public class CRI22RightAuton extends LinearOpMode{
 
         // reset the lift to prepare to grab the next sample
         //if (opModeIsActive()) mechOps.liftReset();
-
         if (opModeIsActive()) mechOps.scoreForeHold();
 
         // Drive to Sample3 Position
@@ -421,70 +404,67 @@ public class CRI22RightAuton extends LinearOpMode{
         if (opModeIsActive()) mechOps.extPitchGrab();
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
         if (opModeIsActive()) mechOps.setExtensionPosition();
-        if (opModeIsActive()) mechOps.autoSpecimenLiftReset();
 
     }
 
     // method to retrieve the a sample from the submersible and score into the high basket
-    public void specGrab2(PinpointDrive drive) {
+    public void scoreSample5(PinpointDrive drive) {
+
+//        // Drive to prep position
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
+//                        .build());
+//
+//        // reset the lift to prepare to grab the next sample
+//
+//
+
+        // prepare the mechanisms for grabbing sample 3
+        if(opModeIsActive()) mechOps.extForePart();
+
+
+        // Drive to submersible to grab Sample 5
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
+                        .strafeToLinearHeading(yellowSample5Position.position, yellowSample5Position.heading)
+                        .build());
+
+        // Pick up Sample3 and prepare to score in the high basket
+        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
+        if (opModeIsActive()) mechOps.setExtensionPosition();
+        safeWaitSeconds(0.2);
+        if (opModeIsActive()) mechOps.extForeBarDeploy();
+        safeWaitSeconds(.2);
+        if (opModeIsActive()) mechOps.extClawClose();
+        safeWaitSeconds(0.2);
+        if (opModeIsActive()) mechOps.auto7SampleScorePrep();
+        //safeWaitSeconds(0.5);
+
+        // drive to scoring position
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        .stopAndAdd(new SetServoPositionScoreSample())
+                        .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
+                        .build());
+
+        // Release the sample into the basket
+        if (opModeIsActive()) mechOps.scoreClawOpen();
+
+        // Drive to prep position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
                         .build());
 
-        if (opModeIsActive()) mechOps.autoSpecimenLiftReset();
-
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
-                        .strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
-                        .strafeToLinearHeading(humanPlayerSpecGrab.position,humanPlayerSpecGrab.heading)
-                        .build());
-
-
-        if (opModeIsActive()) mechOps.scoreClawClosed();
-        safeWaitSeconds(.1);
-        if (opModeIsActive()) mechOps.specimenPrepPositionCRILow();
-
-
-
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
-                        .strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
-                        .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
-                        .strafeToLinearHeading(specimenPrepPosition.position,specimenPrepPosition.heading)
-                        .strafeToLinearHeading(specimenScore2Position.position, specimenScore2Position.heading)
-                        .build());
-
-        if (opModeIsActive()) mechOps.scoreForeSpecimen();
-        safeWaitSeconds(.1);
-        if (opModeIsActive()) mechOps.specimenScorePositionLow();
-        safeWaitSeconds(.75);
-
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        //.strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
-                        //.strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
-                        .strafeToLinearHeading(specimenScoreDrive.position,specimenScoreDrive.heading)
-                        //.strafeToLinearHeading(specimenScore2Position.position, specimenScore2Position.heading)
-                        .build());
-
-
-        if (opModeIsActive()) mechOps.scoreClawOpen();
-        if (opModeIsActive()) mechOps.liftReset();
-        if (opModeIsActive()) mechOps.scoreForeGrab();
-
-
-
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        //.strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
-                        //.strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
-                        .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
-                        //.strafeToLinearHeading(specimenScore2Position.position, specimenScore2Position.heading)
-                        .build());
+        // Lower the arm & reset the mechanisms
+        if(opModeIsActive()) mechOps.liftPark();
+        if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT);
+        if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
+        if (opModeIsActive()) mechOps.extPitchGrab();
+        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
+        if (opModeIsActive()) mechOps.setExtensionPosition();
 
     }
 
@@ -582,7 +562,7 @@ public class CRI22RightAuton extends LinearOpMode{
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
                         .stopAndAdd(new SetServoPositionScorePark())
-                        .stopAndAdd(new SetLiftPosition(params.LIFT_PARK))
+                        .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
                         .build());
 
         // Lower the arm & reset the mechanisms
@@ -601,7 +581,7 @@ public class CRI22RightAuton extends LinearOpMode{
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
 //                        .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
-                        .strafeToLinearHeading(parkPrepPose.position,parkPrepPose.heading)
+                        //.strafeToLinearHeading(parkPrepPose.position,parkPrepPose.heading)
                         .strafeToLinearHeading(parkPose.position, parkPose.heading)
                         .build());
 
@@ -652,7 +632,7 @@ public class CRI22RightAuton extends LinearOpMode{
                         delay.reset();
                     }else if(gamepad1.a && delay.time() > 0.5) {
                         selectionState = State.SAMPLE_6;
-                        yellowSample5Position = new Pose2d(x5 + xAxisOffset, y5 +yAxisOffset, Math.toRadians(-90));
+                        yellowSample5Position = new Pose2d(x5 + xAxisOffset, y5 +yAxisOffset, Math.toRadians(0));
                         delay.reset();
                     }
                     break;

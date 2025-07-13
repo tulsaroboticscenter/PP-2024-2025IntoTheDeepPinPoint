@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.hardware;
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.RUN_TO_POSITION;
 
 import com.acmerobotics.roadrunner.ftc.GoBildaPinpointDriverRR;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -130,21 +129,21 @@ public class HWProfile {
 
 
     final public double SCORE_RIGHT_FOREBAR_RESET = 0; //started at 1
-    final public double SCORE_RIGHT_FOREBAR_GRAB = 0.13;//started at 1
+    final public double SCORE_LEFT_FOREBAR_RESET = 1; //started at 0
+    final public double SCORE_RIGHT_FOREBAR_GRAB = 0.1;//started at 1
+    final public double SCORE_LEFT_FOREBAR_GRAB = 0.9;//tarted at 0
     final public double SCORE_RIGHT_FOREBAR_HOLD = 0.3;
     final public double SCORE_LEFT_FOREBAR_HOLD = 0.7;
     final public double SCORE_RIGHT_FOREBAR_HOLD_AUTON = 0.4;
     final public double SCORE_LEFT_FOREBAR_HOLD_AUTON = 0.6;
-    final public double SCORE_RIGHT_FOREBAR_SPECIMEN = 1;
-    final public double SCORE_RIGHT_FOREBAR_SCORE_PART = 0.87;
-    final public double SCORE_LEFT_FOREBAR_SCORE_PART = 0.13;
-    final public double SCORE_RIGHT_FOREBAR_SCORE = 0.8;
-    final public double SCORE_LEFT_FOREBAR_SPECIMEN = 0;
-    final public double SCORE_LEFT_FOREBAR_RESET = 1; //started at 0
-    final public double SCORE_LEFT_FOREBAR_GRAB = 0.87;//tarted at 0
-    final public double SCORE_LEFT_FOREBAR_SCORE = 0.2;
-    final public double SCORE_RIGHT_FOREBAR_SCORE_AUTON = 0.9;
-    final public double SCORE_LEFT_FOREBAR_SCORE_AUTON = 0.1;
+    final public double SCORE_RIGHT_FOREBAR_SPECIMEN = 0.9;
+    final public double SCORE_RIGHT_FOREBAR_SCORE_PART = 0.75;
+    final public double SCORE_LEFT_FOREBAR_SCORE_PART = 0.25;
+    final public double SCORE_RIGHT_FOREBAR_SCORE = 0.7;
+    final public double SCORE_LEFT_FOREBAR_SPECIMEN = 0.1;
+    final public double SCORE_LEFT_FOREBAR_SCORE = 0.3;
+    final public double SCORE_RIGHT_FOREBAR_SCORE_LOW = 1;
+    final public double SCORE_LEFT_FOREBAR_SCORE_LOW = 0;
 
 
     final public double L3DOWNRIGHT = 1;

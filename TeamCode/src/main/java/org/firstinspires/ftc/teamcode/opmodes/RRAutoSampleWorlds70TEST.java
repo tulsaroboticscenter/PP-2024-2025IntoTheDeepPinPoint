@@ -38,6 +38,7 @@ import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -46,7 +47,7 @@ import org.firstinspires.ftc.teamcode.PinpointDrive;
 import org.firstinspires.ftc.teamcode.hardware.CSAutoParams;
 import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 
-//@Disabled
+@Disabled
 @Autonomous(name = "Auto Samples - 5+0 PARK", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
 public class RRAutoSampleWorlds70TEST extends LinearOpMode{
 
@@ -426,6 +427,7 @@ public class RRAutoSampleWorlds70TEST extends LinearOpMode{
         // Drive to submersible to grab Sample 5
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
                         .strafeToLinearHeading(yellowSample5Position.position, yellowSample5Position.heading)
                         .build());
 
