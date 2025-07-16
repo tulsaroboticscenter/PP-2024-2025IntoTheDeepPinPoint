@@ -210,7 +210,7 @@ public class INACTIVERRAuto4SpecimenTest extends LinearOpMode{
 
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            // .strafeToLinearHeading(specimenScoringPrep.position,specimenScoringPrep.heading)
+                            // .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
                             .strafeToLinearHeading(specimenScoringPosition2.position, specimenScoringPosition2.heading)
                             .build());
 
@@ -256,7 +256,7 @@ public class INACTIVERRAuto4SpecimenTest extends LinearOpMode{
             }
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            // .strafeToLinearHeading(specimenScoringPrep.position,specimenScoringPrep.heading)
+                            // .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
                             .strafeToLinearHeading(specimenScoringPosition3.position, specimenScoringPosition3.heading)
                             .build());
             // Drive to specimen scoring position
@@ -302,7 +302,7 @@ public class INACTIVERRAuto4SpecimenTest extends LinearOpMode{
             }
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            // .strafeToLinearHeading(specimenScoringPrep.position,specimenScoringPrep.heading)
+                            // .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
                             .strafeToLinearHeading(specimenScoringPosition4.position, specimenScoringPosition4.heading)
                             .build());
             // Drive to specimen scoring position

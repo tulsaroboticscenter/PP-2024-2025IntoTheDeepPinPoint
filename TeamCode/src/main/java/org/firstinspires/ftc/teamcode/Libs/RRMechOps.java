@@ -566,6 +566,31 @@ public class RRMechOps {
 
 
     }
+    public void autoSampleCRIDrop() {
+
+
+        extClawClose();
+        opMode.sleep(100);
+
+        robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
+
+        extForeBarRetract();
+        extClawRotateZero();
+
+        this.extensionPosition = (int) robot.EXTENSION_RESET;
+        setAutoExtensionPosition();
+        opMode.sleep(750);
+        scoreClawClosed();
+        opMode.sleep(100);
+        extClawOpen();
+        opMode.sleep(100);
+        scoreForeSpecimen();
+        extClawRotateNinety();
+        opMode.sleep(150);
+
+
+
+    }
     public void auto7SampleScorePrep() {
 
         liftReset();

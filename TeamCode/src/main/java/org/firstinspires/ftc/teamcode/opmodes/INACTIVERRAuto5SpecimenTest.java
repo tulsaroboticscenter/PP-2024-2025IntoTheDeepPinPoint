@@ -122,7 +122,7 @@ public class INACTIVERRAuto5SpecimenTest extends LinearOpMode{
         specimenScoringPosition4 = new Pose2d(-28,-15, Math.toRadians(0));
         specimenScoringPosition5 = new Pose2d(-28,-20,Math.toRadians(0));
         specimenGrabPrep = new Pose2d(-9, 27.69, Math.toRadians(-180)); // specimen grabbing prep
-        //specimenScoringPrep = new Pose2d(-20,0,Math.toRadians(0));
+        //specimenScoringPrep1 = new Pose2d(-20,0,Math.toRadians(0));
         //specimenScoringPush = new Pose2d(-28, -8, Math.toRadians(0));
         grabSpecimenPosition = new Pose2d(-3.25, 27, Math.toRadians(-180));
         coloredSample1PositionGrab = new Pose2d(-23, 36, Math.toRadians(117));
@@ -280,7 +280,7 @@ public class INACTIVERRAuto5SpecimenTest extends LinearOpMode{
 
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            // .strafeToLinearHeading(specimenScoringPrep.position,specimenScoringPrep.heading)
+                            // .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
                             .strafeToLinearHeading(specimenScoringPosition2.position, specimenScoringPosition2.heading)
                             .build());
 
@@ -311,7 +311,7 @@ public class INACTIVERRAuto5SpecimenTest extends LinearOpMode{
             // Raise Arm to high basket scoring position
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            // .strafeToLinearHeading(specimenScoringPrep.position,specimenScoringPrep.heading)
+                            // .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
                             .strafeToLinearHeading(specimenScoringPosition3.position, specimenScoringPosition4.heading)
                             .build());
 
@@ -342,7 +342,7 @@ public class INACTIVERRAuto5SpecimenTest extends LinearOpMode{
 
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            // .strafeToLinearHeading(specimenScoringPrep.position,specimenScoringPrep.heading)
+                            // .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
                             .strafeToLinearHeading(specimenScoringPosition4.position, specimenScoringPosition4.heading)
                             .build());
 //
@@ -375,7 +375,7 @@ public class INACTIVERRAuto5SpecimenTest extends LinearOpMode{
             // Raise Arm to high basket scoring position
             Actions.runBlocking(
                     drive.actionBuilder(drive.pose)
-                            // .strafeToLinearHeading(specimenScoringPrep.position,specimenScoringPrep.heading)
+                            // .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
                             .strafeToLinearHeading(specimenScoringPosition5.position, specimenScoringPosition5.heading)
                             .build());
 //

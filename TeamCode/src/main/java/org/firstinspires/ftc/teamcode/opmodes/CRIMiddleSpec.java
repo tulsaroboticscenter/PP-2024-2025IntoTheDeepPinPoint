@@ -47,7 +47,7 @@ import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 
 
-@Autonomous(name = "CRI BLUE Middle 4 Spec", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
+@Autonomous(name = "CRI BOTH COLORS Middle 4 Spec", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
 public class CRIMiddleSpec extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
@@ -61,9 +61,10 @@ public class CRIMiddleSpec extends LinearOpMode{
     public Pose2d specimenScoringPosition = new Pose2d(0, 0, 0);
     public Pose2d specimenScoringPosition2 = new Pose2d(0, 0, 0);
     public Pose2d specimenScoringPosition3 = new Pose2d(0, 0, 0);
-    public Pose2d specimenScoringPosition4 = new Pose2d(0, 0, 0);
-    public Pose2d specimenScoringPosition5 = new Pose2d(0, 0, 0);
-    public Pose2d specimenScoringPrep = new Pose2d(0, 0, 0);
+//    public Pose2d specimenScoringPosition4 = new Pose2d(0, 0, 0);
+//    public Pose2d specimenScoringPosition5 = new Pose2d(0, 0, 0);
+    public Pose2d specimenScoringPrep1 = new Pose2d(0, 0, 0);
+    public Pose2d specimenScoringPrep2 = new Pose2d(0,0,0);
     public Pose2d specimenScoringPush = new Pose2d(0, 0, 0);
     public Pose2d coloredSample1PositionGrab = new Pose2d(0, 0, 0);
     public Pose2d coloredSample2PositionGrab = new Pose2d(0, 0, 0);
@@ -72,7 +73,9 @@ public class CRIMiddleSpec extends LinearOpMode{
     public Pose2d coloredSample5PositionGrab = new Pose2d(0, 0, 0);
     public Pose2d coloredSample6PositionGrab = new Pose2d(0, 0, 0);
     public Pose2d grabSpecimenPosition = new Pose2d(0, 0, 0);
+    public Pose2d grabSpecimenPosition2 = new Pose2d(0, 0, 0);
     public Pose2d specimenGrabPrepCycle = new Pose2d(0, 0, 0);
+    public Pose2d midway1Pose = new Pose2d(0,0,0);
     public Pose2d dropPose = new Pose2d(0, 0, 0);
     public Pose2d specimenGrabPrep = new Pose2d(0, 0, 0);
     public Pose2d parkPose = new Pose2d(0, 0, 0);
@@ -80,23 +83,27 @@ public class CRIMiddleSpec extends LinearOpMode{
 
     @Override
     public void runOpMode() throws InterruptedException {
-        specimenScoringPosition = new Pose2d(-28.5, 2, Math.toRadians(0));
-        specimenScoringPosition2 = new Pose2d(-27.5, 0, Math.toRadians(5));
-        specimenScoringPosition3 = new Pose2d(-27, -1, Math.toRadians(5));
-        specimenScoringPosition4 = new Pose2d(-26.5, -3, Math.toRadians(5));
-        specimenScoringPosition5 = new Pose2d(-26.5, -5, Math.toRadians(5));
-        specimenGrabPrep = new Pose2d(-9, 27.5, Math.toRadians(-180)); // specimen grabbing prep
-        specimenGrabPrepCycle = new Pose2d(-9, 27.25, Math.toRadians(-180));
-        specimenScoringPrep = new Pose2d(-20, 2, Math.toRadians(0));
+        specimenScoringPosition = new Pose2d(52, -18, Math.toRadians(-90));
+        specimenScoringPosition2 = new Pose2d(53, -43, Math.toRadians(90));
+        specimenScoringPosition3 = new Pose2d(52, -21, Math.toRadians(-90));
+//        specimenScoringPosition3 = new Pose2d(-27, -1, Math.toRadians(5));
+//        specimenScoringPosition4 = new Pose2d(-26.5, -3, Math.toRadians(5));
+//        specimenScoringPosition5 = new Pose2d(-26.5, -5, Math.toRadians(5));
+        specimenGrabPrep = new Pose2d(8, -30, Math.toRadians(0)); // specimen grabbing prep
+//        specimenGrabPrepCycle = new Pose2d(-9, 27.25, Math.toRadians(-180));
+        specimenScoringPrep1 = new Pose2d(50, -30, Math.toRadians(-90));
+        specimenScoringPrep2 = new Pose2d(49,-35, Math.toRadians(90));
         //specimenScoringPush = new Pose2d(-28, -8, Math.toRadians(0));
-        grabSpecimenPosition = new Pose2d(5, -31.2, Math.toRadians(0));
-        coloredSample1PositionGrab = new Pose2d(11.5, -28.5, Math.toRadians(0));
-        coloredSample2PositionGrab = new Pose2d(11.75, -33.5, Math.toRadians(0));
+        grabSpecimenPosition = new Pose2d(2.5, -31.2, Math.toRadians(0));
+        grabSpecimenPosition2 = new Pose2d(2, -31.2, Math.toRadians(0));
+        coloredSample1PositionGrab = new Pose2d(11.25, -28.5, Math.toRadians(0));
+        coloredSample2PositionGrab = new Pose2d(11.5, -33.5, Math.toRadians(0));
         coloredSample3PositionGrab = new Pose2d(33.6, -29.3, Math.toRadians(0));
         coloredSample4PositionGrab = new Pose2d(33.9, -33.6, Math.toRadians(0));
         coloredSample5PositionGrab = new Pose2d(21, -30.0, Math.toRadians(0));
         coloredSample6PositionGrab = new Pose2d(21, -34.5, Math.toRadians(0));
-        dropPose = new Pose2d(10, -31.2, Math.toRadians(0)); //prep for grabbing first sample
+        midway1Pose = new Pose2d (52,-30, Math.toRadians(0));
+        dropPose = new Pose2d(15, -31.2, Math.toRadians(0)); //prep for grabbing first sample
         parkPose = new Pose2d(-5, 45, Math.toRadians(-180));
 
         robot.init(hardwareMap, false);
@@ -107,7 +114,8 @@ public class CRIMiddleSpec extends LinearOpMode{
         mechOps.scoreClawClosed();
         mechOps.extClawOpen();
         mechOps.extForeBarRetract();
-
+        mechOps.scoreForeHold();
+        mechOps.extClawRotateNinety();
 
         telemetry.addData("5 Specimen Auto - CRI", "");
         telemetry.addData("Team Name   : ", TEAM_NAME);
@@ -196,20 +204,23 @@ public class CRIMiddleSpec extends LinearOpMode{
         // Lower the arm
         if(opModeIsActive()) {
             mechOps.scoreClawOpen();
+            mechOps.scoreForeHold();
+            robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
             mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
             mechOps.setAutoExtensionPosition();
             mechOps.extForeBarDeploy();
             safeWaitSeconds(.25);
             robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
             robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
-            robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
+
             safeWaitSeconds(.3);
 
         }
         if(opModeIsActive()) mechOps.scoreForeGrab();
         if(opModeIsActive()) mechOps.scoreClawOpen();
-        if(opModeIsActive()) mechOps.autoSampleCRI();
+        if(opModeIsActive()) mechOps.autoSampleCRIDrop();
         if(opModeIsActive()) mechOps.scoreClawOpen();
+        //mechOps.extClawRotateNinety();
 
 
         Actions.runBlocking(
@@ -242,8 +253,9 @@ public class CRIMiddleSpec extends LinearOpMode{
 //        if(opModeIsActive()) mechOps.autoSampleCRI();
         if(opModeIsActive()) mechOps.scoreForeGrab();
         if(opModeIsActive()) mechOps.scoreClawOpen();
-        if(opModeIsActive()) mechOps.autoSampleCRI();
+        if(opModeIsActive()) mechOps.autoSampleCRIDrop();
         if(opModeIsActive()) mechOps.scoreClawOpen();
+        //mechOps.extClawRotateNinety();
 
 
         Actions.runBlocking(
@@ -270,8 +282,9 @@ public class CRIMiddleSpec extends LinearOpMode{
         }
         if(opModeIsActive()) mechOps.scoreForeGrab();
         if(opModeIsActive()) mechOps.scoreClawOpen();
-        if(opModeIsActive()) mechOps.autoSampleCRI();
+        if(opModeIsActive()) mechOps.autoSampleCRIDrop();
         if(opModeIsActive()) mechOps.scoreClawOpen();
+        //mechOps.extClawRotateNinety();
 
 
         Actions.runBlocking(
@@ -297,8 +310,11 @@ public class CRIMiddleSpec extends LinearOpMode{
         }
         if(opModeIsActive()) mechOps.scoreForeGrab();
         if(opModeIsActive()) mechOps.scoreClawOpen();
-        if(opModeIsActive()) mechOps.autoSampleCRI();
+        if(opModeIsActive()) mechOps.autoSampleCRIDrop();
         if(opModeIsActive()) mechOps.scoreClawOpen();
+        if(opModeIsActive()) mechOps.autoSpecimenLiftReset();
+
+
 
 
 
@@ -309,14 +325,19 @@ public class CRIMiddleSpec extends LinearOpMode{
                         //.strafeToLinearHeading(coloredSample5PositionGrab.position,coloredSample5PositionGrab.heading)
                         .build());
 
-        if (opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
-        if (opModeIsActive()) robot.motorLiftFront.setPower(1);
-        if (opModeIsActive()) robot.motorLiftBack.setPower(1);
+if(opModeIsActive()) mechOps.scoreClawClosed();
+safeWaitSeconds(.2);
+
+//        if (opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_HOLD);
+//        if (opModeIsActive()) robot.motorLiftFront.setPower(1);
+//        if (opModeIsActive()) robot.motorLiftBack.setPower(1);
         if (opModeIsActive()) mechOps.specimenPrepPosition();
 
         // Drive to scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        //.strafeToLinearHeading(midway1Pose.position,midway1Pose.heading)
+                        .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
                         .strafeToLinearHeading(specimenScoringPosition.position, specimenScoringPosition.heading)
                         .build());
 
@@ -326,16 +347,59 @@ public class CRIMiddleSpec extends LinearOpMode{
         safeWaitSeconds(.25);
         if (opModeIsActive()) mechOps.scoreClawOpen();
         if (opModeIsActive()) mechOps.autoSpecimenLiftReset();
+        safeWaitSeconds(.2);
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(specimenGrabPrep.position,specimenGrabPrep.heading)
                         .strafeToLinearHeading(grabSpecimenPosition.position, grabSpecimenPosition.heading)
                         .build());
 
+        if(opModeIsActive()) mechOps.scoreClawClosed();
+        safeWaitSeconds(.2);
+        if(opModeIsActive()) mechOps.specimenPrepPosition();
 
 
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        //.strafeToLinearHeading(midway1Pose.position,midway1Pose.heading)
+                        .strafeToLinearHeading(specimenScoringPrep2.position, specimenScoringPrep2.heading)
+                        .strafeToLinearHeading(specimenScoringPosition2.position,specimenScoringPosition2.heading)
+                        .build());
 
+        if(opModeIsActive()) mechOps.specimenScorePosition();
+        safeWaitSeconds(.2);
+        if(opModeIsActive()) mechOps.scoreClawOpen();
+        if(opModeIsActive()) mechOps.autoSpecimenLiftReset();
 
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(specimenGrabPrep.position, specimenGrabPrep.heading)
+                        .strafeToLinearHeading(grabSpecimenPosition2.position,grabSpecimenPosition2.heading)
+                        .build());
+
+        if(opModeIsActive()) mechOps.scoreClawClosed();
+        safeWaitSeconds(.2);
+        if (opModeIsActive()) mechOps.specimenPrepPositionCRILow();
+
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        //.strafeToLinearHeading(midway1Pose.position,midway1Pose.heading)
+                        .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
+                        .strafeToLinearHeading(specimenScoringPosition3.position, specimenScoringPosition3.heading)
+                        .build());
+
+        if (opModeIsActive()) mechOps.scoreForeSpecimen();
+        safeWaitSeconds(.1);
+        if (opModeIsActive()) mechOps.specimenScorePositionLow();
+        safeWaitSeconds(.25);
+        if(opModeIsActive()) mechOps.scoreClawOpen();
+
+        Actions.runBlocking(
+                drive.actionBuilder(drive.pose)
+                        .strafeToLinearHeading(specimenGrabPrep.position, specimenGrabPrep.heading)
+                        .strafeToLinearHeading(grabSpecimenPosition.position,grabSpecimenPosition.heading)
+                        .build());
 
 
 //        if(opModeIsActive()) {
@@ -480,7 +544,7 @@ public class CRIMiddleSpec extends LinearOpMode{
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(specimenScoringPrep.position, specimenScoringPrep.heading)
+                        .strafeToLinearHeading(specimenScoringPrep1.position, specimenScoringPrep1.heading)
                         .strafeToLinearHeading(specimenScoringPosition2.position, specimenScoringPosition2.heading)
                         .build());
 
@@ -510,8 +574,7 @@ public class CRIMiddleSpec extends LinearOpMode{
         // Raise Arm to high basket scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        // .strafeToLinearHeading(specimenScoringPrep.position,specimenScoringPrep.heading)
-                        .strafeToLinearHeading(specimenScoringPosition3.position, specimenScoringPosition4.heading)
+                        // .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
                         .build());
 
 
@@ -540,8 +603,7 @@ public class CRIMiddleSpec extends LinearOpMode{
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        // .strafeToLinearHeading(specimenScoringPrep.position,specimenScoringPrep.heading)
-                        .strafeToLinearHeading(specimenScoringPosition4.position, specimenScoringPosition4.heading)
+                        // .strafeToLinearHeading(specimenScoringPrep1.position,specimenScoringPrep1.heading)
                         .build());
 //
 
@@ -572,7 +634,6 @@ public class CRIMiddleSpec extends LinearOpMode{
         // Raise Arm to high basket scoring position
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(specimenScoringPosition5.position, specimenScoringPosition5.heading)
                         .build());
 //
 
