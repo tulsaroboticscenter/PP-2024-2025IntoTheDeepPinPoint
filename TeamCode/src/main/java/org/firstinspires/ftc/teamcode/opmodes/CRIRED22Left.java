@@ -94,7 +94,7 @@ public class CRIRED22Left extends LinearOpMode{
         yellowSample3Position = new Pose2d(37.5, -7.5, Math.toRadians(-90));
         specimenPrepPosition = new Pose2d(55,6, Math.toRadians(90));
         specimenScorePosition = new Pose2d(55,3, Math.toRadians(90));
-        specimenScore2Position = new Pose2d(58,2, Math.toRadians(90));
+        specimenScore2Position = new Pose2d(58,1.5, Math.toRadians(90));
         specimenScoreDrive = new Pose2d(55,5, Math.toRadians(85));
         humanPlayerSpecGrabPrep = new Pose2d(15,-57.4, Math.toRadians(0));
         humanPlayerSpecGrab = new Pose2d(2.7, -57.4, Math.toRadians(0));

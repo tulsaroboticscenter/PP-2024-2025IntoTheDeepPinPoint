@@ -93,8 +93,8 @@ public class CRIRED30Right extends LinearOpMode{
 //        yellowSample1Position = new Pose2d(10.75, -15.75, Math.toRadians(0));
 //        yellowSample2Position = new Pose2d(12, -25, Math.toRadians(5));
 //        yellowSample3Position = new Pose2d(37.5, -7.5, Math.toRadians(-90));
-        specimenPrepPosition = new Pose2d(55,-8, Math.toRadians(-90));
-        specimenScorePosition = new Pose2d(60,-3.25, Math.toRadians(-90));
+        specimenPrepPosition = new Pose2d(55,-15, Math.toRadians(-90));
+        specimenScorePosition = new Pose2d(60,-3.5, Math.toRadians(-90));
         specimenScore2Position = new Pose2d(57,-3, Math.toRadians(-90));
         specimenScore3Position = new Pose2d(54,-3.25, Math.toRadians(-90));
         specimenScoreDrive = new Pose2d(55,-5, Math.toRadians(-85));

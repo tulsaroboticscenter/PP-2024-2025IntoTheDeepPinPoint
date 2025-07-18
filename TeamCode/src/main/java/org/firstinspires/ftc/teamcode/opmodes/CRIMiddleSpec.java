@@ -47,7 +47,7 @@ import org.firstinspires.ftc.teamcode.hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.RRMechOps;
 
 
-@Autonomous(name = "CRI BOTH COLORS Middle 4 Spec", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
+@Autonomous(name = "CRI BOTH COLORS Middle 3 Spec", group = "Competition", preselectTeleOp = "WorldsBestTeleopFINAL")
 public class CRIMiddleSpec extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";

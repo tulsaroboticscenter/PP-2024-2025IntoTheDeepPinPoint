@@ -441,10 +441,10 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
                 liftPosition = robot.LIFT_SCORE_SPECIMEN_TELEOP;
 
             } else if (gamepad2.dpad_left) {
-                robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_CLOSED);
+                mechOps.specimenPrepPositionCRILow();
 
             }else if (gamepad2.dpad_right){
-                robot.scoreGrabServo.setPosition(robot.SCORE_CLAW_OPEN);
+                mechOps.specimenScorePositionLow();
 
             } else if (gamepad2.b){
                 robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
