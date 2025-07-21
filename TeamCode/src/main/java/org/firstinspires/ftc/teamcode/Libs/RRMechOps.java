@@ -103,9 +103,10 @@ public class RRMechOps {
         robot.motorLiftFront.setTargetPosition((int)robot.LIFT_SPECIMEN_PREP);
         robot.motorLiftTop.setTargetPosition((int)robot.LIFT_SPECIMEN_PREP);
     }
+
     public void specimenPrepPositionCRI() {
-        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_HOLD);
-        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_HOLD);
+        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_SPECIMEN);
+        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_SPECIMEN);
         robot.motorLiftBack.setTargetPosition((int)robot.LIFT_SPECIMEN_PREP);
         robot.motorLiftFront.setTargetPosition((int)robot.LIFT_SPECIMEN_PREP);
         robot.motorLiftTop.setTargetPosition((int)robot.LIFT_SPECIMEN_PREP);
@@ -114,6 +115,12 @@ public class RRMechOps {
     public void specimenPrepPositionCRILow() {
         robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_HOLD);
         robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_HOLD);
+
+    }
+
+    public void specimenPrepPositionCRILowTeleop() {
+        robot.scoreForeLeftServo.setPosition(robot.SCORE_LEFT_FOREBAR_HOLD_TELEOP);
+        robot.scoreForeRightServo.setPosition(robot.SCORE_RIGHT_FOREBAR_HOLD_TELEOP);
 
     }
 
@@ -383,6 +390,7 @@ public class RRMechOps {
         robot.extendMotor.setPower(1);
         robot.extendMotor.setTargetPosition(this.extensionPosition);
     }
+
     public void setLiftPosition(){
         robot.motorLiftBack.setPower(1);
         robot.motorLiftBack.setTargetPosition(this.liftPosition);
@@ -392,6 +400,22 @@ public class RRMechOps {
         robot.motorLiftTop.setTargetPosition(this.liftPosition);
     }
 
+    public void setLiftPositionTeleop(){
+        robot.motorLiftBack.setTargetPosition(this.liftPosition);
+        robot.motorLiftFront.setTargetPosition(this.liftPosition);
+        robot.motorLiftTop.setTargetPosition(this.liftPosition);
+
+        if(robot.motorLiftTop.getCurrentPosition() == liftPosition){
+            robot.motorLiftTop.setPower(1);
+            robot.motorLiftBack.setPower(0);
+            robot.motorLiftFront.setPower(0);
+        } else {
+            robot.motorLiftTop.setPower(1);
+            robot.motorLiftBack.setPower(1);
+            robot.motorLiftFront.setPower(1);
+        }
+
+    }
 
     public void setAutoExtensionPosition(){
         robot.extendMotor.setPower(1);

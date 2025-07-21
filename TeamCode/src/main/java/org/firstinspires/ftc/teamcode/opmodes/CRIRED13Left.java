@@ -90,7 +90,7 @@ public class CRIRED13Left extends LinearOpMode{
 
         sampleScoringPosition = new Pose2d(9, 25, Math.toRadians(-45));
         yellowSample1Position = new Pose2d(10.5, 15.75, Math.toRadians(-5));
-        yellowSample2Position = new Pose2d(12, 24, Math.toRadians(0));
+        yellowSample2Position = new Pose2d(12, 22, Math.toRadians(0));
         yellowSample3Position = new Pose2d(37.75, 7.5, Math.toRadians(90));
         specimenPrepPosition = new Pose2d(60,6, Math.toRadians(90));
         specimenScorePosition = new Pose2d(59.7,2.75, Math.toRadians(90));
@@ -100,8 +100,8 @@ public class CRIRED13Left extends LinearOpMode{
         midwayPose1 = new Pose2d(15,23, Math.toRadians(-45));
         midwayPose2 = new Pose2d(9,2, Math.toRadians(0));
         midwayPose3 = new Pose2d(36,5, Math.toRadians(90));
-        midwayPose4 = new Pose2d(55,5, Math.toRadians(0));
-        midwayPose5 = new Pose2d(5,3, Math.toRadians(0));
+        midwayPose4 = new Pose2d(55,7, Math.toRadians(0));
+        midwayPose5 = new Pose2d(5,5, Math.toRadians(0));
         parkPrepPose = new Pose2d(27, -22, Math.toRadians(180));
         parkPose = new Pose2d(40.3, -22, Math.toRadians(180));
 

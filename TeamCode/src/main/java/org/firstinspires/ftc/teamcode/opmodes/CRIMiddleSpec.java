@@ -114,7 +114,7 @@ public class CRIMiddleSpec extends LinearOpMode{
         mechOps.scoreClawClosed();
         mechOps.extClawOpen();
         mechOps.extForeBarRetract();
-        mechOps.scoreForeHold();
+//        mechOps.scoreForeHold();
         mechOps.extClawRotateNinety();
 
         telemetry.addData("5 Specimen Auto - CRI", "");
@@ -220,17 +220,12 @@ public class CRIMiddleSpec extends LinearOpMode{
         if(opModeIsActive()) mechOps.scoreClawOpen();
         if(opModeIsActive()) mechOps.autoSampleCRIDrop();
         if(opModeIsActive()) mechOps.scoreClawOpen();
-        //mechOps.extClawRotateNinety();
-
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         //.strafeToLinearHeading(dropPose.position,dropPose.heading)
                         .strafeToLinearHeading(coloredSample2PositionGrab.position,coloredSample2PositionGrab.heading)
                         .build());
-
-
-
 
         if(opModeIsActive()) {
             mechOps.scoreClawOpen();
@@ -242,8 +237,6 @@ public class CRIMiddleSpec extends LinearOpMode{
             robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
             robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
             safeWaitSeconds(.3);
-
-
         }
 //        if(opModeIsActive()) mechOps.scoreForeGrab();
 //        safeWaitSeconds(.5);
@@ -268,52 +261,52 @@ public class CRIMiddleSpec extends LinearOpMode{
 
 
 
-        if(opModeIsActive()) {
-            mechOps.scoreClawOpen();
-            mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
-            mechOps.setAutoExtensionPosition();
-            mechOps.extForeBarDeploy();
-            safeWaitSeconds(.25);
-            robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
-            robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
-            robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
-            safeWaitSeconds(.3);
-
-        }
-        if(opModeIsActive()) mechOps.scoreForeGrab();
-        if(opModeIsActive()) mechOps.scoreClawOpen();
-        if(opModeIsActive()) mechOps.autoSampleCRIDrop();
-        if(opModeIsActive()) mechOps.scoreClawOpen();
-        //mechOps.extClawRotateNinety();
-
-
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(dropPose.position,dropPose.heading)
-                        .strafeToLinearHeading(coloredSample6PositionGrab.position,coloredSample6PositionGrab.heading)
-                        .build());
-
-
-
-        if(opModeIsActive()) {
-            mechOps.scoreClawOpen();
-            mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
-            mechOps.setAutoExtensionPosition();
-            mechOps.extForeBarDeploy();
-            safeWaitSeconds(.25);
-            robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
-            robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
-            robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
-            safeWaitSeconds(.3);
-
-
-        }
-        if(opModeIsActive()) mechOps.scoreForeGrab();
-        if(opModeIsActive()) mechOps.scoreClawOpen();
-        if(opModeIsActive()) mechOps.autoSampleCRIDrop();
-        if(opModeIsActive()) mechOps.scoreClawOpen();
-        if(opModeIsActive()) mechOps.autoSpecimenLiftReset();
-
+//        if(opModeIsActive()) {
+//            mechOps.scoreClawOpen();
+//            mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
+//            mechOps.setAutoExtensionPosition();
+//            mechOps.extForeBarDeploy();
+//            safeWaitSeconds(.25);
+//            robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
+//            robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
+//            robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
+//            safeWaitSeconds(.3);
+//
+//        }
+//        if(opModeIsActive()) mechOps.scoreForeGrab();
+//        if(opModeIsActive()) mechOps.scoreClawOpen();
+//        if(opModeIsActive()) mechOps.autoSampleCRIDrop();
+//        if(opModeIsActive()) mechOps.scoreClawOpen();
+//        //mechOps.extClawRotateNinety();
+//
+//
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .strafeToLinearHeading(dropPose.position,dropPose.heading)
+//                        .strafeToLinearHeading(coloredSample6PositionGrab.position,coloredSample6PositionGrab.heading)
+//                        .build());
+//
+//
+//
+//        if(opModeIsActive()) {
+//            mechOps.scoreClawOpen();
+//            mechOps.extensionPosition =  ((int)robot.EXTENSION_OUT_MAX);
+//            mechOps.setAutoExtensionPosition();
+//            mechOps.extForeBarDeploy();
+//            safeWaitSeconds(.25);
+//            robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
+//            robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
+//            robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
+//            safeWaitSeconds(.3);
+//
+//
+//        }
+//        if(opModeIsActive()) mechOps.scoreForeGrab();
+//        if(opModeIsActive()) mechOps.scoreClawOpen();
+//        if(opModeIsActive()) mechOps.autoSampleCRIDrop();
+//        if(opModeIsActive()) mechOps.scoreClawOpen();
+//        if(opModeIsActive()) mechOps.autoSpecimenLiftReset();
+//
 
 
 

@@ -91,10 +91,10 @@ public class CRIBLUE05Right extends LinearOpMode{
         yellowSample1Position = new Pose2d(11.25, -16, Math.toRadians(2.5));
         yellowSample2Position = new Pose2d(12.25, -25, Math.toRadians(5));
         yellowSample3Position = new Pose2d(37.5, -7.5, Math.toRadians(-90));
+        yellowSample5Position = new Pose2d(3, 31.0, Math.toRadians(90));
         specimenPrepPosition = new Pose2d(55,-6, Math.toRadians(-90));
         specimenScorePosition = new Pose2d(55,-3.5, Math.toRadians(-90));
         specimenScore2Position = new Pose2d(55,-3.5, Math.toRadians(-85));
-        humanPlayerSpecGrabPrep = new Pose2d(15,57.4, Math.toRadians(0));
         humanPlayerSpecGrab = new Pose2d(2.7, 57.4, Math.toRadians(0));
         midwayPose1 = new Pose2d(15,-23, Math.toRadians(45));
         midwayPose2 = new Pose2d(9,0, Math.toRadians(0));
@@ -109,17 +109,9 @@ public class CRIBLUE05Right extends LinearOpMode{
 
         //Key Pay inputs to selecting Starting Position of robot
 
-
-
         mechOps.scoreClawClosed();
         mechOps.extForeBarRetract();
-
-
-        //selectYellowSamples();
-
-
-
-        selectYellowSamples();
+//        selectYellowSamples();
 
         // Wait for the DS start button to be touched.
 
@@ -179,19 +171,7 @@ public class CRIBLUE05Right extends LinearOpMode{
                 mechOps.writeToFile(botHeading, "HeadingFile");
             }
 
-            //scoreSample7(drive);
-            // save heading to local file for teleop if bot gets stopped prematurely
-            if(isStopRequested()){
-                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
-                mechOps.writeToFile(botHeading, "HeadingFile");
-            }
-
-            park(drive);
-            // save heading to local file for teleop if bot gets stopped prematurely
-            if(isStopRequested()){
-                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
-                mechOps.writeToFile(botHeading, "HeadingFile");
-            }
+//            park(drive);
         }
 
         // write the bot heading to a local file for retrieval for field centric drive in TeleOp
@@ -426,7 +406,6 @@ public class CRIBLUE05Right extends LinearOpMode{
     // method to retrieve the a sample from the submersible and score into the high basket
     public void scoreSample5(PinpointDrive drive) {
 
-
         // Drive to submersible to grab Sample 5
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -434,13 +413,13 @@ public class CRIBLUE05Right extends LinearOpMode{
                         .strafeToLinearHeading(yellowSample5Position.position, yellowSample5Position.heading)
                         .build());
 
-        // Pick up Sample3 and prepare to score in the high basket
+        // Pick up Sample5 and prepare to score in the high basket
         if (opModeIsActive()) mechOps.autoExtension();
         if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
         if (opModeIsActive()) mechOps.setExtensionPosition();
         safeWaitSeconds(0.2);
         if (opModeIsActive()) mechOps.extForeBarDeploy();
-        safeWaitSeconds(.2);
+        safeWaitSeconds(0.4);
         if (opModeIsActive()) mechOps.extClawClose();
         safeWaitSeconds(0.2);
         if (opModeIsActive()) mechOps.auto7SampleScorePrep();
@@ -630,7 +609,6 @@ public class CRIBLUE05Right extends LinearOpMode{
                         delay.reset();
                     }else if(gamepad1.a && delay.time() > 0.5) {
                         selectionState = State.SAMPLE_6;
-                        yellowSample5Position = new Pose2d(x5 + xAxisOffset, y5 +yAxisOffset, Math.toRadians(90));
                         delay.reset();
                     }
                     break;

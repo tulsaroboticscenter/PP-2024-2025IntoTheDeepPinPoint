@@ -132,8 +132,6 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
         mechOps.extPitchGrab();
 
 
-
-
         // Initializes ElapsedTimes. One for total runtime of the program and the others set up for toggles.
         ElapsedTime totalRuntime = new ElapsedTime();
         ElapsedTime clawRuntime = new ElapsedTime();
@@ -147,8 +145,6 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
         ElapsedTime scoreClawGrabRuntime = new ElapsedTime();
         ElapsedTime l2ClimbDeployRuntime = new ElapsedTime();
 
-
-
         totalRuntime.reset();
         clawRuntime.reset();
         scoreClawRuntime.reset();
@@ -159,8 +155,6 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
         clawGrabRuntime.reset();
         scoreClawGrabRuntime.reset();
 
-
-
         // booleans for keeping track of toggles
         boolean clawRotated = false;
         boolean armRetracted = true;
@@ -168,9 +162,7 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
         boolean isTransferReady = false;
         boolean l2ClimbDeploy = false;
 
-
         TelemetryPacket packet = new TelemetryPacket();
-
 
 //        requestOpModeStop();
         while(opModeIsActive()){
@@ -216,7 +208,7 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
             robot.rightBackDrive.setPower(backRightPower);
 
             mechOps.liftPosition = (int)liftPosition;
-            mechOps.setLiftPosition();
+            mechOps.setLiftPositionTeleop();
 
             mechOps.transferSample();
             mechOps.setExtensionPosition();
@@ -432,6 +424,7 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
 
             } else if (gamepad2.dpad_up) {
                 liftPosition = robot.LIFT_SPECIMEN_PREP_TELEOP;
+                mechOps.scoreForeSpecimen();
 
             } else if (gamepad1.dpad_down){
                 robot.extRotateServo.setPosition(robot.INTAKE_WRIST_ROTATED_NINETY);
@@ -441,7 +434,8 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
                 liftPosition = robot.LIFT_SCORE_SPECIMEN_TELEOP;
 
             } else if (gamepad2.dpad_left) {
-                mechOps.specimenPrepPositionCRILow();
+                liftPosition = robot.LIFT_RESET_TELEOP;
+                mechOps.specimenPrepPositionCRILowTeleop();
 
             }else if (gamepad2.dpad_right){
                 mechOps.specimenScorePositionLow();
@@ -523,15 +517,6 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
 
 
 
-            if(motorLiftTop.getCurrentPosition() == liftPosition){
-                motorLiftTop.set(1);
-                motorLiftBack.set(0);
-                motorLiftFront.set(0);
-            } else {
-                motorLiftTop.set(1);
-                motorLiftBack.set(1);
-                motorLiftFront.set(1);
-            }
 
             telemetry.addData("liftPosition = ", mechOps.liftPosition);
             telemetry.addData("extensionPosition = ", mechOps.extensionPosition);
@@ -589,8 +574,8 @@ public class WorldsBestTeleopFINAL extends LinearOpMode {
         int liftPosition = (robot.motorLiftBack.getCurrentPosition() + robot.motorLiftFront.getCurrentPosition() + robot.motorLiftTop.getCurrentPosition())/3;
         while(opModeIsActive()){
             if(liftPosition > 20) {
-                robot.motorLiftFront.setTargetPosition((int) robot.LIFT_RESET_CLIMB);
-                robot.motorLiftBack.setTargetPosition((int) robot.LIFT_RESET_CLIMB);
+                robot.motorLiftFront.setTargetPosition((int)robot.LIFT_RESET_CLIMB);
+                robot.motorLiftBack.setTargetPosition((int)robot.LIFT_RESET_CLIMB);
                 robot.motorLiftTop.setTargetPosition((int)robot.LIFT_RESET_CLIMB);
             }
 

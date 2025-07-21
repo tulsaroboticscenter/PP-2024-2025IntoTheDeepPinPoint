@@ -52,8 +52,6 @@ public class CRIRED05Left extends LinearOpMode{
 
     public static String TEAM_NAME = "Project Peacock";
     public static int TEAM_NUMBER = 10355;
-    public double xAxisOffset = 1.5;
-    public double yAxisOffset = -33;
     public double buttonPressDelay = 0.2;       // button press delay for menu
 
     public final static HWProfile robot = new HWProfile();
@@ -83,9 +81,10 @@ public class CRIRED05Left extends LinearOpMode{
     public void runOpMode() throws InterruptedException {
 
         sampleScoringPosition = new Pose2d(7, 25, Math.toRadians(-45));
-        yellowSample1Position = new Pose2d(11.5, 16, Math.toRadians(-5));
+        yellowSample1Position = new Pose2d(11.5, 16.5, Math.toRadians(-5));
         yellowSample2Position = new Pose2d(11.75, 24, Math.toRadians(-5));
         yellowSample3Position = new Pose2d(37.5, 7.5, Math.toRadians(90));
+        yellowSample5Position = new Pose2d(1.5, -31.5, Math.toRadians(-90));
         midwayPose1 = new Pose2d(14,20, Math.toRadians(-45));
         midwayPose2 = new Pose2d(20,20, Math.toRadians(-45));
         midwayPose3 = new Pose2d(35,5, Math.toRadians(90));
@@ -99,12 +98,10 @@ public class CRIRED05Left extends LinearOpMode{
 
         //Key Pay inputs to selecting Starting Position of robot
 
-
-
         mechOps.scoreClawClosed();
         mechOps.extForeBarRetract();
 
-        selectYellowSamples();
+//        selectYellowSamples();
 
         // Wait for the DS start button to be touched.
 
@@ -170,14 +167,10 @@ public class CRIRED05Left extends LinearOpMode{
                 mechOps.writeToFile(botHeading, "HeadingFile");
             }
 
-            park(drive);
-            // save heading to local file for teleop if bot gets stopped prematurely
-            if(isStopRequested()){
-                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
-                mechOps.writeToFile(botHeading, "HeadingFile");
-            }
+//            park(drive);
         }
 
+        safeWaitSeconds(2);
         // write the bot heading to a local file for retrieval for field centric drive in TeleOp
         botHeading = Math.toDegrees(drive.pose.heading.toDouble());
         mechOps.writeToFile(botHeading, "HeadingFile");
@@ -593,97 +586,6 @@ public class CRIRED05Left extends LinearOpMode{
         }
     }
 
-    public void selectYellowSamples(){
-        boolean selectionsDone = false;
-        State selectionState = State.SAMPLE_5;
-        int x5=0, x6=0, x7=0;
-        int y5=0, y6=0, y7=0;
-        ElapsedTime delay = new ElapsedTime();
-
-        while (!selectionsDone && !isStopRequested()){
-
-            switch(selectionState){
-                case SAMPLE_5:
-                    telemetry.addLine("Select the coordinates for Sample 5");
-                    telemetry.addLine("DO NOT CHANGE ANYTHING, JUST PRESS A!!!!");
-                    telemetry.addLine("Press A When Done");
-
-                    telemetry.update();
-                    if (gamepad1.dpad_up && delay.time() > buttonPressDelay){
-                        x5++;
-                        delay.reset();
-                    }else if (gamepad1.dpad_down && delay.time() > buttonPressDelay){
-                        x5--;
-                        delay.reset();
-                    }else if (gamepad1.dpad_right && delay.time() > buttonPressDelay){
-                        y5--;
-                        delay.reset();
-                    }else if (gamepad1.dpad_left && delay.time() > buttonPressDelay){
-                        y5++;
-                        delay.reset();
-                    }else if(gamepad1.a && delay.time() > 0.5) {
-                        selectionState = State.SAMPLE_6;
-                        yellowSample5Position = new Pose2d(x5 + xAxisOffset, y5 +yAxisOffset, Math.toRadians(-90));
-                        delay.reset();
-                    }
-                    break;
-
-                case SAMPLE_6:
-                    telemetry.addLine("Select the coordinates for Sample 6");
-                    telemetry.addLine("DO NOT CHANGE ANYTHING, JUST PRESS A!!!!");
-                    telemetry.addLine("Press A When Done");
-                    telemetry.update();
-
-                    if (gamepad1.dpad_up && delay.time() > buttonPressDelay){
-                        x6++;
-                        delay.reset();
-                    }else if (gamepad1.dpad_down && delay.time() > buttonPressDelay){
-                        x6--;
-                        delay.reset();
-                    }else if (gamepad1.dpad_right && delay.time() > buttonPressDelay){
-                        y6++;
-                        delay.reset();
-                    }else if (gamepad1.dpad_left && delay.time() > buttonPressDelay){
-                        y6--;
-                        delay.reset();
-                    }else if(gamepad1.a && delay.time() > 0.5) {
-                        selectionState = State.SAMPLE_7;
-                        yellowSample6Position = new Pose2d(x6 + xAxisOffset, y6 + yAxisOffset, Math.toRadians(-90));
-                        delay.reset();
-                    }
-                    break;
-
-                case SAMPLE_7:
-                    telemetry.addLine("Select the coordinates for Sample 7");
-                    telemetry.addLine("DO NOT CHANGE ANYTHING, JUST PRESS A!!!!");
-                    telemetry.addLine("Press A When Done");
-
-                    telemetry.update();
-                    if (gamepad1.dpad_up && delay.time() > buttonPressDelay){
-                        x7++;
-                        delay.reset();
-                    }else if (gamepad1.dpad_down && delay.time() > buttonPressDelay){
-                        x7--;
-                        delay.reset();
-                    }else if (gamepad1.dpad_right && delay.time() > buttonPressDelay){
-                        y7++;
-                        delay.reset();
-                    }else if (gamepad1.dpad_left && delay.time() > buttonPressDelay){
-                        y7--;
-                        delay.reset();
-                    }else if(gamepad1.a && delay.time() > 0.5) {
-                        selectionState = State.EXIT;
-                        yellowSample7Position = new Pose2d(x7 + xAxisOffset, y7 + yAxisOffset, Math.toRadians(-90));
-                        delay.reset();
-                    }
-                    break;
-
-                case EXIT:
-                    selectionsDone = true;
-                    break;
-            }
-        }
-    }
     public class SetLiftPosition implements Action {
         int targetPosition;
 

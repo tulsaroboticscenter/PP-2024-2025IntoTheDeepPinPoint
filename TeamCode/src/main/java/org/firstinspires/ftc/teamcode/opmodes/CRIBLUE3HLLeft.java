@@ -81,6 +81,7 @@ public class CRIBLUE3HLLeft extends LinearOpMode{
     public Pose2d midwayPose2 = new Pose2d(0, 0, 0);
     public Pose2d midwayPose3 = new Pose2d(0, 0, 0);
     public Pose2d midwayPose4 = new Pose2d(0,0,0);
+    public Pose2d moveAwayFromHuman = new Pose2d(0,0,0);
     public Pose2d submersiblePose = new Pose2d(0, 0, 0);
     public Pose2d parkPrepPose = new Pose2d(0, 0, 0);
     public Pose2d parkPose = new Pose2d(0, 0, 0);
@@ -104,6 +105,7 @@ public class CRIBLUE3HLLeft extends LinearOpMode{
         midwayPose2 = new Pose2d(20,10, Math.toRadians(0));
         midwayPose3 = new Pose2d(36,-5, Math.toRadians(-90));
         midwayPose4 = new Pose2d(55,10, Math.toRadians(0));
+        moveAwayFromHuman = new Pose2d(5,10, Math.toRadians(0));
         parkPrepPose = new Pose2d(48, -20, Math.toRadians(90));
         parkPose = new Pose2d(53, -12, Math.toRadians(90));
 
@@ -147,27 +149,6 @@ public class CRIBLUE3HLLeft extends LinearOpMode{
                 mechOps.writeToFile(botHeading, "HeadingFile");
             }
 
-            //scoreSample1(drive);
-            // save heading to local file for teleop if bot gets stopped prematurely
-            if(isStopRequested()){
-                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
-                mechOps.writeToFile(botHeading, "HeadingFile");
-            }
-
-            //scoreSample2(drive);
-            // save heading to local file for teleop if bot gets stopped prematurely
-            if(isStopRequested()){
-                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
-                mechOps.writeToFile(botHeading, "HeadingFile");
-            }
-
-            //scoreSample3(drive);
-            // save heading to local file for teleop if bot gets stopped prematurely
-            if(isStopRequested()){
-                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
-                mechOps.writeToFile(botHeading, "HeadingFile");
-            }
-
             specGrab2(drive);
             // save heading to local file for teleop if bot gets stopped prematurely
             if(isStopRequested()){
@@ -175,26 +156,6 @@ public class CRIBLUE3HLLeft extends LinearOpMode{
                 mechOps.writeToFile(botHeading, "HeadingFile");
             }
 
-            //scoreSample6(drive);
-            // save heading to local file for teleop if bot gets stopped prematurely
-            if(isStopRequested()){
-                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
-                mechOps.writeToFile(botHeading, "HeadingFile");
-            }
-
-            //scoreSample7(drive);
-            // save heading to local file for teleop if bot gets stopped prematurely
-            if(isStopRequested()){
-                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
-                mechOps.writeToFile(botHeading, "HeadingFile");
-            }
-
-            //park(drive);
-            // save heading to local file for teleop if bot gets stopped prematurely
-            if(isStopRequested()){
-                botHeading = Math.toDegrees(drive.pose.heading.toDouble());
-                mechOps.writeToFile(botHeading, "HeadingFile");
-            }
         }
 
         // write the bot heading to a local file for retrieval for field centric drive in TeleOp
@@ -242,192 +203,8 @@ public class CRIBLUE3HLLeft extends LinearOpMode{
         if (opModeIsActive()) mechOps.extPitchGrab();
         if (opModeIsActive()) mechOps.extForeBarPart();
 
-
     }
 
-    // method to retrieve the first sample from the field and score into the high basket
-    public void scoreSample1(PinpointDrive drive) {
-        // Drive to prep position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose2.position, midwayPose2.heading)
-                        .stopAndAdd(new SetServoPositionScoreReset())
-                        .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
-                        .strafeToLinearHeading(yellowSample1Position.position, yellowSample1Position.heading)
-                        .build());
-
-
-        // lower the arm and prepare to grab sample from the field
-        //if (opModeIsActive()) mechOps.liftReset();
-        if (opModeIsActive()) mechOps.scoreForeGrab();
-        if (opModeIsActive()) mechOps.scoreClawOpen();
-//        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
-//        if (opModeIsActive()) mechOps.setExtensionPosition();
-        if (opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
-        if (opModeIsActive()) mechOps.extForeBarDeploy();
-        if (opModeIsActive()) mechOps.scoreForeGrab();
-
-        // Drive to pick up Sample1 Position
-//        Actions.runBlocking(
-//                drive.actionBuilder(drive.pose)
-//                        .strafeToLinearHeading(yellowSample1Position.position, yellowSample1Position.heading)
-//                        .build());
-
-        // Pick up Sample1 from the field and prepare to score the sample
-        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
-        if (opModeIsActive()) mechOps.setExtensionPosition();
-        safeWaitSeconds(0.5);
-        if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
-        safeWaitSeconds(0.2);
-        if (opModeIsActive()) mechOps.auto7SampleScorePrep();
-        safeWaitSeconds(0.25);
-
-        // Drive to scoring position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .stopAndAdd(new SetLiftPosition(params.LIFT_SCORE))
-                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .stopAndAdd(new SetServoPositionScoreSample())
-                        .waitSeconds(.2)
-                        .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
-                        .build());
-
-        // Release sample1 into the basket
-        if (opModeIsActive()) mechOps.scoreClawOpen();
-
-    }
-
-    // method to retrieve the second sample from the field and score into the high basket
-    public void scoreSample2(PinpointDrive drive) {
-
-        // Drive to prep position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .stopAndAdd(new SetServoPositionScoreReset())
-                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
-                        .strafeToLinearHeading(yellowSample2Position.position, yellowSample2Position.heading)
-                        .build());
-
-        // lower the lift and prepare to grab the sample from the field
-        //if (opModeIsActive()) mechOps.liftReset();
-        if (opModeIsActive()) mechOps.extClawRotateZero();
-        if (opModeIsActive()) mechOps.autoExtension();
-//        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
-//        if (opModeIsActive()) mechOps.setExtensionPosition();
-        if (opModeIsActive()) robot.extPitchServo.setPosition(robot.INTAKE_CLAW_PITCH_GRAB);
-        if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_OPEN);
-
-        //Drive to pickup Sample2 Position
-//        Actions.runBlocking(
-//                drive.actionBuilder(drive.pose)
-//
-//                        .strafeToLinearHeading(yellowSample2Position.position, yellowSample2Position.heading)
-//                        .build());
-
-
-        // Pick up Sample2 and prepare to score in the high basket
-        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
-        if (opModeIsActive()) mechOps.setExtensionPosition();
-        safeWaitSeconds(0.5);
-        if (opModeIsActive()) robot.extGrabServo.setPosition(robot.INTAKE_CLAW_CLOSED);
-        safeWaitSeconds(0.2);
-        if (opModeIsActive()) mechOps.auto7SampleScorePrep();
-        //safeWaitSeconds(0.1);
-
-        // drive to scoring position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .stopAndAdd(new SetServoPositionScoreSample())
-                        .waitSeconds(.5)
-                        .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
-                        .build());
-
-        // Release sample2 into the high basket
-        if (opModeIsActive()) mechOps.scoreClawOpen();
-    }
-
-    // method to retrieve the third sample from the field and score into the high basket
-    public void scoreSample3(PinpointDrive drive) {
-
-
-        // Drive to prep position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
-                        .build());
-
-        // reset the lift to prepare to grab the next sample
-        //if (opModeIsActive()) mechOps.liftReset();
-
-        if (opModeIsActive()) mechOps.scoreForeHold();
-
-        // Drive to Sample3 Position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose3.position, midwayPose3.heading)
-                        .strafeToLinearHeading(yellowSample3Position.position, yellowSample3Position.heading)
-                        .build());
-
-        // prepare the mechanisms for grabbing sample 3
-        if (opModeIsActive()) mechOps.extClawRotateNinety();
-        //if (opModeIsActive()) mechOps.extClawRotate45(); POSSIBILITY 1
-        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
-        if (opModeIsActive()) mechOps.setExtensionPosition();
-        //if (opModeIsActive()) mechOps.autoExtension();
-        if (opModeIsActive()) mechOps.autoExtensionThirdSample(); //POSSIBILITY 2
-        safeWaitSeconds(0.5);
-        if (opModeIsActive()) mechOps.extClawClose();
-        safeWaitSeconds(.2);
-        if (opModeIsActive()) mechOps.auto7SampleScorePrep();
-        //safeWaitSeconds(0.5);
-
-
-        // drive to sample 3 position
-
-
-
-        // Pick up Sample3 and prepare to score in the high basket
-
-//        if (opModeIsActive()) mechOps.extClawClose();
-//        safeWaitSeconds(0.2);
-//        if (opModeIsActive()) mechOps.autoSampleScorePrep();
-//        safeWaitSeconds(0.5);
-
-        // drive to scoring position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .stopAndAdd(new SetLiftPosition(params.LIFT_SCORE))
-                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .stopAndAdd(new SetServoPositionScoreSample())
-                        .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
-                        .build());
-
-        // Release the sample into the basket
-        if (opModeIsActive()) mechOps.scoreClawOpen();
-
-        // Drive to prep position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .stopAndAdd(new SetServoPositionScoreReset())
-                        .stopAndAdd(new SetLiftPosition(params.LIFT_RESET))
-                        .build());
-
-        // Lower the arm & reset the mechanisms
-        //if (opModeIsActive()) mechOps.liftReset();
-        if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT);
-        if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
-        if (opModeIsActive()) mechOps.extPitchGrab();
-        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
-        if (opModeIsActive()) mechOps.setExtensionPosition();
-        if (opModeIsActive()) mechOps.autoSpecimenLiftReset();
-
-    }
-
-    // method to retrieve the a sample from the submersible and score into the high basket
     public void specGrab2(PinpointDrive drive) {
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -444,12 +221,9 @@ public class CRIBLUE3HLLeft extends LinearOpMode{
                         .strafeToLinearHeading(humanPlayerSpecGrab.position,humanPlayerSpecGrab.heading)
                         .build());
 
-
         if (opModeIsActive()) mechOps.scoreClawClosed();
         safeWaitSeconds(.1);
         if (opModeIsActive()) mechOps.specimenPrepPosition();
-
-
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
@@ -464,8 +238,6 @@ public class CRIBLUE3HLLeft extends LinearOpMode{
 //        safeWaitSeconds(.1);
         if (opModeIsActive()) mechOps.specimenScorePosition();
         safeWaitSeconds(.35);
-
-
 
         if (opModeIsActive()) mechOps.scoreClawOpen();
         if (opModeIsActive()) mechOps.liftReset();
@@ -520,6 +292,7 @@ public class CRIBLUE3HLLeft extends LinearOpMode{
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         //.strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
+                        .strafeToLinearHeading(moveAwayFromHuman.position,moveAwayFromHuman.heading)
                         .strafeToLinearHeading(midwayPose4.position,midwayPose4.heading)
                         .strafeToLinearHeading(midwayPose2.position,midwayPose2.heading)
                         .strafeToLinearHeading(humanPlayerSpecGrabPrep.position,humanPlayerSpecGrabPrep.heading)
@@ -528,111 +301,6 @@ public class CRIBLUE3HLLeft extends LinearOpMode{
                         .build());
 
 
-    }
-
-    // method to retrieve the a sample from the submersible and score into the high basket
-    public void scoreSample6(PinpointDrive drive) {
-
-
-        if(opModeIsActive()) mechOps.extForePart();
-
-        // Drive to submersible to grab Sample 5
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(yellowSample6Position.position, yellowSample6Position.heading)
-                        .build());
-
-        // Pick up Sample3 and prepare to score in the high basket
-        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
-        if (opModeIsActive()) mechOps.setExtensionPosition();
-        safeWaitSeconds(.2);
-        if (opModeIsActive()) mechOps.autoExtension();
-        safeWaitSeconds(.2);
-        if (opModeIsActive()) mechOps.extClawClose();
-        safeWaitSeconds(0.2);
-        if (opModeIsActive()) mechOps.auto7SampleScorePrep();
-        //safeWaitSeconds(0.5);
-
-        // drive to scoring position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
-                        .build());
-
-        // Release the sample into the basket
-        if (opModeIsActive()) mechOps.scoreClawOpen();
-
-        // Drive to prep position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .build());
-
-        // Lower the arm & reset the mechanisms
-        if (opModeIsActive()) mechOps.liftReset();
-        if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT);
-        if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
-        if (opModeIsActive()) mechOps.extPitchGrab();
-        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
-        if (opModeIsActive()) mechOps.setExtensionPosition();
-
-    }
-
-    // method to retrieve the a sample from the submersible and score into the high basket
-    public void scoreSample7(PinpointDrive drive) {
-
-        // Drive to prep position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .build());
-
-        // reset the lift to prepare to grab the next sample
-        if (opModeIsActive()) mechOps.liftReset();
-
-        // prepare the mechanisms for grabbing sample 3
-
-        if (opModeIsActive()) mechOps.extForePart();
-
-        // Drive to submersible to grab Sample 5
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(yellowSample5Position.position, yellowSample5Position.heading)
-                        .build());
-
-        // Pick up Sample3 and prepare to score in the high basket
-        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_OUT_MAX);
-        if (opModeIsActive()) mechOps.setExtensionPosition();
-        safeWaitSeconds(0.5);
-        if (opModeIsActive()) mechOps.extForeBarDeploy();
-        safeWaitSeconds(0.25);
-        if (opModeIsActive()) mechOps.extClawClose();
-        safeWaitSeconds(0.2);
-        if (opModeIsActive()) mechOps.autoSampleScorePrep();
-
-        // drive to scoring position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
-                        .build());
-
-        // Release the sample into the basket
-        if (opModeIsActive()) mechOps.scoreClawOpen();
-
-        // Drive to prep position
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(midwayPose1.position, midwayPose1.heading)
-                        .stopAndAdd(new SetServoPositionScorePark())
-                        .stopAndAdd(new SetLiftPosition(params.LIFT_PARK))
-                        .build());
-
-        // Lower the arm & reset the mechanisms
-        if (opModeIsActive()) robot.extForeLeftServo.setPosition(robot.INTAKE_LEFT_FOREBAR_RETRACT);
-        if (opModeIsActive()) robot.extForeRightServo.setPosition(robot.INTAKE_RIGHT_FOREBAR_RETRACT);
-        if (opModeIsActive()) mechOps.extPitchGrab();
-        if (opModeIsActive()) mechOps.extensionPosition = ((int) robot.EXTENSION_RESET);
-        if (opModeIsActive()) mechOps.setExtensionPosition();
     }
 
     // method to part the robot
@@ -658,115 +326,7 @@ public class CRIBLUE3HLLeft extends LinearOpMode{
         }
     }
 
-    public void selectYellowSamples(){
-        boolean selectionsDone = false;
-        State selectionState = State.SAMPLE_5;
-        int x5=0, x6=0, x7=0;
-        int y5=0, y6=0, y7=0;
-        ElapsedTime delay = new ElapsedTime();
 
-        while (!selectionsDone && !isStopRequested()){
-
-            switch(selectionState){
-                case SAMPLE_5:
-                    telemetry.addLine("Select the coordinates for Sample 5");
-                    telemetry.addLine("Press A When Done");
-                    telemetry.addLine("Press DPAD_UP to Increment X - AWAY FROM YOU");
-                    telemetry.addLine("Press DPAD_DOWN to Decrement X - CLOSER TO YOU");
-                    telemetry.addLine("Press DPAD_RIGHT to Increment Y - MORE RIGHT");
-                    telemetry.addLine("Press DPAD_LEFT to Decrement Y - MORE LEFT");
-                    telemetry.addData("X = ", x5);
-                    telemetry.addData("Y = ", y5);
-                    telemetry.addLine("MAX X Increment without crossing center: 5");
-                    telemetry.addLine("To hit center of submersible, change Y increment to: -10");
-                    telemetry.update();
-                    if (gamepad1.dpad_up && delay.time() > buttonPressDelay){
-                        x5++;
-                        delay.reset();
-                    }else if (gamepad1.dpad_down && delay.time() > buttonPressDelay){
-                        x5--;
-                        delay.reset();
-                    }else if (gamepad1.dpad_right && delay.time() > buttonPressDelay){
-                        y5--;
-                        delay.reset();
-                    }else if (gamepad1.dpad_left && delay.time() > buttonPressDelay){
-                        y5++;
-                        delay.reset();
-                    }else if(gamepad1.a && delay.time() > 0.5) {
-                        selectionState = State.SAMPLE_6;
-                        yellowSample5Position = new Pose2d(x5 + xAxisOffset, y5 +yAxisOffset, Math.toRadians(-90));
-                        delay.reset();
-                    }
-                    break;
-
-                case SAMPLE_6:
-                    telemetry.addLine("Select the coordinates for Sample 6");
-                    telemetry.addLine("Press A When Done");
-                    telemetry.addLine("Press DPAD_UP to Increment X - AWAY FROM YOU");
-                    telemetry.addLine("Press DPAD_DOWN to Decrement X - CLOSER TO YOU");
-                    telemetry.addLine("Press DPAD_RIGHT to Increment Y - MORE LEFT");
-                    telemetry.addLine("Press DPAD_LEFT to Decrement Y - MORE RIGHT");
-                    telemetry.addData("X = ", x6);
-                    telemetry.addData("Y = ", y6);
-                    telemetry.addLine("MAX X Increment without crossing center: 5");
-                    telemetry.addLine("To hit center of submersible, change Y increment to: -10");
-                    telemetry.update();
-                    if (gamepad1.dpad_up && delay.time() > buttonPressDelay){
-                        x6++;
-                        delay.reset();
-                    }else if (gamepad1.dpad_down && delay.time() > buttonPressDelay){
-                        x6--;
-                        delay.reset();
-                    }else if (gamepad1.dpad_right && delay.time() > buttonPressDelay){
-                        y6++;
-                        delay.reset();
-                    }else if (gamepad1.dpad_left && delay.time() > buttonPressDelay){
-                        y6--;
-                        delay.reset();
-                    }else if(gamepad1.a && delay.time() > 0.5) {
-                        selectionState = State.SAMPLE_7;
-                        yellowSample6Position = new Pose2d(x6 + xAxisOffset, y6 + yAxisOffset, Math.toRadians(-90));
-                        delay.reset();
-                    }
-                    break;
-
-                case SAMPLE_7:
-                    telemetry.addLine("Select the coordinates for Sample 7");
-                    telemetry.addLine("Press A When Done");
-                    telemetry.addLine("Press DPAD_UP to Increment X - AWAY FROM YOU");
-                    telemetry.addLine("Press DPAD_DOWN to Decrement X - CLOSER TO YOU");
-                    telemetry.addLine("Press DPAD_RIGHT to Increment Y - MORE LEFT");
-                    telemetry.addLine("Press DPAD_LEFT to Decrement Y - MORE RIGHT");
-                    telemetry.addData("X = ", x7);
-                    telemetry.addData("Y = ", y7);
-                    telemetry.addLine("MAX X Increment without crossing center: 5");
-                    telemetry.addLine("To hit center of submersible, change Y increment to: -10");
-                    telemetry.update();
-                    if (gamepad1.dpad_up && delay.time() > buttonPressDelay){
-                        x7++;
-                        delay.reset();
-                    }else if (gamepad1.dpad_down && delay.time() > buttonPressDelay){
-                        x7--;
-                        delay.reset();
-                    }else if (gamepad1.dpad_right && delay.time() > buttonPressDelay){
-                        y7++;
-                        delay.reset();
-                    }else if (gamepad1.dpad_left && delay.time() > buttonPressDelay){
-                        y7--;
-                        delay.reset();
-                    }else if(gamepad1.a && delay.time() > 0.5) {
-                        selectionState = State.EXIT;
-                        yellowSample7Position = new Pose2d(x7 + xAxisOffset, y7 + yAxisOffset, Math.toRadians(-90));
-                        delay.reset();
-                    }
-                    break;
-
-                case EXIT:
-                    selectionsDone = true;
-                    break;
-            }
-        }
-    }
     public class SetLiftPosition implements Action {
         int targetPosition;
 

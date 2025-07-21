@@ -132,8 +132,10 @@ public class HWProfile {
     final public double SCORE_LEFT_FOREBAR_RESET = 1; //started at 0
     final public double SCORE_RIGHT_FOREBAR_GRAB = 0.1;//started at 1
     final public double SCORE_LEFT_FOREBAR_GRAB = 0.9;//tarted at 0
-    final public double SCORE_RIGHT_FOREBAR_HOLD = 0.3;
-    final public double SCORE_LEFT_FOREBAR_HOLD = 0.7;
+    final public double SCORE_RIGHT_FOREBAR_HOLD_TELEOP = 0.75;     // was orginally 0.3 - CTS
+    final public double SCORE_LEFT_FOREBAR_HOLD_TELEOP = 0.25;      // was originally 0.7 CTS
+    final public double SCORE_RIGHT_FOREBAR_HOLD = 0.5;     // was orginally 0.3 - CTS
+    final public double SCORE_LEFT_FOREBAR_HOLD = 0.5;      // was originally 0.7 CTS
     final public double SCORE_RIGHT_FOREBAR_HOLD_AUTON = 0.4;
     final public double SCORE_LEFT_FOREBAR_HOLD_AUTON = 0.6;
     final public double SCORE_RIGHT_FOREBAR_SPECIMEN = 0.9;
