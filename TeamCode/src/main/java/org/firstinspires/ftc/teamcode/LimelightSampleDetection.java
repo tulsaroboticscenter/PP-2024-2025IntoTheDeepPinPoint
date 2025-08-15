@@ -14,6 +14,10 @@ public class LimelightSampleDetection extends LinearOpMode {
 
     double YAngle, XAngle;
 
+    double limelightXOffset = 5.2;
+
+    double limelightYOffset = 2.33;
+
     @Override
     public void runOpMode() {
         Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
@@ -46,11 +50,11 @@ public class LimelightSampleDetection extends LinearOpMode {
             double angleToTargetRadians = angleToTargetDegrees * (3.14159/180);
 
             //Calculate distance
-            double distanceToGoal = limelightHeightInches / Math.tan(angleToTargetRadians);
+            double distanceToGoal = (limelightHeightInches / Math.tan(angleToTargetRadians)) + limelightYOffset;
             telemetry.addData("Distance to taget", distanceToGoal);
 
             //Calculate Side to Side
-            double XOffset = Math.tan(XAngle) * distanceToGoal;
+            double XOffset = (Math.tan(XAngle) * distanceToGoal) - limelightXOffset;
             telemetry.addData("Displacement to the right", XOffset);
 
             telemetry.update();
